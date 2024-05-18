@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom";
 import { SERVICE_URL } from "../Constants";
 import axios, { AxiosResponse } from "axios";
 

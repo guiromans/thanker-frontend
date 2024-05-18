@@ -3,7 +3,7 @@ import { UserService } from "./services/UserService"
 import { ErrorResponse } from "react-router-dom";
 import { Loader } from "./cards/Loader";
 import './style/Fonts.css';
-import { ERROR_EMAIL_NOT_EXISTS, ERROR_INVALID_EMAIL, Language, NEW_CONFIRMATION, NEW_CONFIRMATION_EMAIL_REQUESTED, NEW_CONFIRMATION_TITLE, PASSWORD_RESET_REQUEST_SENT, REQUEST_RESET_PASSWORD, RESET_PASSWORD, TranslationService, YOUR_EMAIL } from "./services/TranslationService";
+import { ERROR_EMAIL_NOT_EXISTS, ERROR_INVALID_EMAIL, Language, NEW_CONFIRMATION, NEW_CONFIRMATION_EMAIL_REQUESTED, NEW_CONFIRMATION_TITLE, TranslationService, YOUR_EMAIL } from "./services/TranslationService";
 import { useSnackbar } from "notistack";
 
 export interface RequestResetPassProps {

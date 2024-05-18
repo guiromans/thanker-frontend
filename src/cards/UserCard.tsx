@@ -8,7 +8,6 @@ import { UserService } from "../services/UserService";
 import { AuthService } from "../services/AuthService";
 import { ImageService } from "../services/ImageService";
 import { Loader } from "./Loader";
-import { ErrorResponse } from "../model/ErrorResponse";
 import { AxiosError } from "axios";
 
 export interface UserProps {

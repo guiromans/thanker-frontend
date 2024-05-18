@@ -3,7 +3,6 @@ import { CreateUserRequest, ImageUploadRequest, ResetPasswordRequest, UsernameCh
 import { AuthService } from "./AuthService";
 import { http } from "./Interceptor";
 import { Language } from "./TranslationService";
-import { StorageService } from "./StorageService";
 
 export class UserService {
 

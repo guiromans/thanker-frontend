@@ -4,7 +4,7 @@ import { CreateThanksRequest, DeleteThanksResponse, PrivacyChangeResponse, Priva
 import { ErrorResponse } from "./model/ErrorResponse";
 import { getUniqueById, privacyTypeOf } from "./utils/ThanksUtils";
 import { AuthService } from "./services/AuthService";
-import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, IM_THANKFUL_FOR, I_THANK_YOU_FOR, Language, PRIVATE, PUBLIC, TEXT_NOT_EMPTY, THANK, THANKS, TranslationService, USER_PAGE, WALL_OF_GRATITUDE, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
+import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, Language, TEXT_NOT_EMPTY, THANK, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
 import { FollowerResponse } from "./model/FollowerModel";
 import { UserResponse } from "./model/UserModel";
 import { UserService } from "./services/UserService";

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../style/Sponsor.css';
 import Ad from './Ad';
 import { Language, THANKER_IS_THANKFUL_TO, TranslationService } from '../services/TranslationService';

@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { SERVICE_URL } from '../Constants';
 import { AuthService } from './AuthService';
 import { AuthResponse } from '../model/AuthResponse';

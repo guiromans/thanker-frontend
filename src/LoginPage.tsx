@@ -4,7 +4,7 @@ import { ErrorResponse, useNavigate } from "react-router-dom";
 import './style/Fonts.css';
 import './style/Styles.css';
 import './style/Login.css';
-import { CREATE_USER, ERROR_LOGIN_MSG, ERROR_SERVER_COMMS, LOGIN, MAKE_YOUR_DAY, NEW_CONFIRMATION, PASSWORD, RESET_PASSWORD, THANKER_INTRO, TranslationService } from "./services/TranslationService";
+import { CREATE_USER, ERROR_LOGIN_MSG, ERROR_SERVER_COMMS, LOGIN, MAKE_YOUR_DAY, NEW_CONFIRMATION, PASSWORD, RESET_PASSWORD, TranslationService } from "./services/TranslationService";
 import { AuthResponse } from "./model/AuthResponse";
 import { ThankerIntro } from "./cards/ThankerIntro";
 import { Loader } from "./cards/Loader";
