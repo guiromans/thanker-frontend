@@ -1,0 +1,21 @@
+.hurray-overlay {
+    position: absolute;
+    top: 25%;
+    left: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 1000;
+}
+
+.hurray-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hurray-size {
+    width: 55%;
+    height: 55%;
+}

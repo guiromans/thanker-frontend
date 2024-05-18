@@ -1,0 +1,7 @@
+.label-create-error {
+    color: red;
+    font-size: 10px;
+    width: 40%; /* Set the width of the label to 40% of its parent container */
+    display: inline-block; /* or 'block' depending on your layout needs */
+    text-align: left;
+}

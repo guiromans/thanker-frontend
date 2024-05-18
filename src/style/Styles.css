@@ -1,0 +1,187 @@
+* {
+    box-sizing: border-box;
+}
+
+.main {
+    padding: 0px 0px;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    z-index: 200;
+}
+
+.div-container {
+    position: relative;
+}
+
+.center-login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -95%);
+}
+
+.header-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.centerish {
+    position: absolute;
+    margin: 8px;
+    text-align: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+}
+
+.centerish-2 {
+    justify-content: bottom;
+    text-align: center;
+}
+
+.top-padding {
+    padding-top: 10vh;
+}
+
+.rightish {
+    margin-left: auto;
+    margin-right: 0;
+    padding-right: 24px;
+    text-align: right;
+}
+
+.leftish {
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+}
+
+label, a, select {
+    cursor: pointer;
+}
+
+label:hover, a:hover {
+    font-weight: bold;
+}
+
+.custom-link:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input, textarea, select {
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 10px;
+    box-shadow:0 0 12px 4px rgba(80, 200, 120, 0.3);
+    border: 2px;
+    outline: 1px;
+}
+
+.thanks-text-box {
+    width: 85%;
+    height: 70px;
+    text-align: center;
+}
+
+input[type="text"]:focus {
+    box-shadow: 1px 1px px 1px 0 green; 
+}
+
+textarea:focus {
+    box-shadow: 1px 1px px 1px 0 green; 
+}
+
+.custom-text-area {
+    height: 60px;
+    width: 40%;
+    text-align: center;
+}
+
+select {
+    padding: 4px;
+    margin-bottom: 16px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-top: 2px;
+    border-radius:10px;
+    box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.06);
+}
+
+button {
+    border-radius: 8px;
+    box-shadow: 4px 4px 4px 0px rgba(0,0,0,0.06);
+    padding: 8px;
+    margin-top: 8px;
+}
+
+.thanks-button:active {
+    background-color: white;
+    color: #2E2E2E;
+    box-shadow: 0 0 0 0 rgb(255, 255, 255);
+}
+
+.thanks-button:hover {
+    box-shadow: 0 0px 0 2px #AFE1AF;
+}
+
+.thanks-button {
+    width: 45%;
+    height: 64px;
+    border-color: #AFE1AF;
+    background-color: #50C878;
+    font-weight: bold;
+    font-size: 24px;
+    color: #F9F6EE;
+}
+
+.overlay {
+    position: fixed; 
+    z-index: 10; 
+    background: rgba(255, 255, 255, 0.5);
+    display: block;
+}
+
+.checkbox {
+    margin-right: 8px;
+    align-items: center;
+}
+
+button:hover, select:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.06);
+}
+
+.wider-input {
+    width: 40%;
+}
+
+.medium-input {
+    width: 30%;
+}
+
+.smaller-input {
+    width: 20%;
+}
+
+.search-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 8px;
+    width: 200px;
+    max-height: 200px;
+    overflow-y: auto;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-bottom: 8px;
+}
+
+body {
+    overflow-y: hidden;
+}

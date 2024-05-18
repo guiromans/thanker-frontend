@@ -1,0 +1,17 @@
+.no-following {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.text-empty {
+    font-size: 32px;
+    margin: 16px;
+    font-weight: bold;
+}
+
+.emoji {
+    font-size: 64px;
+}

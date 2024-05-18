@@ -1,0 +1,30 @@
+
+  .quote-container {
+    margin: 24px;
+    overflow-y: hidden;
+  }
+
+  .quote-text {
+    font-size: 2vw;
+    animation: fadeIn 1.5s ease-in-out forwards;
+  }
+
+  .quote-section-container {
+    align-items: center;
+    width: 100%;
+    height: 90%;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+.no-overflow {
+  overflow: hidden;
+}
+
+.professions {
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 4px;
+}

@@ -1,0 +1,41 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    background-color: white;
+    height: 10vh;
+}
+
+.shadow {
+  box-shadow:0 0 0 2px rgba(0,0,0,0.06);
+}
+
+  .fixed {
+    position: fixed;
+  }
+  
+  .header-left, .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-left a, label, .header-right a {
+    margin-right: 24px;
+    margin-left: 24px;
+    font-size: 20px;
+ 
+  }
+
+  .header-left {
+    justify-content: space-evenly;
+  }
+  
+  .header-right a:last-child {
+    margin-right: 0;
+  }
+
+  .search-text {
+    margin-right: 32px;
+  }
+

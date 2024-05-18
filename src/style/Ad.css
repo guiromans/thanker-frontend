@@ -1,0 +1,5 @@
+.ad-container {
+    max-height: 100px !important;;
+    overflow-y: hidden !important;;
+    height: 20px;
+}
