@@ -1,7 +1,8 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { SERVICE_URL } from '../Constants';
 import { AuthService } from './AuthService';
 import { AuthResponse } from '../model/AuthResponse';
+import { enqueueSnackbar } from 'notistack';
 
 const authService: AuthService = new AuthService();
 
@@ -44,8 +45,17 @@ http.interceptors.response.use(
         originalRequest.headers.Authorization = `Bearer ${authResponse.token}`;
         return axios(originalRequest);
       } catch (error) {
-        authService.deleteTokens();
-        window.location.href = '/';
+        const axiosError: AxiosError = error as AxiosError;
+
+        if (axiosError.message.includes("409")) {
+          enqueueSnackbar("Your account has been blocked, Contact us for further details", { variant: "error" })
+        }
+
+        setTimeout(() => {
+          authService.deleteTokens();
+          window.location.href = '/';
+        }, 1500);
+        
       }
     }
     return Promise.reject(error);

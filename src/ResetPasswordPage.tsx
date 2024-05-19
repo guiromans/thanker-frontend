@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { UserService } from "./services/UserService";
+import './style/ResetPassword.css';
+import { CONFIRM_NEW_PASSWORD, NEW_PASSWORD, SUBMIT, TranslationService } from "./services/TranslationService";
 
 export const ResetPasswordPage = () => {
     const userService: UserService = new UserService();
@@ -12,6 +14,8 @@ export const ResetPasswordPage = () => {
     const [displaySuccess, setDisplaySuccess] = useState<boolean>(false);
     const [displayError, setDisplayError] = useState<boolean>(false);
     const navigate = useNavigate();
+
+    const translationService: TranslationService = new TranslationService();
 
     const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
@@ -39,13 +43,13 @@ export const ResetPasswordPage = () => {
     }
 
     return (
-        <div className='top-padding'>
+        <div className='top-padding form'>
             <h2>Reset Password</h2>
             <br/>
-            <form onSubmit={setNewPassword}>
-                New password&nbsp;<input type='password' name='password' onChange={handlePasswordChange} />
-                Confirm password&nbsp;<input type='password' name='confirmPassword' onChange={handleConfirmPasswordChange} />
-                <button type='submit'>Submit</button>
+            <form onSubmit={setNewPassword} className="form">
+                <input type='password' name='password' onChange={handlePasswordChange} placeholder={translationService.getFor(NEW_PASSWORD)} /><br/>
+                <input type='password' name='confirmPassword' onChange={handleConfirmPasswordChange} placeholder={translationService.getFor(CONFIRM_NEW_PASSWORD)} /><br/><br/>
+                <button type='submit'>{translationService.getFor(SUBMIT)}</button>
             </form>
             <br/>
             {displaySuccess && 'New password has been reset!\nGo to login page or wait to be redirected there...'}

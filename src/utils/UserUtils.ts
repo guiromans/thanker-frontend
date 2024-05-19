@@ -1,5 +1,5 @@
 import { UserResponse } from "../model/UserModel";
-import defaultProfilePic from '../assets/images/profile_colorized.png';
+import defaultProfilePic from '../assets/images/profile_colorized_white_bg.png';
 
 
 export const getUniqueById = (list: UserResponse[]): UserResponse[] => {

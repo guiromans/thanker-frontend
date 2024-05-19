@@ -127,8 +127,8 @@ button {
     box-shadow: 0 0 0 0 rgb(255, 255, 255);
 }
 
-.thanks-button:hover {
-    box-shadow: 0 0px 0 2px #AFE1AF;
+.thanks-button,.thanker-button:hover {
+    box-shadow: 2px 2px 0px 0px #AFE1AF;
 }
 
 .thanks-button {
@@ -138,6 +138,14 @@ button {
     background-color: #50C878;
     font-weight: bold;
     font-size: 24px;
+    color: #F9F6EE;
+}
+
+.thanker-button {
+    border-color: #AFE1AF;
+    background-color: #50C878;
+    font-weight: bold;
+    font-size: 16px;
     color: #F9F6EE;
 }
 

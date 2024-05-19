@@ -92,7 +92,7 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
             placeholder={translationService.getFor(PASSWORD)}
             className="smaller-input"
           /><br/><br/>
-          {!authenticating && <button type='submit'>{translationService.getFor(LOGIN)}</button>}
+          {!authenticating && <button type='submit' className="thanker-button">{translationService.getFor(LOGIN)}</button>}
           {authenticating && <div className='centerish'><Loader size="small" /></div>}
         </form>
         <div className="options">
@@ -101,6 +101,9 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
           {!authenticating && <a className='label-link' onClick={requestNewConfirmation}>{translationService.getFor(NEW_CONFIRMATION)}</a>}
         </div>
         <ThankerIntro />
+        <div>
+          <a href="mailto:beatrue@thanker.co">beatrue@thanker.co</a>
+        </div>
       </div>
     );
    

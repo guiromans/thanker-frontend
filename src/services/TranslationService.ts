@@ -39,6 +39,9 @@ export const PLATO: string = "Plato";
 export const CHANGED_PRIVACY_TYPE: string = "changed-privacy-type";
 export const PASSWORD_RESET_REQUEST_SENT: string = "password-reset-request-sent";
 export const NEW_CONFIRMATION_EMAIL_REQUESTED: string = "new-confirmation-email-requested";
+export const NEW_PASSWORD: string = "new-password";
+export const CONFIRM_NEW_PASSWORD: string = "confirm-new-password";
+export const SUBMIT: string = "submit";
 export const YOU_ARE_NOW_FOLLOWING: string = "you-are-now-following";
 export const ERROR_TRYING_TO_FOLLOW: string = "error-trying-to-follow";
 export const THANKER_IS_THANKFUL_TO: string = "thanker-is-thankful-to";
@@ -255,6 +258,9 @@ export class TranslationService {
             [ERROR_INVALID_EMAIL, "Endereço providenciado não é um e-mail válido:"],
             [PASSWORD_RESET_REQUEST_SENT, "Pedido para configuração de nova password enviado"],
             [NEW_CONFIRMATION_EMAIL_REQUESTED, "Pedido para nova confirmação de e-mail feito!"],
+            [NEW_PASSWORD, "Nova password"],
+            [CONFIRM_NEW_PASSWORD, "Confirma nova password"],
+            [SUBMIT, "Submeter"],
             [ERROR_NAME_NOT_EMPTY, "Nome não pode estar vazio"],
             [ERROR_HANDLE_NOT_EMPTY, "Handle não pode estar vazio"],
             [ERROR_EMAIL_NOT_EMPTY, "E-mail não pode estar vazio"],
@@ -446,6 +452,9 @@ export class TranslationService {
             [ERROR_INVALID_EMAIL, "Provided e-mail is not a valid one:"],
             [PASSWORD_RESET_REQUEST_SENT, "Password reset request sent"],
             [NEW_CONFIRMATION_EMAIL_REQUESTED, "New confirmation e-mail requested"],
+            [NEW_PASSWORD, "New password"],
+            [CONFIRM_NEW_PASSWORD, "Confirm new password"],
+            [SUBMIT, "Submit"],
             [THANKER_IS_THANKFUL_TO, "Thanker is thankful to:"],
             [QUOTE_1, "Gratitude makes sense of our past, brings peace for today, and creates a vision for tomorrow"], //Melody Beattie
             [QUOTE_2, "The root of joy is gratefulness"], //David Steindl-Rast
