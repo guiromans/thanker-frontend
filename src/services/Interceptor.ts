@@ -27,7 +27,6 @@ http.interceptors.request.use(
 http.interceptors.response.use(
   (response) => response,
   async (error) => {
-    console.log("Logging error: ", error)
     const originalRequest = error.config;
 
     // If the error status is 401 and there is no originalRequest._retry flag,
