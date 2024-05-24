@@ -34,17 +34,25 @@
 
 .info-icon {
     width: 15px;
-    align-items: center;
+    display: grid;
+    place-items: center;
 }
 
 .privacy {
     align-items: center;
     display: flex;
     justify-content: center;
+    margin-bottom: 24px;
 }
 
 .privacy-select {
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 8px;
 }
 
 .page-padding {

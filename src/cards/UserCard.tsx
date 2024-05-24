@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ImageUploadResponse, UserResponse } from "../model/UserModel";
-import { CLICK_YOUR_NAME_UPDATE, Language, THANKS, UPDATE, TranslationService, USERNAME_UPDATED, PUBLIC, PRIVATE, FILES_MUST_BE } from "../services/TranslationService";
+import { CLICK_YOUR_NAME_UPDATE, Language, THANKS, UPDATE, TranslationService, USERNAME_UPDATED, PUBLIC, PRIVATE, FILES_MUST_BE, CLICK_YOUR_PICTURE_UPDATE } from "../services/TranslationService";
 import '../style/UserStyle.css';
 import { resolveUserImage } from "../utils/UserUtils";
 import { enqueueSnackbar } from "notistack";
@@ -9,6 +9,7 @@ import { AuthService } from "../services/AuthService";
 import { ImageService } from "../services/ImageService";
 import { Loader } from "./Loader";
 import { AxiosError } from "axios";
+import { Tooltip } from "react-tooltip";
 
 export interface UserProps {
     user: UserResponse | undefined;
@@ -70,12 +71,6 @@ const UserCard = (props: UserProps) => {
         }
     }
 
-    const handleHoverName = () => {
-        if (isUserPage()) {
-            enqueueSnackbar(`${translationService.getFor(CLICK_YOUR_NAME_UPDATE)}`, { variant: 'info' });
-        }
-    }
-
     const isUserPage = (): boolean => {
         const thisUserId = authService.readUserIdFromToken();
         const pageUserId = props.user?.id;
@@ -129,7 +124,7 @@ const UserCard = (props: UserProps) => {
     }
 
     const resolveImageClassName = (): string => {
-        return isUserPage() ? "custom-link" : "";
+        return ("user-image " + isUserPage() ? "custom-link" : "").trim();
     }
 
     const resolveHandle = (): string => {
@@ -138,7 +133,7 @@ const UserCard = (props: UserProps) => {
 
     return (
         <div className="user-container">
-            {!isEditingName && <div className="user-data" onClick={handleNameClick} onMouseOver={handleHoverName}>
+            {!isEditingName && <div className="user-data user-name" data-tooltip-id="tooltip-name" onClick={handleNameClick}>
                 <b>{username}</b>
             </div>
             }
@@ -150,14 +145,22 @@ const UserCard = (props: UserProps) => {
                 </form>
             }
             <div className="handle">{resolveHandle()}</div>
-            {!loadingImage && <div className="circle">
+            {!loadingImage && <div className="circle user-image" data-tooltip-id="tooltip-image" data-tooltip-content={translationService.getFor(CLICK_YOUR_PICTURE_UPDATE)}>
                 <img src={`${imageUrl}${cacheBuster}`} alt="Click to upload new image"
                     className={resolveImageClassName()}
                     onClick={handleImageClick}
                 />
-                <input type="file" accept="image/jpeg, image/png, image/gif" ref={fileInputRef} onChange={handleImageSelection}/>
+                <input className="user-image" type="file" accept="image/jpeg, image/png, image/gif" ref={fileInputRef} onChange={handleImageSelection}/>
                 <br/>
             </div>}
+            <div>
+                <Tooltip id="tooltip-name" anchorSelect=".user-name" place="top" className="tooltip">
+                        {translationService.getFor(CLICK_YOUR_NAME_UPDATE)}
+                </Tooltip>
+                <Tooltip id="tooltip-image" anchorSelect=".user-image" place="top" className="tooltip">
+                        {translationService.getFor(CLICK_YOUR_PICTURE_UPDATE)}
+                </Tooltip>
+            </div>
             {loadingImage && <div className="circle">
                 <Loader size="small"/>
             </div>}

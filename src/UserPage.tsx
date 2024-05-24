@@ -4,7 +4,7 @@ import { CreateThanksRequest, DeleteThanksResponse, PrivacyChangeResponse, Priva
 import { ErrorResponse } from "./model/ErrorResponse";
 import { getUniqueById, privacyTypeOf } from "./utils/ThanksUtils";
 import { AuthService } from "./services/AuthService";
-import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, Language, TEXT_NOT_EMPTY, THANK, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
+import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, Language, PRIVACY_ICON_TOOLTIP, TEXT_NOT_EMPTY, THANK, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
 import { FollowerResponse } from "./model/FollowerModel";
 import { UserResponse } from "./model/UserModel";
 import { UserService } from "./services/UserService";
@@ -12,6 +12,7 @@ import { Loader } from "./cards/Loader";
 import ThanksCard from "./cards/ThanksCard";
 import { HurrayCard } from "./cards/HurrayCard";
 import './style/UserPage.css';
+import './style/UserStyle.css';
 import './style/Fonts.css';
 import UserCard from "./cards/UserCard";
 import QuoteCard from "./cards/QuoteCard";
@@ -21,6 +22,7 @@ import infoIcon from './assets/images/info_icon.png';
 import { Modal } from "./cards/Modal";
 import { StorageService } from "./services/StorageService";
 import { NoThanksCard } from "./cards/NoThanksCard";
+import { Tooltip } from "react-tooltip";
 
 interface UserProps {
   userId: string | null | undefined;
@@ -343,7 +345,13 @@ export const UserPage = (props: UserProps) => {
                   <option key={type} value={type}>{translationService.getFor(type)}</option>
                 ))}
               </select>
-              <img src={infoIcon} className="info-icon" />
+              <img 
+                src={infoIcon} 
+                className="info-icon"
+              />
+              <Tooltip id="privacy-tooltip" anchorSelect=".info-icon" place="top" className="tooltip">
+                {translationService.getFor(PRIVACY_ICON_TOOLTIP)}
+              </Tooltip>
             </div>
             <button type='submit' className="thanks-button">{translationService.getFor(THANK)}!</button>
           </form>

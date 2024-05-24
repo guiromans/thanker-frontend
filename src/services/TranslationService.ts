@@ -1,6 +1,6 @@
 import { GDPR_EN_HTML, GDPR_PT_HTML } from "../model/GDPR";
 import { StorageService } from "./StorageService";
-import { PROFESSION_ACTOR, PROFESSION_ACTRESS, PROFESSION_COMEDIAN, PROFESSION_JOURNALIST, PROFESSION_LAYWER, PROFESSION_MONK, PROFESSION_MUSICIAN, PROFESSION_SINGER_WOMAN, PROFESSION_PHILOSOPHER, PROFESSION_PSYCHOLOGIST, PROFESSION_ROMAN_EMPEROR, PROFESSION_SCIENTIST, PROFESSION_SPIRITUAL_LEADER, PROFESSION_WRITER, PROFESSION_WRITER_WOMAN, QUOTE_1, QUOTE_10, QUOTE_11, QUOTE_12, QUOTE_13, QUOTE_14, QUOTE_15, QUOTE_16, QUOTE_17, QUOTE_18, QUOTE_19, QUOTE_2, QUOTE_20, QUOTE_21, QUOTE_22, QUOTE_23, QUOTE_24, QUOTE_25, QUOTE_26, QUOTE_27, QUOTE_28, QUOTE_29, QUOTE_3, QUOTE_30, QUOTE_31, QUOTE_32, QUOTE_33, QUOTE_34, QUOTE_35, QUOTE_36, QUOTE_37, QUOTE_4, QUOTE_5, QUOTE_6, QUOTE_7, QUOTE_8, QUOTE_9, quotesList, QUOTE_38, QUOTE_39, QUOTE_40, QUOTE_41, QUOTE_42, PROFESSION_MARTIAL_ARTIST, QUOTE_43, QUOTE_44, PROFESSION_PSYCHOLOGIST_WOMAN, PROFESSION_RESEARCHER_WOMAN, QUOTE_45, QUOTE_46, QUOTE_47, QUOTE_48, PROFESSION_ENTERPRENEUR, QUOTE_49, QUOTE_50, PROFESSION_TV_HOST_WOMAN, PROFESSION_ENTERPRENEUR_WOMAN, PROFESSION_YOGA_TEACHER_WOMAN } from "./translations/QuotesService";
+import { PROFESSION_ACTOR, PROFESSION_ACTRESS, PROFESSION_COMEDIAN, PROFESSION_JOURNALIST, PROFESSION_LAYWER, PROFESSION_MONK, PROFESSION_MUSICIAN, PROFESSION_SINGER_WOMAN, PROFESSION_PHILOSOPHER, PROFESSION_PSYCHOLOGIST, PROFESSION_ROMAN_EMPEROR, PROFESSION_SCIENTIST, PROFESSION_SPIRITUAL_LEADER, PROFESSION_WRITER, PROFESSION_WRITER_WOMAN, QUOTE_1, QUOTE_10, QUOTE_11, QUOTE_12, QUOTE_13, QUOTE_14, QUOTE_15, QUOTE_16, QUOTE_17, QUOTE_18, QUOTE_19, QUOTE_2, QUOTE_20, QUOTE_21, QUOTE_22, QUOTE_23, QUOTE_24, QUOTE_25, QUOTE_26, QUOTE_27, QUOTE_28, QUOTE_29, QUOTE_3, QUOTE_30, QUOTE_31, QUOTE_32, QUOTE_33, QUOTE_34, QUOTE_35, QUOTE_36, QUOTE_37, QUOTE_4, QUOTE_5, QUOTE_6, QUOTE_7, QUOTE_8, QUOTE_9, QUOTE_38, QUOTE_39, QUOTE_40, QUOTE_41, QUOTE_42, PROFESSION_MARTIAL_ARTIST, QUOTE_43, QUOTE_44, PROFESSION_PSYCHOLOGIST_WOMAN, PROFESSION_RESEARCHER_WOMAN, QUOTE_45, QUOTE_46, QUOTE_47, QUOTE_48, PROFESSION_ENTERPRENEUR, QUOTE_49, QUOTE_50, PROFESSION_TV_HOST_WOMAN, PROFESSION_ENTERPRENEUR_WOMAN, PROFESSION_YOGA_TEACHER_WOMAN } from "./translations/QuotesService";
 
 export enum Language {
     PT = "PT", GB = "GB"
@@ -47,6 +47,7 @@ export const ERROR_TRYING_TO_FOLLOW: string = "error-trying-to-follow";
 export const THANKER_IS_THANKFUL_TO: string = "thanker-is-thankful-to";
 export const THANKING_MAKES_YOU_HAPPIER: string = "thanking-makes-you-happier";
 export const CLICK_YOUR_NAME_UPDATE: string = "click-your-name-update";
+export const CLICK_YOUR_PICTURE_UPDATE: string = "click-your-picture-update";
 export const UPDATE: string = "update";
 export const ARE_YOU_SURE_TO_DELETE: string = "are-you-sure-to-delete";
 export const YES: string = "yes";
@@ -73,6 +74,7 @@ export const HARVARD_ARTICLE: string = "harvard-article";
 export const BERKELEY_ARTICLE: string = "berkeley-article";
 export const GDPR: string = "gdpr";
 export const FILES_MUST_BE: string = "files-must-be";
+export const PRIVACY_ICON_TOOLTIP: string = "privacy-icon-tooltip";
 
 export const INTRO_THANKFUL_FOR: string = "intro-thankful-for";
 export const INTRO_GRATEFUL_FOR: string = "intro-grateful-for";
@@ -205,7 +207,9 @@ export class TranslationService {
             [BERKELEY_ARTICLE, "Artigo da Universidade de Berkeley"],
             [GDPR, GDPR_PT_HTML],
             [FILES_MUST_BE, "Ficheiros têm de ser"],
+            [PRIVACY_ICON_TOOLTIP, "Privado: só tu (e a quem deres) conseguem visualizar o Thanks.\nPúblico: toda a gente conseguirá ver este Thanks."],
             [CLICK_YOUR_NAME_UPDATE, "Clica no teu nome para o atualizares"],
+            [CLICK_YOUR_PICTURE_UPDATE, "Clica na tua imagem para a atualizares"],
             [UPDATE, "Atualiza"],
             [ARE_YOU_SURE_TO_DELETE, "De certeza que queres apagar este Agradecimento?"],
             [YES, "Sim"],
@@ -391,7 +395,9 @@ export class TranslationService {
             [BERKELEY_ARTICLE, "Berkeley University Article"],
             [GDPR, GDPR_EN_HTML],
             [FILES_MUST_BE, "Files must be"],
+            [PRIVACY_ICON_TOOLTIP, "Private: only you (and who you give to) will be able to see this Thanks.\nPublic: everyone can see the Thanks."],
             [CLICK_YOUR_NAME_UPDATE, "Click your name to update it"],
+            [CLICK_YOUR_PICTURE_UPDATE, "Click your image to update it"],
             [UPDATE, "Update"],
             [ARE_YOU_SURE_TO_DELETE, "Are you sure you want to delete this Thanks?"],
             [YES, "Yes"],
@@ -505,7 +511,7 @@ export class TranslationService {
             [QUOTE_47, "By writing what I was grateful for, I learned to look for things that made me smile"],
             [QUOTE_48, "If you listen to birds, every day will have a song in it"],
             [QUOTE_49, "When you view your world with an attitude of gratitude, you are training yourself to focus on the good in life"],
-            [QUOTE_50, "I'm big on manners. I'm big on politeness. I'm big on gratitude"],
+            [QUOTE_50, "I'm big on manners. I'm big on politeness. I'm big on Gratitude"],
         ])
         ]
     ]);
