@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { UserService } from "./services/UserService";
 import './style/ResetPassword.css';
+import './style/Styles.css';
 import { CONFIRM_NEW_PASSWORD, NEW_PASSWORD, SUBMIT, TranslationService } from "./services/TranslationService";
 
 export const ResetPasswordPage = () => {
@@ -49,7 +50,7 @@ export const ResetPasswordPage = () => {
             <form onSubmit={setNewPassword} className="form">
                 <input type='password' name='password' onChange={handlePasswordChange} placeholder={translationService.getFor(NEW_PASSWORD)} /><br/>
                 <input type='password' name='confirmPassword' onChange={handleConfirmPasswordChange} placeholder={translationService.getFor(CONFIRM_NEW_PASSWORD)} /><br/><br/>
-                <button type='submit'>{translationService.getFor(SUBMIT)}</button>
+                <button type='submit' className="thanker-button">{translationService.getFor(SUBMIT)}</button>
             </form>
             <br/>
             {displaySuccess && 'New password has been reset!\nGo to login page or wait to be redirected there...'}

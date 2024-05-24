@@ -5,6 +5,7 @@ import { ErrorResponse } from "./model/ErrorResponse";
 import { CREATE, CREATE_USER, ERRORS_IN_FORM, ERROR_ACCEPT_TERMS_AND_CONDITIONS, ERROR_EMAIL_NOT_EMPTY, ERROR_HANDLE_NOT_EMPTY, ERROR_NAME_NOT_EMPTY, ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, ERROR_PASSWORD_NOT_EMPTY, ERROR_PASSWORD_RULES, Language, REGISTER_CONFIRM_PASSWORD, REGISTER_EMAIL, REGISTER_HANDLE, REGISTER_NAME, REGISTER_PASSWORD, TERMS_AND_CONDITIONS, TranslationService, USER_CREATED_TEXT } from "./services/TranslationService";
 import { useSnackbar } from "notistack";
 import './style/CreateUser.css';
+import './style/Styles.css';
 import { Loader } from "./cards/Loader";
 
 export interface CreateUserProps {
@@ -223,7 +224,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                     )}
                     <input type='checkbox' checked={acceptedTerms} onChange={handleTermsConditionsCheckboxChange} className='checkbox' /> 
                     <a href="/gdpr" target="_blank">{translationService.getFor(TERMS_AND_CONDITIONS)}</a><br/><br/>
-                    <button type='submit'>{translationService.getFor(CREATE)}</button>
+                    <button type='submit' className="thanker-button">{translationService.getFor(CREATE)}</button>
                 </form>
             )}
             {loading && <Loader size="small" />}

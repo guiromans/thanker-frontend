@@ -3,6 +3,7 @@ import { UserService } from "./services/UserService"
 import { ErrorResponse } from "react-router-dom";
 import { Loader } from "./cards/Loader";
 import './style/Fonts.css';
+import './style/Styles.css';
 import { ERROR_EMAIL_NOT_EXISTS, ERROR_INVALID_EMAIL, Language, NEW_CONFIRMATION, NEW_CONFIRMATION_EMAIL_REQUESTED, NEW_CONFIRMATION_TITLE, TranslationService, YOUR_EMAIL } from "./services/TranslationService";
 import { useSnackbar } from "notistack";
 
@@ -61,7 +62,7 @@ export const RequestNewConfirmationPage = (props: RequestResetPassProps) => {
                     className='medium-input'
                     disabled={loading}
                 /><br/><br/><br/>
-                <button type='submit' disabled={loading}>{translationService.getFor(NEW_CONFIRMATION)}</button>
+                <button type='submit' className="thanker-button" disabled={loading}>{translationService.getFor(NEW_CONFIRMATION)}</button>
             </form><br/>
             {loading && <Loader size="big" />}<br/>
         </div>
