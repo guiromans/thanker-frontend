@@ -4,6 +4,7 @@ import { UserService } from "./services/UserService";
 import './style/ResetPassword.css';
 import './style/Styles.css';
 import { CONFIRM_NEW_PASSWORD, NEW_PASSWORD, SUBMIT, TranslationService } from "./services/TranslationService";
+import { validatePasswordRules } from "./utils/PasswordUtils";
 
 export const ResetPasswordPage = () => {
     const userService: UserService = new UserService();
@@ -29,7 +30,7 @@ export const ResetPasswordPage = () => {
     const setNewPassword = async(event: React.FormEvent) => {
         event.preventDefault();
         
-        if (password === confirmPassword && userId && resetPasswordId) {
+        if (validatePasswordRules(password) && password === confirmPassword && userId && resetPasswordId) {
             setDisplayError(false);
             await userService.setNewPassword(userId, resetPasswordId, password)
                 .then(() => {

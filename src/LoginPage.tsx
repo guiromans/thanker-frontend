@@ -102,7 +102,7 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
         </div>
         <ThankerIntro />
         <div>
-          <a href="mailto:beatrue@thanker.co">beatrue@thanker.co</a>
+          {!authenticating && <a href="mailto:beatrue@thanker.co">beatrue@thanker.co</a>}
         </div>
       </div>
     );

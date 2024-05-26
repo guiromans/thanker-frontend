@@ -7,6 +7,7 @@ import { useSnackbar } from "notistack";
 import './style/CreateUser.css';
 import './style/Styles.css';
 import { Loader } from "./cards/Loader";
+import { validatePasswordRules } from "./utils/PasswordUtils";
 
 export interface CreateUserProps {
     language: Language | undefined;
@@ -133,10 +134,6 @@ export const CreateUserPage = (props: CreateUserProps) => {
         return password !== null && password.length > 0;
     }
 
-    const validatePasswordRules = (password: string): boolean => {
-        return password.length >= 8 && containsSpecialChars(password);
-    }
-
     const validateCheckedTerms = (isTicked: boolean): boolean => {
         return isTicked;
     }
@@ -160,13 +157,6 @@ export const CreateUserPage = (props: CreateUserProps) => {
 
         return hasValidName && hasValidHandle && hasValidEmail && hasValidPassword && 
             passwordCompliesWithRules && passwordsMatch && hasAcceptedTerms;
-    }
-
-    const containsSpecialChars = (password: string): boolean => {
-        const specialChars: string [] = ["!", "?", ".", "-", "(", ")", "/", "&", "$", "#", "@", "\\", "&", "«",
-            "»", "_", ";", ":", "{", "}", "%", "\"", "*"];
-
-        return specialChars.some(char => password.includes(char));
     }
 
     return (
