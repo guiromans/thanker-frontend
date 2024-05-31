@@ -14,6 +14,7 @@ export const http = axios.create({
 http.interceptors.request.use(
   (config) => {
     const token: string | null = authService.getToken();
+    config.headers['Access-Control-Allow-Origin'] = '*';
     if (token != null) {
       config.headers.Authorization = `Bearer ${token}`;
       config.headers['Content-Type'] = 'application/json';
