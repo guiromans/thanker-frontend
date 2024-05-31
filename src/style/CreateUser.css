@@ -5,3 +5,7 @@
     display: inline-block; /* or 'block' depending on your layout needs */
     text-align: left;
 }
+
+label {
+    color: #50C878;
+}
