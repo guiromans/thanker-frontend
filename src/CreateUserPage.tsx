@@ -8,6 +8,7 @@ import './style/CreateUser.css';
 import './style/Styles.css';
 import { Loader } from "./cards/Loader";
 import { validatePasswordRules } from "./utils/PasswordUtils";
+import { newWindowOf } from "./utils/WindowUtils";
 
 export interface CreateUserProps {
     language: Language | undefined;
@@ -159,6 +160,10 @@ export const CreateUserPage = (props: CreateUserProps) => {
             passwordCompliesWithRules && passwordsMatch && hasAcceptedTerms;
     }
 
+    const handleGdprClick = () => {
+        newWindowOf("gdpr");
+    }
+
     return (
         <div className='top-padding'>
             <h2>{translationService.getFor(CREATE_USER)}</h2>
@@ -213,7 +218,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                         </div>
                     )}
                     <input type='checkbox' checked={acceptedTerms} onChange={handleTermsConditionsCheckboxChange} className='checkbox' /> 
-                    <a href="/gdpr" target="_blank">{translationService.getFor(TERMS_AND_CONDITIONS)}</a><br/><br/>
+                    <label onClick={handleGdprClick}>{translationService.getFor(TERMS_AND_CONDITIONS)}</label><br/><br/>
                     <button type='submit' className="thanker-button">{translationService.getFor(CREATE)}</button>
                 </form>
             )}
