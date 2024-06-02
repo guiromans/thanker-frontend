@@ -96,7 +96,10 @@ export const CreateUserPage = (props: CreateUserProps) => {
                 .then(() => {
                     setVisibleForm(false);
                     enqueueSnackbar(`${translationService.getFor(USER_CREATED_TEXT)}: ${email}`, { variant: 'success' });
-                    props.onUserCreated();
+                    
+                    setTimeout(() => {
+                        props.onUserCreated();
+                    }, 1500); 
                 })
                 .catch(e => {
                     console.log("Error creating user:", e);
