@@ -54,7 +54,7 @@ export const RequestResetPasswordPage = (props: RequestResetPassProps) => {
             <h1>{translationService.getFor(RESET_PASSWORD)}</h1><br/>
             <form onSubmit={requestPasswordReset}>
                 <input 
-                    type='text' 
+                    type='email' 
                     name='email' 
                     value={email} 
                     onChange={handleEmailChange}

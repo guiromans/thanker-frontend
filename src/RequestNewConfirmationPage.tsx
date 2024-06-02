@@ -54,7 +54,7 @@ export const RequestNewConfirmationPage = (props: RequestResetPassProps) => {
             <h1>{translationService.getFor(NEW_CONFIRMATION_TITLE)}</h1><br/>
             <form onSubmit={requestNewConfirmation}>
                 <input 
-                    type='text' 
+                    type='email' 
                     name='email' 
                     value={email} 
                     onChange={handleEmailChange}

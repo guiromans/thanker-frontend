@@ -191,7 +191,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                             
                         </div>
                     )}
-                    <input className='wider-input' type='text' name='email' value={email} onChange={handleEmailChange} placeholder={translationService.getFor(REGISTER_EMAIL)}/><br/>
+                    <input className='wider-input' type='email' name='email' value={email} onChange={handleEmailChange} placeholder={translationService.getFor(REGISTER_EMAIL)}/><br/>
                     { /* Password */ }
                     {errorPassword && (
                         <div className="error-label-container">

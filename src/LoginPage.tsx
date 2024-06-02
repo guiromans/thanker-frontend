@@ -77,7 +77,7 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
         <br/>
         <form onSubmit={performLogin} method='POST'>
           <input 
-            type='text' 
+            type='email' 
             name='email' 
             value={email} 
             onChange={handleEmailChange}
