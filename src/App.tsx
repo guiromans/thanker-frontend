@@ -34,20 +34,10 @@ const App = () => {
   const [loggingOut, setLoggingOut] = useState<boolean>(false);
   const [loadingUsers, setLoadingUsers] = useState<boolean>(false);
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     setLoading(true);
     fetchUserId();    
   }, []);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const redirectPath = params.get('redirect');
-    if (redirectPath) {
-      navigate(redirectPath);
-    }
-  }, [navigate]);
 
   const hasValidToken = (): boolean => {
     const isValidToken: boolean = authService.isTokenValid();
@@ -162,7 +152,7 @@ const App = () => {
           userId={userId}
         />
         <React.StrictMode>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
             <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/>} />
@@ -180,7 +170,7 @@ const App = () => {
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
+        </HashRouter>
         </React.StrictMode>
         </SnackbarProvider>
     </div>  
