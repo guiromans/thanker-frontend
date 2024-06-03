@@ -139,7 +139,6 @@ const App = () => {
 
   return (
     <div className='main'>
-      <React.StrictMode>
       <SnackbarProvider maxSnack={3}>
         <Header 
           onLanguageChange={handleLanguageChange} 
@@ -152,6 +151,7 @@ const App = () => {
           onLogoutClick={handleLogout}
           userId={userId}
         />
+        <React.StrictMode>
         <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
@@ -171,8 +171,8 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
-        </SnackbarProvider>
         </React.StrictMode>
+        </SnackbarProvider>
     </div>  
   );
 
