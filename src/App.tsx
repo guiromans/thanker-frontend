@@ -1,7 +1,7 @@
 import { UserPage } from './UserPage';
 import { LoginPage } from './LoginPage';
 import { AuthService } from './services/AuthService';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { HashRouter, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { AccountConfirmationPage } from './AccountConfirmationPage';
 import { CreateUserPage } from './CreateUserPage';
@@ -150,7 +150,7 @@ const App = () => {
           onLogoutClick={handleLogout}
           userId={userId}
         />
-        <Router>
+        <HashRouter>
           <Routes>
             <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
             <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/>} />
@@ -168,7 +168,7 @@ const App = () => {
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </Router>
+        </HashRouter>
         </SnackbarProvider>
     </div>  
   );
