@@ -99,7 +99,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                     
                     setTimeout(() => {
                         props.onUserCreated();
-                    }, 1500); 
+                    }, 5000); 
                 })
                 .catch(e => {
                     console.log("Error creating user:", e);
