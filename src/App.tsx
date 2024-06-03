@@ -152,7 +152,7 @@ const App = () => {
           userId={userId}
         />
         <React.StrictMode>
-        <BrowserRouter basename="https://thanker.co">
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
             <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/>} />
