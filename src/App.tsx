@@ -1,7 +1,7 @@
 import { UserPage } from './UserPage';
 import { LoginPage } from './LoginPage';
 import { AuthService } from './services/AuthService';
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { AccountConfirmationPage } from './AccountConfirmationPage';
 import { CreateUserPage } from './CreateUserPage';
@@ -34,10 +34,20 @@ const App = () => {
   const [loggingOut, setLoggingOut] = useState<boolean>(false);
   const [loadingUsers, setLoadingUsers] = useState<boolean>(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     setLoading(true);
     fetchUserId();    
   }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const redirectPath = params.get('redirect');
+    if (redirectPath) {
+      navigate(redirectPath);
+    }
+  }, [navigate]);
 
   const hasValidToken = (): boolean => {
     const isValidToken: boolean = authService.isTokenValid();
