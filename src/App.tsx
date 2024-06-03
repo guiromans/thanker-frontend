@@ -152,7 +152,7 @@ const App = () => {
           onLogoutClick={handleLogout}
           userId={userId}
         />
-        <BrowserRouter basename='/'>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
             <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
             <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/>} />
