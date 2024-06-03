@@ -168,7 +168,7 @@ const App = () => {
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
         </SnackbarProvider>
     </div>  
   );
