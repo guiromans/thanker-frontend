@@ -1,7 +1,7 @@
 import { UserPage } from './UserPage';
 import { LoginPage } from './LoginPage';
 import { AuthService } from './services/AuthService';
-import { HashRouter, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { AccountConfirmationPage } from './AccountConfirmationPage';
 import { CreateUserPage } from './CreateUserPage';
