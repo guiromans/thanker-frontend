@@ -1,8 +1,8 @@
 {
   "name": "thanker-app",
-  "homepage": "http://guiromans.github.io/#",
+  "homepage": "https://guiromans.github.io/",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "proxy": "http://localhost:3000",
   "dependencies": {
     "@mui/icons-material": "^5.15.4",
