@@ -23,6 +23,7 @@ import { UserResponse } from './model/UserModel';
 import { RequestNewConfirmationPage } from './RequestNewConfirmationPage';
 import { SettingsPage } from './SettingsPage';
 import { GDPRCard } from './cards/GDPRCard';
+import React from 'react';
 
 const App = () => {
   const authService = new AuthService();
@@ -138,6 +139,7 @@ const App = () => {
 
   return (
     <div className='main'>
+      <React.StrictMode>
       <SnackbarProvider maxSnack={3}>
         <Header 
           onLanguageChange={handleLanguageChange} 
@@ -170,6 +172,7 @@ const App = () => {
           </Routes>
         </BrowserRouter>
         </SnackbarProvider>
+        </React.StrictMode>
     </div>  
   );
 
