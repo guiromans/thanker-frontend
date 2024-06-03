@@ -1,6 +1,6 @@
 {
   "name": "thanker-app",
-  "homepage": "http://guiromans.github.io/",
+  "homepage": "https://thanker.co",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:3000",
