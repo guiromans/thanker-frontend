@@ -20,11 +20,15 @@ export const resolveUserImage = (user: UserResponse | undefined): string => {
     return (user && user.profilePictureUrl !== null ?
         user.profilePictureUrl
         : defaultProfilePic)
-        + `?v=${new Date().getTime()}`;
+}
+
+export const resolveAndReloadImage = (imageUrl: string | undefined | null): string => {
+    return (imageUrl && imageUrl !== null ? imageUrl 
+        : defaultProfilePic)
+        + `?v=${new Date().getTime()}`; 
 }
 
 export const resolveImage = (imageUrl: string | undefined | null): string => {
     return (imageUrl && imageUrl !== null ? imageUrl 
-        : defaultProfilePic)
-        + `?v=${new Date().getTime()}`; 
+        : defaultProfilePic); 
 }

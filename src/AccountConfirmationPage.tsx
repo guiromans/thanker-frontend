@@ -14,7 +14,6 @@ export const AccountConfirmationPage = (props: ConfirmationProps) => {
     const confirmationId = params.confirmationId;
 
     const [confirming, setConfirming] = useState<boolean>(true);
-    const [unconfirmedMessage, setUnconfirmedMessage] = useState<string>('Confirming account...')
     
     const confirmationService: AccountConfirmationService = new AccountConfirmationService();
 

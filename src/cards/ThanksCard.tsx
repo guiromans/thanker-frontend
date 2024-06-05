@@ -4,7 +4,7 @@ import '../style/ThanksCard.css';
 import { Language, TranslationService } from "../services/TranslationService";
 import { AuthService } from "../services/AuthService";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { resolveImage } from "../utils/UserUtils";
+import { resolveAndReloadImage, resolveImage } from "../utils/UserUtils";
 import { privacyTypeOf } from "../utils/ThanksUtils";
 import deleteIcon from "../assets/images/delete_icon.png";
 
@@ -27,17 +27,17 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     const [cardStyle, setCardStyle] = useState<string>('');
     const [privacyType, setPrivacyType] = useState<PrivacyType>(props.thanks.privacyType);
     const [profilePicUrl, setProfilePicUrl] = useState<string | undefined | null>(resolveImage(props.thanks.giver.profilePictureUrl));
+    const [imageCount, setImageCount] = useState<number>(props.imageCount);
 
     useEffect(() => {
         setCardStyle(resolveCardStyle());
     }, [props.thanks.privacyType])
 
     useEffect(() => {
-        console.log("Profile pic update log: Image count incremented");
-        if (isUserPage()) {
-            const newImageUrl: string = resolveImage(props.userImageUrl);
+        if (isUserPage() && imageCount !== 0 && imageCount !== props.imageCount) {
+            const newImageUrl: string = resolveAndReloadImage(props.userImageUrl);
             setProfilePicUrl(newImageUrl);
-            console.log("Profile pic update log: it's User thanks. Profile pic is now: ", newImageUrl);
+            setImageCount(props.imageCount);
         }
     }, [props.imageCount]);
 

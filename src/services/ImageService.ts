@@ -11,9 +11,7 @@ export class ImageService {
             if (compressedImage !== null) {
                 const response = await axios.put(presignedUrl, compressedImage, {
                     headers: {
-                        'Content-Type': compressedImage.type,
-                        //'Cache-Control': 'max-age=120',
-                        //'Expires': new Date(Date.now() + 60 * 2 * 1000).toUTCString()
+                        'Content-Type': "image/png",
                     }
                 });
                 console.log("Got response:", response);
@@ -28,7 +26,7 @@ export class ImageService {
         }
     }
 
-    private async compress(event: ChangeEvent<HTMLInputElement>): Promise<File | null> {
+    private async compress(event: ChangeEvent<HTMLInputElement>): Promise<Blob | null> {
         if (event.target.files === null) {
             return null;
         }

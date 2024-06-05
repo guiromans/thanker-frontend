@@ -36,7 +36,6 @@ const UserCard = (props: UserProps) => {
         if (isEditingName && inputNameRef !== null && inputNameRef.current !== null) {
             inputNameRef.current.focus();
         }
-        resetCacheBuster(imageUrl);
     }, [isEditingName])
 
     const displayUserThanks = (): string => {
@@ -111,7 +110,7 @@ const UserCard = (props: UserProps) => {
             .catch((err) => {
                 const errorResponse: AxiosError = err as AxiosError;
                 if (errorResponse.response?.status === 403) {
-                    enqueueSnackbar(`${translationService.getFor(FILES_MUST_BE)}: JPG, GIF or PNG`, { variant: "error" });
+                    enqueueSnackbar(`${translationService.getFor(FILES_MUST_BE)}: PNG`, { variant: "error" });
                 }
             })
             .finally(() => setLoadingImage(false));
@@ -150,7 +149,7 @@ const UserCard = (props: UserProps) => {
                     className={resolveImageClassName()}
                     onClick={handleImageClick}
                 />
-                <input className="user-image" type="file" accept="image/jpeg, image/png, image/gif" ref={fileInputRef} onChange={handleImageSelection}/>
+                <input className="user-image" type="file" accept="image/png" ref={fileInputRef} onChange={handleImageSelection}/>
                 <br/>
             </div>}
             <div>

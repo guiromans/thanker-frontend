@@ -22,7 +22,6 @@ export const CreateUserPage = (props: CreateUserProps) => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [confirmPass, setConfirmPass] = useState<string>('');
-    const [createdText, setCreatedText] = useState<string>('');
     const [visibleForm, setVisibleForm] = useState<boolean>(true);
     const [acceptedTerms, setAcceptedTerms] = useState<boolean>(false);
     const [errorName, setErrorName] = useState<boolean>(false);
@@ -169,7 +168,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
 
     return (
         <div className='top-padding'>
-            <h2>{translationService.getFor(CREATE_USER)}</h2>
+            <h2>{!loading && translationService.getFor(CREATE_USER)}</h2>
             {visibleForm && (
                 <form onSubmit={createUser} >
                     { /* Name */ }
@@ -228,7 +227,6 @@ export const CreateUserPage = (props: CreateUserProps) => {
             {loading && <Loader size="small" />}
             <br/>
             <br/>
-            {createdText}
         </div>
     )
 
