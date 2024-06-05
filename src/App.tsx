@@ -66,7 +66,7 @@ const App = () => {
 
   const handleSearchedUserSelect = (userId: string) => {
     console.log("Changed userId in App:", userId)
-    window.location.href = `/users/${userId}`;
+    window.location.href = `/#/users/${userId}`;
     setUserId(userId);
   }
 
@@ -76,7 +76,7 @@ const App = () => {
   }
 
   const handleAboutClick = () => {
-    window.location.href = '/about';
+    window.location.href = '/#/about';
   }
 
   const goToHome = () => {
@@ -95,11 +95,11 @@ const App = () => {
   }
 
   const handleFollowingClick  = (user: UserResponse) => {
-    window.location.href = `/users/${user.id}`;
+    window.location.href = `/#/users/${user.id}`;
   }
 
   const handleFollowingSelect = () => {
-    window.location.href = '/following';
+    window.location.href = '/#/following';
   }
 
   const openMainPage = () => {
@@ -111,7 +111,7 @@ const App = () => {
   }
 
   const handleSettingsClick = () => {
-    window.location.href = "/settings";
+    window.location.href = "/#/settings";
   }
 
   if (loading) {
@@ -154,7 +154,6 @@ const App = () => {
         <React.StrictMode>
         <HashRouter>
           <Routes>
-            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
             <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/>} />
             <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} />} />
@@ -169,6 +168,7 @@ const App = () => {
             <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} />} />
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
           </Routes>
         </HashRouter>
         </React.StrictMode>
