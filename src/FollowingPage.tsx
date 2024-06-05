@@ -99,7 +99,7 @@ export const FollowingPage = (props: FollowingProps) => {
 
     if (loading) {
         return (
-            <div className="centerish top-padding">
+            <div className="top-padding">
                 <Loader size="massive" />
             </div>
         )
