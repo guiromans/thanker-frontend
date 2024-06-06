@@ -23,7 +23,6 @@ const UserCard = (props: UserProps) => {
     const [isEditingName, setIsEditingName] = useState<boolean>(false);
     const [imageUrl, setImageUrl] = useState<string>(resolveUserImage(props.user));
     const [loadingImage, setLoadingImage] = useState<boolean>(false);
-    const [cacheBuster, setCacheBuster] = useState('');
     const inputNameRef = useRef<HTMLInputElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -99,8 +98,8 @@ const UserCard = (props: UserProps) => {
                 imageService.compressAndSend(event, imageUrlsResponse.uploadUrl)
                     .then(() => {
                         const imageUrl: string = imageUrlsResponse.getUrl;
-                        resetCacheBuster(imageUrl);
-                        setImageUrl(imageUrl);
+                        setImageUrl(`${imageUrl}?${new Date().getTime()}`);
+                        props.onImageUpdated(imageUrl);
                     })
                     .finally(() => setLoadingImage(false));
                     
@@ -111,11 +110,6 @@ const UserCard = (props: UserProps) => {
                     enqueueSnackbar(`${translationService.getFor(FILES_MUST_BE)}: PNG`, { variant: "error" });
                 }
             });
-    }
-
-    const resetCacheBuster = (imageUrl: string) => {
-        setCacheBuster(`?${new Date().getTime()}`);
-        props.onImageUpdated(imageUrl);
     }
 
     const resolveImageClassName = (): string => {
@@ -141,7 +135,7 @@ const UserCard = (props: UserProps) => {
             }
             <div className="handle">{resolveHandle()}</div>
             {!loadingImage && <div className="circle user-image" data-tooltip-id="tooltip-image" data-tooltip-content={translationService.getFor(CLICK_YOUR_PICTURE_UPDATE)}>
-                <img src={`${imageUrl}${cacheBuster}`} alt="Click to upload new image"
+                <img src={imageUrl} alt="Thanker profile image"
                     className={resolveImageClassName()}
                     onClick={handleImageClick}
                 />

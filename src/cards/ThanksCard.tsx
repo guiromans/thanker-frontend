@@ -26,7 +26,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     const pageUserId: string | undefined | null = props.pageUserId;
     const [cardStyle, setCardStyle] = useState<string>('');
     const [privacyType, setPrivacyType] = useState<PrivacyType>(props.thanks.privacyType);
-    const [profilePicUrl, setProfilePicUrl] = useState<string | undefined | null>(resolveImage(props.thanks.giver.profilePictureUrl));
+    const [profilePicUrl, setProfilePicUrl] = useState<string>(resolveImage(props.thanks.giver.profilePictureUrl));
     const [imageCount, setImageCount] = useState<number>(props.imageCount);
 
     useEffect(() => {
@@ -121,7 +121,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
         <div className={cardStyle}>
             <div className="giver-thanks-card">
                 <div className={resolveImageStyle()}>
-                    <img src={`${profilePicUrl}`} onClick={handleUserImageClick} />
+                    <img src={profilePicUrl} onClick={handleUserImageClick} />
                 </div>
             </div>
             <div className="content-thanks-card">
