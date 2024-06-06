@@ -23,6 +23,7 @@ import { Modal } from "./cards/Modal";
 import { StorageService } from "./services/StorageService";
 import { NoThanksCard } from "./cards/NoThanksCard";
 import { Tooltip } from "react-tooltip";
+import { ImageService } from "./services/ImageService";
 
 interface UserProps {
   userId: string | null | undefined;
@@ -58,7 +59,7 @@ export const UserPage = (props: UserProps) => {
   const [modalMessage, setModalMessage] = useState<string>('');
   const [thanksIdToDelete, setThanksIdToDelete] = useState<string | null>(null);
   const [language, setLanguage] = useState<Language | undefined>(props?.language);
-  const [imageCount, setImageCount] = useState<number>(0);
+  const [timestamp, setTimestamp] = useState<number>(0);
   const [userImageUrl, setUserImageUrl] = useState<string | null>('');
   const { enqueueSnackbar } = useSnackbar();
 
@@ -263,8 +264,8 @@ export const UserPage = (props: UserProps) => {
     }
   }
 
-  const handleImageUpdated = (imageUrl: string) => {
-    setImageCount(imageCount + 1);
+  const handleImageUpdated = async(imageUrl: string, timestamp: number) => {
+    setTimestamp(timestamp);
     setUserImageUrl(imageUrl);
   }
 
@@ -368,9 +369,9 @@ export const UserPage = (props: UserProps) => {
               onUserImageClick={handleUserImageClick}
               language={language}
               onClickedDelete={handleClickedDelete}
-              imageCount={imageCount}
               userImageUrl={userImageUrl}
               pageUserId={userId}
+              timestamp={timestamp}
             />
           ))}
           {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} />}

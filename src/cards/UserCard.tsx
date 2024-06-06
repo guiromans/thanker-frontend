@@ -14,7 +14,7 @@ import { Tooltip } from "react-tooltip";
 export interface UserProps {
     user: UserResponse | undefined;
     language: Language | undefined;
-    onImageUpdated: (imageUrl: string) => void;
+    onImageUpdated: (imageUrl: string, timestamp: number) => void;
 }
 
 const UserCard = (props: UserProps) => {
@@ -97,9 +97,10 @@ const UserCard = (props: UserProps) => {
                 const imageUrlsResponse: ImageUploadResponse = resp.data as ImageUploadResponse;
                 imageService.compressAndSend(event, imageUrlsResponse.uploadUrl)
                     .then(() => {
-                        const imageUrl: string = `${imageUrlsResponse.getUrl}?lastmod=${new Date().getTime()}`;
+                        const timestamp = new Date().getTime();
+                        const imageUrl: string = `${imageUrlsResponse.getUrl}?v=${timestamp}`;
                         setImageUrl(imageUrl);
-                        props.onImageUpdated(imageUrl);
+                        props.onImageUpdated(imageUrlsResponse.getUrl, timestamp);
                     })
                     .finally(() => setLoadingImage(false));
                     

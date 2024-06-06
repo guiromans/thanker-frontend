@@ -24,7 +24,7 @@ export class ImageService {
         }
     }
 
-    private async compress(event: ChangeEvent<HTMLInputElement>): Promise<Blob | null> {
+    private async compress(event: ChangeEvent<HTMLInputElement>): Promise<File | null> {
         if (event.target.files === null) {
             return null;
         }

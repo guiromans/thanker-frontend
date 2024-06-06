@@ -4,7 +4,7 @@ import '../style/ThanksCard.css';
 import { Language, TranslationService } from "../services/TranslationService";
 import { AuthService } from "../services/AuthService";
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { resolveAndReloadImage, resolveImage } from "../utils/UserUtils";
+import { resolveImage } from "../utils/UserUtils";
 import { privacyTypeOf } from "../utils/ThanksUtils";
 import deleteIcon from "../assets/images/delete_icon.png";
 
@@ -14,9 +14,9 @@ export type ThanksCardProps = {
     onUserImageClick(userId: string): void;
     language: Language | undefined;
     onClickedDelete(thanksId: string): void;
-    imageCount: number;
     userImageUrl: string | null;
     pageUserId: string | null | undefined;
+    timestamp: number;
 }
 
 const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
@@ -27,19 +27,17 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     const [cardStyle, setCardStyle] = useState<string>('');
     const [privacyType, setPrivacyType] = useState<PrivacyType>(props.thanks.privacyType);
     const [profilePicUrl, setProfilePicUrl] = useState<string>(resolveImage(props.thanks.giver.profilePictureUrl));
-    const [imageCount, setImageCount] = useState<number>(props.imageCount);
 
     useEffect(() => {
         setCardStyle(resolveCardStyle());
     }, [props.thanks.privacyType])
 
     useEffect(() => {
-        if (isUserPage() && imageCount !== props.imageCount) {
-            const newImageUrl: string = resolveAndReloadImage(props.userImageUrl);
+        if (isUserPage() && props.timestamp !== 0) {
+            const newImageUrl: string = `${props.userImageUrl}?v=${props.timestamp}`;
             setProfilePicUrl(newImageUrl);
-            setImageCount(props.imageCount);
         }
-    }, [props.imageCount]);
+    }, [props.timestamp]);
 
     const resolveIntro = (): string => {
         const thanks: ThanksResponse = props.thanks;

@@ -22,12 +22,6 @@ export const resolveUserImage = (user: UserResponse | undefined): string => {
         : defaultProfilePic)
 }
 
-export const resolveAndReloadImage = (imageUrl: string | undefined | null): string => {
-    return (imageUrl && imageUrl !== null ? imageUrl 
-        : defaultProfilePic)
-        + `?v=${new Date().getTime()}`; 
-}
-
 export const resolveImage = (imageUrl: string | undefined | null): string => {
     return (imageUrl && imageUrl !== null ? imageUrl 
         : defaultProfilePic); 
