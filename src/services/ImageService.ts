@@ -14,14 +14,12 @@ export class ImageService {
                         'Content-Type': "image/png",
                     }
                 });
-                console.log("Got response:", response);
                 return response;
             } else {
                 enqueueSnackbar("Need to select image", { variant: 'error' });
                 return undefined;
             }
         } catch (error) {
-            console.error("Error during compression or send:", error);
             throw error;
         }
     }

@@ -92,19 +92,17 @@ const UserCard = (props: UserProps) => {
     }
 
     const handleImageSelection = async(event: ChangeEvent<HTMLInputElement>) => {
-        setLoadingImage(true);
         event.target.files && await userService.getImageUploadUrl(event.target.files[0].name)
             .then(resp => {
+                setLoadingImage(true);
                 const imageUrlsResponse: ImageUploadResponse = resp.data as ImageUploadResponse;
-                console.log("Got upload URL. Going to compress and send...");
                 imageService.compressAndSend(event, imageUrlsResponse.uploadUrl)
                     .then(() => {
-                        console.log("Sent image to S3...");
                         const imageUrl: string = imageUrlsResponse.getUrl;
                         resetCacheBuster(imageUrl);
                         setImageUrl(imageUrl);
-                        console.log("Get image:", imageUrl);
                     })
+                    .finally(() => setLoadingImage(false));
                     
             })
             .catch((err) => {
@@ -112,9 +110,7 @@ const UserCard = (props: UserProps) => {
                 if (errorResponse.response?.status === 403) {
                     enqueueSnackbar(`${translationService.getFor(FILES_MUST_BE)}: PNG`, { variant: "error" });
                 }
-            })
-            .finally(() => setLoadingImage(false));
-            
+            });
     }
 
     const resetCacheBuster = (imageUrl: string) => {

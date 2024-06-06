@@ -29,7 +29,6 @@ export const SettingsPage = (props: SettingsProps) => {
     }, []);
 
     useEffect(() => {
-        console.log("Settings page:", user?.isOpenProfile)
         setOpenProfileChecked(user?.isOpenProfile);
     }, [user]);
 

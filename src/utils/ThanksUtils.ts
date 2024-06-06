@@ -18,14 +18,10 @@ export const privacyTypeOf = (enumStr: string): PrivacyType => {
     const str: string = enumStr.trim().toUpperCase();
     let type: PrivacyType = PrivacyType.PRIVATE;
 
-    console.log("Privacy type string:", str)
-
     switch (str) {
         case PrivacyType.PRIVATE.toString(): type = PrivacyType.PRIVATE; break;
         case PrivacyType.PUBLIC.toString(): type = PrivacyType.PUBLIC; break;
     }
-
-    console.log("Returning:", type);
 
     return type;
 }

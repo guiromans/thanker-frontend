@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { AuthService } from "./services/AuthService";
 import { ErrorResponse, useNavigate } from "react-router-dom";
 import './style/Fonts.css';
@@ -24,10 +24,6 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
     const authService: AuthService = new AuthService();
     const translationService: TranslationService = new TranslationService();
 
-    useEffect(() => {
-      console.log("Entered login page")
-    }, [])
-
     const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
       setEmail(event.target.value)
     }
@@ -48,7 +44,6 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
           onLogged();
         })
         .catch((e) => {
-          console.log("Error logging in:", e);
           const error: ErrorResponse = e.response;
           const errorKey: string = error && error.status && error.status === 400 ? ERROR_LOGIN_MSG : ERROR_SERVER_COMMS;
           enqueueSnackbar(`${translationService.getFor(errorKey)}`, { variant: 'error' })

@@ -39,10 +39,8 @@ export const SearchPage = (props: SearchProps) => {
 
     const checkScroll = () => {
         const div = resultsDivRef.current;
-        console.log("Value of isGettingUsers:", isGettingUsers, "and cangetMoreUsers:", canGetMoreUsers);
         if (div !== null && !isGettingUsers && canGetMoreUsers) {
           const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight -5;
-          console.log("Scrolling on search bar. Top + Height:", (div.scrollTop + div.clientHeight), "Div Height - 5:", (div.scrollHeight - 5));
           if (isAtBottom) {
             props.onLoading(true);
             setTimeout(() => {
@@ -62,12 +60,10 @@ export const SearchPage = (props: SearchProps) => {
             .then((resp) => {
                 const respUsers: UserResponse[] = resp.data as UserResponse[];
                 setUsers(prevUsers => [...prevUsers, ...respUsers]);
-                console.log("Value of respUsers:", respUsers)
                 setCanGetMoreUsers(respUsers.length > 0);
             })
             .catch((e) => {
                 const err: ErrorResponse = e.response.data as ErrorResponse;
-                console.error("Error searching for users:", err.detail);
             })
             .finally(() => {
                 setIsGettingUsers(false);

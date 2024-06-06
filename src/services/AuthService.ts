@@ -38,11 +38,9 @@ export class AuthService {
         const tokenDate: Date = new Date(token.exp * 1000);
 
         if (tokenDate > new Date()) {
-            console.log("Used 'regular' token");
             return true;
         }
       
-        console.log("Trying refresh token")
         return await this.useRefreshToken();
       };
 
@@ -120,11 +118,9 @@ export class AuthService {
                 const authResponse: AuthResponse = resp.data as AuthResponse;
                 hasLoggedIn = true;
                 this.storageService.saveTokensFrom(authResponse)
-                console.log("Used refresh token");
             })
             .catch(e => {
                 hasLoggedIn = false;
-                console.error("Error using refresh token:", e)
             });
 
         return hasLoggedIn;

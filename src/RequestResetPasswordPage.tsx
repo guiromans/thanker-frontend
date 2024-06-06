@@ -15,6 +15,7 @@ export interface RequestResetPassProps {
 export const RequestResetPasswordPage = (props: RequestResetPassProps) => {
     const [email, setEmail] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const [disableFields, setDisableFields] = useState<boolean>(false);
     const { enqueueSnackbar } = useSnackbar();
 
     const userService: UserService = new UserService();
@@ -29,6 +30,7 @@ export const RequestResetPasswordPage = (props: RequestResetPassProps) => {
 
         if (email.length > 0 && email.includes('@') && props.language) {
             setLoading(true);
+            setDisableFields(true);
             userService.requestPasswordReset(email, props.language)
                 .then(() => {
                     setEmail('');
@@ -60,11 +62,14 @@ export const RequestResetPasswordPage = (props: RequestResetPassProps) => {
                     onChange={handleEmailChange}
                     placeholder={translationService.getFor(YOUR_EMAIL)}
                     className='medium-input'
-                    disabled={loading}
+                    disabled={disableFields}
                 /><br/><br/><br/>
-                <button type='submit' className="thanker-button" disabled={loading}>{translationService.getFor(REQUEST_RESET_PASSWORD)}</button>
+                <button type='submit' className="thanker-button" disabled={disableFields}>{translationService.getFor(REQUEST_RESET_PASSWORD)}</button>
             </form><br/>
-            {loading && <Loader size="big" />}<br/>
+            <div className="loader-confirmations">
+                {loading && <Loader size="big"/>}
+            </div>
+            <br/>
         </div>
     );
 

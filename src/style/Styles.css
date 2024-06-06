@@ -193,3 +193,7 @@ button:hover, select:hover {
 body {
     overflow-y: hidden;
 }
+
+.loader-confirmations {
+    text-align: center;
+}

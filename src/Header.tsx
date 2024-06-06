@@ -30,11 +30,8 @@ export const Header = (props: HeaderProps) => {
     const storageService: StorageService = new StorageService();
     const [language, setLanguage] = useState<Language>(storageService.getLanguage());
 
-    console.log("Header user ID", props.userId)
-
     const handleLanguageChange = (code: string) => {
         const lang: Language = languageOf(code);
-        console.log("Selected language:", lang)
         setLanguage(lang);
         storageService.setLanguage(lang);
         props.onLanguageChange(lang);

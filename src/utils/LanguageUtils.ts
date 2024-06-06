@@ -9,7 +9,5 @@ export const languageOf = (enumStr: string): Language => {
         case Language.PT.toString(): lang = Language.PT; break;
     }
 
-    console.log("Returning:", lang);
-
     return lang;
 }

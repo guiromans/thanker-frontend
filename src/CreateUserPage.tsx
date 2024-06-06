@@ -101,7 +101,6 @@ export const CreateUserPage = (props: CreateUserProps) => {
                     }, 5000); 
                 })
                 .catch(e => {
-                    console.log("Error creating user:", e);
                     const error: ErrorResponse = e.response.data as ErrorResponse;
                     enqueueSnackbar(`${error.detail}`,  { variant: 'error' })
                 })
@@ -113,7 +112,6 @@ export const CreateUserPage = (props: CreateUserProps) => {
     }
 
     const handleTermsConditionsCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log("Event checkbox", event)
         const checked: boolean = event.target.checked;
         if (checked) {
             setErrorTerms(false);

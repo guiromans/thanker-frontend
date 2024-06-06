@@ -50,13 +50,11 @@ const App = () => {
   }
 
   const fetchUserId = () => {
-    console.log("Fetching user ID")
     setUserId(authService.readUserIdFromToken());
     setLoading(false);
   }
 
   const handleLogged = () => {
-    console.log("Fetching user ID")
     fetchUserId();
   }
 
@@ -65,7 +63,6 @@ const App = () => {
   }
 
   const handleSearchedUserSelect = (userId: string) => {
-    console.log("Changed userId in App:", userId)
     window.location.href = `/#/users/${userId}`;
     setUserId(userId);
   }

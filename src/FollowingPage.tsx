@@ -48,7 +48,6 @@ export const FollowingPage = (props: FollowingProps) => {
     const checkScroll = () => {
         const div = scrollableDivRef.current;
         if (div !== null) {
-          console.log("Current position:", (div.scrollTop + div?.clientHeight), "Top:", div?.scrollHeight)
           const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight - 2;
           if (isAtBottom && !usersLoading && canLoadMoreFollowing) {
             setPage((prevPage) => prevPage + 1);
@@ -66,10 +65,8 @@ export const FollowingPage = (props: FollowingProps) => {
 
     const callSearch = async(searchMethod:() => Promise<AxiosResponse>) => {
         setUsersLoading(true);
-        console.log("Page is:", page)
         await searchMethod()
             .then((resp) => {
-                console.log("Following resp:", resp)
                 const respUsers: UserResponse[] = resp.data as UserResponse[];
                 if (respUsers.length > 0) {
                     setUsers([...users, ...respUsers]);

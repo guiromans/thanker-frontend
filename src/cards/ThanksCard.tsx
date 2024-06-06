@@ -34,7 +34,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     }, [props.thanks.privacyType])
 
     useEffect(() => {
-        if (isUserPage() && imageCount !== 0 && imageCount !== props.imageCount) {
+        if (isUserPage() && imageCount !== props.imageCount) {
             const newImageUrl: string = resolveAndReloadImage(props.userImageUrl);
             setProfilePicUrl(newImageUrl);
             setImageCount(props.imageCount);

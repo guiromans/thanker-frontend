@@ -108,7 +108,6 @@ export const UserPage = (props: UserProps) => {
 
   const checkScroll = () => {
     const div = thanksScrollableDivRef.current;
-    console.log("Scroll at:", div?.scrollHeight, "\nAnd client height:", div?.clientHeight, "\nAnd scrollTop + clientheight:", (div && (div?.scrollTop + div?.clientHeight)), "\nPage:", page, "\nLoading thanks:", loadingThanks)
     if (div !== null && !gettingMoreThanks) {
       const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight - 20;
       if (isAtBottom) {
@@ -206,7 +205,6 @@ export const UserPage = (props: UserProps) => {
           .catch(e => {
             const error: ErrorResponse = e.response.data as ErrorResponse;
             enqueueSnackbar(`Could not thank ${user?.name}`, { variant: 'error' });
-            console.log("Error giving thanks:", error);
           })
           .finally(() => {
             setTimeout(() => {
@@ -281,7 +279,6 @@ export const UserPage = (props: UserProps) => {
     if (thanksIdToDelete !== null) {
       await thanksService.deleteById(thanksIdToDelete)
         .then((resp) => {
-          console.log("Got response from delete thanks:", resp);
           const response: DeleteThanksResponse = resp.data as DeleteThanksResponse;
 
           if (response.deleted) {
