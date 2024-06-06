@@ -12,6 +12,7 @@ export class ImageService {
                 const response = await axios.put(presignedUrl, compressedImage, {
                     headers: {
                         'Content-Type': "image/png",
+                        "Cache-Control": "max-age=3600, must-revalidate, no-cache"
                     }
                 });
                 return response;
