@@ -97,8 +97,8 @@ const UserCard = (props: UserProps) => {
                 const imageUrlsResponse: ImageUploadResponse = resp.data as ImageUploadResponse;
                 imageService.compressAndSend(event, imageUrlsResponse.uploadUrl)
                     .then(() => {
-                        const imageUrl: string = imageUrlsResponse.getUrl;
-                        setImageUrl(`${imageUrl}?${new Date().getTime()}`);
+                        const imageUrl: string = `${imageUrlsResponse.getUrl}?${new Date().getTime()}`;
+                        setImageUrl(imageUrl);
                         props.onImageUpdated(imageUrl);
                     })
                     .finally(() => setLoadingImage(false));
