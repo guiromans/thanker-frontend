@@ -2,7 +2,7 @@ import './style/Styles.css';
 import './style/About.css';
 import { useEffect, useState } from 'react';
 import { Loader } from './cards/Loader';
-import { BERKELEY_ARTICLE, CRYPTOGRAPHY_INFO, HARVARD_ARTICLE, INQUIRIES_AND_EMAIL, Language, SHOW_GRATITUDE_TEXT, THANKING_MAKES_YOU_HAPPIER, TranslationService } from './services/TranslationService';
+import { BERKELEY_ARTICLE, CRYPTOGRAPHY_INFO, HARVARD_ARTICLE, INQUIRIES_AND_EMAIL, Language, SHOW_GRATITUDE_TEXT, THANKING_MAKES_YOU_HAPPIER, TranslationService, UCLA_ARTICLE } from './services/TranslationService';
 
 export interface AboutProps {
     language: Language| undefined;
@@ -42,6 +42,7 @@ export const About = (props: AboutProps) => {
             <div className='about-section'>
                 <a href='https://www.health.harvard.edu/healthbeat/giving-thanks-can-make-you-happier' target="_blank">{translationService.getFor(HARVARD_ARTICLE)}</a>
                 <a href='https://greatergood.berkeley.edu/article/item/how_gratitude_changes_you_and_your_brain' target="_blank">{translationService.getFor(BERKELEY_ARTICLE)}</a>
+                <a href='https://www.uclahealth.org/news/article/health-benefits-gratitude' target="_blank">{translationService.getFor(UCLA_ARTICLE)}</a>
             </div>
         </div>
     );

@@ -72,6 +72,7 @@ export const YOUR_DEFAULT_THANKS_PRIVACY_PRIVATE: string = "your-default-thanks-
 export const YOUR_DEFAULT_THANKS_PRIVACY_PUBLIC: string = "your-default-thanks-privacy-public";
 export const HARVARD_ARTICLE: string = "harvard-article";
 export const BERKELEY_ARTICLE: string = "berkeley-article";
+export const UCLA_ARTICLE: string = "ucla-article";
 export const GDPR: string = "gdpr";
 export const FILES_MUST_BE: string = "files-must-be";
 export const PRIVACY_ICON_TOOLTIP: string = "privacy-icon-tooltip";
@@ -205,6 +206,7 @@ export class TranslationService {
             [YOUR_DEFAULT_THANKS_PRIVACY_PUBLIC, "Alteraste a privacidade padrão dos teus Thanks para: Público - para Thanks que vais dar"],
             [HARVARD_ARTICLE, "Artigo da Universidade de Harvard"],
             [BERKELEY_ARTICLE, "Artigo da Universidade de Berkeley"],
+            [UCLA_ARTICLE, "Artigo da UCLA"],
             [GDPR, GDPR_PT_HTML],
             [FILES_MUST_BE, "Ficheiros têm de ser"],
             [PRIVACY_ICON_TOOLTIP, "Privado: só tu (e a quem deres) conseguem visualizar o Thanks.\nPúblico: toda a gente conseguirá ver este Thanks."],
@@ -393,6 +395,7 @@ export class TranslationService {
             [YOUR_DEFAULT_THANKS_PRIVACY_PUBLIC, "You've updated the default privacy of your Thanks to: Public - for Thanks you're going to give"],
             [HARVARD_ARTICLE, "Harvard University Article"],
             [BERKELEY_ARTICLE, "Berkeley University Article"],
+            [UCLA_ARTICLE, "UCLA Article"],
             [GDPR, GDPR_EN_HTML],
             [FILES_MUST_BE, "Files must be"],
             [PRIVACY_ICON_TOOLTIP, "Private: only you (and who you give to) will be able to see this Thanks.\nPublic: everyone can see the Thanks."],
