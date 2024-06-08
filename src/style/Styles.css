@@ -14,6 +14,10 @@
     position: relative;
 }
 
+.text-fields {
+    width: 300px;
+}
+
 .center-login {
     position: absolute;
     top: 50%;
@@ -196,4 +200,15 @@ body {
 
 .loader-confirmations {
     text-align: center;
+}
+
+.confirming-section {
+    height: 100%;
+    margin: auto;
+}
+
+.full-center {
+    height: 100%;
+    width: 100%;
+    margin: auto;
 }

@@ -9,3 +9,14 @@
 label {
     color: #50C878;
 }
+
+.center {
+    margin: auto;
+    text-align: center;
+}
+
+.success-message {
+    padding-top: 8vh;
+    font-size: 32px;
+    color: #50C878
+}

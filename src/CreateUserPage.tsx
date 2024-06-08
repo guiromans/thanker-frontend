@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { UserService } from "./services/UserService";
 import { CreateUserRequest } from "./model/UserModel";
 import { ErrorResponse } from "./model/ErrorResponse";
-import { CREATE, CREATE_USER, ERRORS_IN_FORM, ERROR_ACCEPT_TERMS_AND_CONDITIONS, ERROR_EMAIL_NOT_EMPTY, ERROR_HANDLE_NOT_EMPTY, ERROR_NAME_NOT_EMPTY, ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, ERROR_PASSWORD_NOT_EMPTY, ERROR_PASSWORD_RULES, Language, REGISTER_CONFIRM_PASSWORD, REGISTER_EMAIL, REGISTER_HANDLE, REGISTER_NAME, REGISTER_PASSWORD, TERMS_AND_CONDITIONS, TranslationService, USER_CREATED_TEXT } from "./services/TranslationService";
+import { CHECK_YOUR_EMAIL_ACCOUNT_CREATE, CREATE, CREATE_USER, ERRORS_IN_FORM, ERROR_ACCEPT_TERMS_AND_CONDITIONS, ERROR_EMAIL_NOT_EMPTY, ERROR_HANDLE_NOT_EMPTY, ERROR_NAME_NOT_EMPTY, ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, ERROR_PASSWORD_NOT_EMPTY, ERROR_PASSWORD_RULES, Language, REGISTER_CONFIRM_PASSWORD, REGISTER_EMAIL, REGISTER_HANDLE, REGISTER_NAME, REGISTER_PASSWORD, TERMS_AND_CONDITIONS, TranslationService, USER_CREATED_TEXT } from "./services/TranslationService";
 import { useSnackbar } from "notistack";
 import './style/CreateUser.css';
 import './style/Styles.css';
@@ -63,10 +63,8 @@ export const CreateUserPage = (props: CreateUserProps) => {
   
     const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
         const updatedPassword: string = event.target.value;
-        if (validatePassword(updatedPassword)) {
-            setErrorPassword(false);
-        }
         if (validatePasswordRules(updatedPassword)) {
+            setErrorPassword(false);
             setErrorConfirmPass(false);
         }
         setPassword(updatedPassword)
@@ -77,6 +75,11 @@ export const CreateUserPage = (props: CreateUserProps) => {
     }
 
     const handleConfirmPassChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const updatedPassword: string = event.target.value;
+
+        if (password === updatedPassword) {
+            setErrorConfirmPass(false);   
+        }
         setConfirmPass(event.target.value);
     }
 
@@ -85,6 +88,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
         setLoading(true);
         
         if (hasAllValidParams() && props.language) {
+            setVisibleForm(false);
             const createRequest: CreateUserRequest = {
                 email: email,
                 password: password,
@@ -102,7 +106,8 @@ export const CreateUserPage = (props: CreateUserProps) => {
                 })
                 .catch(e => {
                     const error: ErrorResponse = e.response.data as ErrorResponse;
-                    enqueueSnackbar(`${error.detail}`,  { variant: 'error' })
+                    enqueueSnackbar(`${error.detail}`,  { variant: 'error' });
+                    setVisibleForm(true);
                 })
                 .finally(() => setLoading(false));
         } else {
@@ -131,10 +136,6 @@ export const CreateUserPage = (props: CreateUserProps) => {
         return email !== null && email.length > 0;
     }
 
-    const validatePassword = (password: string): boolean => {
-        return password !== null && password.length > 0;
-    }
-
     const validateCheckedTerms = (isTicked: boolean): boolean => {
         return isTicked;
     }
@@ -143,7 +144,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
         const hasValidName: boolean = validateName(name);
         const hasValidHandle: boolean = validateHandle(handle);
         const hasValidEmail: boolean = validateEmail(email);
-        const hasValidPassword: boolean = validatePassword(password);
+        const hasValidPassword: boolean = validatePasswordRules(password);
         const passwordCompliesWithRules: boolean = validatePasswordRules(password);
         const passwordsMatch: boolean = validateMatchingPasswords(password);
         const hasAcceptedTerms: boolean = validateCheckedTerms(acceptedTerms);
@@ -165,64 +166,69 @@ export const CreateUserPage = (props: CreateUserProps) => {
     }
 
     return (
-        <div className='top-padding'>
-            <h2>{!loading && translationService.getFor(CREATE_USER)}</h2>
+        <div className='top-padding full-center'>
+            <div className="success-message">
+                {!visibleForm && !loading && translationService.getFor(CHECK_YOUR_EMAIL_ACCOUNT_CREATE)}
+            </div>
             {visibleForm && (
-                <form onSubmit={createUser} >
-                    { /* Name */ }
-                    {errorName && (
-                        <div className="error-label-container">
-                            <label className="label-create-error">{translationService.getFor(ERROR_NAME_NOT_EMPTY)}</label>
-                        </div>
-                    )}
-                    <input className='wider-input' type='text' name='name' value={name} onChange={handleNameChange} placeholder={translationService.getFor(REGISTER_NAME)} /><br/>
-                    { /* Handle */ }
-                    {errorHandle && (
-                        <div className="error-label-container">
-                            <label className="label-create-error error-label-container">{translationService.getFor(ERROR_HANDLE_NOT_EMPTY)}</label>
-                            
-                        </div>
-                    )}
-                    <input className='wider-input' type='text' name='handle' value={handle} onChange={handleHandleChange} placeholder={translationService.getFor(REGISTER_HANDLE)} /><br/>
-                    { /* E-Mail */ }
-                    {errorEmail && (
-                        <div className="error-label-container">
-                            <label className="label-create-error error-label-container">{translationService.getFor(ERROR_EMAIL_NOT_EMPTY)}</label>
-                            
-                        </div>
-                    )}
-                    <input className='wider-input' type='email' name='email' value={email} onChange={handleEmailChange} placeholder={translationService.getFor(REGISTER_EMAIL)}/><br/>
-                    { /* Password */ }
-                    {errorPassword && (
-                        <div className="error-label-container">
-                            <label className="label-create-error">{translationService.getFor(ERROR_PASSWORD_NOT_EMPTY)}</label>
-                        </div>
-                    )}
-                    {errorPasswordRules && (
-                        <div className="error-label-container">
-                            <label className="label-create-error">{translationService.getFor(ERROR_PASSWORD_RULES)}</label>
-                        </div>
-                    )}
-                    <input className='wider-input' type='password' name='password' value={password} onChange={handlePasswordChange} placeholder={translationService.getFor(REGISTER_PASSWORD)}/><br/>
-                    { /* Password Confirmation */ }
-                    {errorConfirmPass && (
-                        <div className="error-label-container">
-                            <label className="label-create-error">{translationService.getFor(ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING)}</label>
-                        </div>
-                    )}
-                    <input className='wider-input' type='password' name='confirmPassword' value={confirmPass} onChange={handleConfirmPassChange} placeholder={translationService.getFor(REGISTER_CONFIRM_PASSWORD)}/><br/><br/>
-                    { /* Terms */ }
-                    {errorTerms && (
-                        <div className="error-label-container">
-                            <label className="label-create-error">{translationService.getFor(ERROR_ACCEPT_TERMS_AND_CONDITIONS)}</label>
-                        </div>
-                    )}
-                    <input type='checkbox' checked={acceptedTerms} onChange={handleTermsConditionsCheckboxChange} className='checkbox' /> 
-                    <label onClick={handleGdprClick}>{translationService.getFor(TERMS_AND_CONDITIONS)}</label><br/><br/>
-                    <button type='submit' className="thanker-button">{translationService.getFor(CREATE)}</button>
-                </form>
+                <div>
+                    <h2>{!loading && translationService.getFor(CREATE_USER)}</h2>
+                    <form onSubmit={createUser}>
+                        { /* Name */ }
+                        {errorName && (
+                            <div className="error-label-container">
+                                <label className="label-create-error">{translationService.getFor(ERROR_NAME_NOT_EMPTY)}</label>
+                            </div>
+                        )}
+                        <input className='wider-input' type='text' name='name' value={name} onChange={handleNameChange} placeholder={translationService.getFor(REGISTER_NAME)} /><br/>
+                        { /* Handle */ }
+                        {errorHandle && (
+                            <div className="error-label-container">
+                                <label className="label-create-error error-label-container">{translationService.getFor(ERROR_HANDLE_NOT_EMPTY)}</label>
+                                
+                            </div>
+                        )}
+                        <input className='wider-input' type='text' name='handle' value={handle} onChange={handleHandleChange} placeholder={translationService.getFor(REGISTER_HANDLE)} /><br/>
+                        { /* E-Mail */ }
+                        {errorEmail && (
+                            <div className="error-label-container">
+                                <label className="label-create-error error-label-container">{translationService.getFor(ERROR_EMAIL_NOT_EMPTY)}</label>
+                                
+                            </div>
+                        )}
+                        <input className='wider-input' type='email' name='email' value={email} onChange={handleEmailChange} placeholder={translationService.getFor(REGISTER_EMAIL)}/><br/>
+                        { /* Password */ }
+                        {errorPassword && (
+                            <div className="error-label-container">
+                                <label className="label-create-error">{translationService.getFor(ERROR_PASSWORD_NOT_EMPTY)}</label>
+                            </div>
+                        )}
+                        {errorPasswordRules && (
+                            <div className="error-label-container">
+                                <label className="label-create-error">{translationService.getFor(ERROR_PASSWORD_RULES)}</label>
+                            </div>
+                        )}
+                        <input className='wider-input' type='password' name='password' value={password} onChange={handlePasswordChange} placeholder={translationService.getFor(REGISTER_PASSWORD)}/><br/>
+                        { /* Password Confirmation */ }
+                        {errorConfirmPass && (
+                            <div className="error-label-container">
+                                <label className="label-create-error">{translationService.getFor(ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING)}</label>
+                            </div>
+                        )}
+                        <input className='wider-input' type='password' name='confirmPassword' value={confirmPass} onChange={handleConfirmPassChange} placeholder={translationService.getFor(REGISTER_CONFIRM_PASSWORD)}/><br/><br/>
+                        { /* Terms */ }
+                        {errorTerms && (
+                            <div className="error-label-container">
+                                <label className="label-create-error">{translationService.getFor(ERROR_ACCEPT_TERMS_AND_CONDITIONS)}</label>
+                            </div>
+                        )}
+                        <input type='checkbox' checked={acceptedTerms} onChange={handleTermsConditionsCheckboxChange} className='checkbox' /> 
+                        <label onClick={handleGdprClick}>{translationService.getFor(TERMS_AND_CONDITIONS)}</label><br/><br/>
+                        <button type='submit' className="thanker-button">{translationService.getFor(CREATE)}</button>
+                    </form>
+                </div>
             )}
-            {loading && <Loader size="small" />}
+            {loading && <div className="full-center"><Loader size="big" /></div>}
             <br/>
             <br/>
         </div>

@@ -3,6 +3,8 @@ import { AccountConfirmationService } from "./services/AccountConfirmationServic
 import { useParams } from "react-router-dom";
 import { enqueueSnackbar } from "notistack";
 import { Loader } from "./cards/Loader";
+import { ACCOUNT_CONFIRMATION_ERROR, ACCOUNT_CONFIRMATION_SUCCESS, ACCOUNT_IS_CONFIRMED, TranslationService } from "./services/TranslationService";
+import thinking from "./assets/images/thinking.png";
 
 export interface ConfirmationProps {
     onConfirmationDone: () => void;
@@ -14,40 +16,47 @@ export const AccountConfirmationPage = (props: ConfirmationProps) => {
     const confirmationId = params.confirmationId;
 
     const [confirming, setConfirming] = useState<boolean>(true);
+    const [success, setSuccess] = useState<boolean>(false);
     
     const confirmationService: AccountConfirmationService = new AccountConfirmationService();
+    const translationService: TranslationService = new TranslationService();
 
     useEffect(() => {
+        console.log("Mounting account confirmation")
         confirmAccount();
     }, []);
 
     const confirmAccount = async() => {
-        if (userId && confirmationId) {
+        console.log("User id is", userId, "and confirmation id is", confirmationId)
+        if (userId && confirmationId && confirming && !success) {
             await confirmationService.confirmAccount(userId, confirmationId)
                 .then(() => {
-                    enqueueSnackbar("Account confirmed!", { variant: 'success'});
+                    enqueueSnackbar(translationService.getFor(ACCOUNT_CONFIRMATION_SUCCESS), { variant: 'success'});
+                    setSuccess(true);
                 })
-                .catch((e) => enqueueSnackbar("Error confirming account. Account was already confirmed, or it's passed the confirmation time.<br>"
-                    + "Please request a new confirmation in the link below:", { variant: 'error'}))
+                .catch(() => enqueueSnackbar(translationService.getFor(ACCOUNT_CONFIRMATION_ERROR), { variant: 'error'}))
                 .finally(() => {
                     setConfirming(false);
                     setTimeout(() => {
                         props.onConfirmationDone();
-                    }, 2000);
+                    }, 3000);
                 })
         }        
     }
 
     if (confirming) {
         return (
-            <div>
+            <div className="top-padding">
                 <Loader size="big" />
             </div>
         )
     }
 
     return (
-        <div className="top-padding">Account is confirmed. Thank you!</div>
+        <div className="top-padding">
+            {success && translationService.getFor(ACCOUNT_IS_CONFIRMED)}
+            {!success && !confirming && <img src={thinking} />}
+        </div>
     )
 
 }

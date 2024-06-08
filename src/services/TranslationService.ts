@@ -13,12 +13,17 @@ export const THANK: string = "thank";
 export const IM_THANKFUL_FOR: string = "im-thankful-for";
 export const I_THANK_YOU_FOR: string = "i-thank-you-for";
 export const TEXT_NOT_EMPTY: string = "text-not-empty";
+export const CHECK_YOUR_EMAIL_ACCOUNT_CREATE: string = "check-your-email-account-create";
 export const CREATE_USER: string = "create-user";
 export const CREATE: string = "create";
 export const RESET_PASSWORD: string = "reset-password";
+export const UPDATE_PASSWORD: string = "update-password";
 export const NEW_CONFIRMATION: string = "new-confirmation";
 export const NEW_CONFIRMATION_TITLE: string = "new-confirmation-title";
 export const REQUEST_RESET_PASSWORD: string = "request-reset-password";
+export const RESET_PASSWORD_SUCCESS: string = "reset-password-success";
+export const RESET_PASSWORD_ERROR: string = "reset-password-error";
+export const CANNOT_RESET_PASSWORD: string = "cannot-reset-password";
 export const YOUR_EMAIL: string = "your-email";
 export const ERROR_LOGIN_MSG: string = "error-login-msg";
 export const SEARCH_USERS_HINT: string = "search-users-hint";
@@ -39,6 +44,9 @@ export const PLATO: string = "Plato";
 export const CHANGED_PRIVACY_TYPE: string = "changed-privacy-type";
 export const PASSWORD_RESET_REQUEST_SENT: string = "password-reset-request-sent";
 export const NEW_CONFIRMATION_EMAIL_REQUESTED: string = "new-confirmation-email-requested";
+export const ACCOUNT_IS_CONFIRMED: string = "account-is-confirmed";
+export const ACCOUNT_CONFIRMATION_SUCCESS: string = "account-confirmation-success";
+export const ACCOUNT_CONFIRMATION_ERROR: string = "account-confirmation-error";
 export const NEW_PASSWORD: string = "new-password";
 export const CONFIRM_NEW_PASSWORD: string = "confirm-new-password";
 export const SUBMIT: string = "submit";
@@ -92,6 +100,7 @@ export const HINT_HELPED_YOU: string = "hint-helped-you";
 export const HINT_GRATEFUL: string = "hint-grateful";
 export const HINT_GRATEFUL_FOR: string = "hint-grateful-for";
 export const HINT_THANK_YOURSELF: string = "hint-thank-yourself";
+export const HINT_WHAT_TO_THANK: string = "hint-what-to-thank";
 
 export const HINT_OTHER_GRATEFUL_1: string = "hint-other-1";
 export const HINT_OTHER_GRATEFUL_2: string = "hint-other-2";
@@ -148,8 +157,13 @@ export class TranslationService {
             [I_THANK_YOU_FOR, "Agradeço-te por"],
             [TEXT_NOT_EMPTY, "Agradecimento não pode estar vazio"],
             [CREATE, "Criar"],
+            [CHECK_YOUR_EMAIL_ACCOUNT_CREATE, "Por favor consulta o teu e-mail para encontrares o link de confirmação!"],
             [CREATE_USER, "Criar Utilizador"],
             [RESET_PASSWORD, "Recuperar Password"],
+            [UPDATE_PASSWORD, "Atualizar password"],
+            [RESET_PASSWORD_SUCCESS, "A password foi atualizada. Podes ir para a página de entrada, ou esperar alguns segundos pela redireção"],
+            [RESET_PASSWORD_ERROR, "A password, e sua confirmação, têm de ter o mesmo valor"],
+            [CANNOT_RESET_PASSWORD, "Não é possível alterar a password: período para alteração expirou, ou existiu erro a comunicar com o servidor. Por favor tenta pedir nova alteração de password, assim que possível. Obrigado!"],
             [NEW_CONFIRMATION, "Pedir novo e-mail de confirmação"],
             [NEW_CONFIRMATION_TITLE, "Pedir nova confirmação"],
             [REQUEST_RESET_PASSWORD, "Pedir para criar nova Password"],
@@ -163,6 +177,7 @@ export class TranslationService {
             [HINT_GRATEFUL, "O que te fez sentir Gratidão hoje?"],
             [HINT_GRATEFUL_FOR, "Pelo que estás a sentir Gratidão?"],
             [HINT_THANK_YOURSELF, "Pelo que te queres agradecer a ti?"],
+            [HINT_WHAT_TO_THANK, "Pelo que gostavas de agradecer?"],
             [SEARCH_USERS_HINT, "Pesquisa utilizadores"],
             [SEARCH_FOLLOWING_HINT, "Pesquisa quem segues"],
             [PRIVATE, "Privado"],
@@ -264,6 +279,9 @@ export class TranslationService {
             [ERROR_INVALID_EMAIL, "Endereço providenciado não é um e-mail válido:"],
             [PASSWORD_RESET_REQUEST_SENT, "Pedido para configuração de nova password enviado"],
             [NEW_CONFIRMATION_EMAIL_REQUESTED, "Pedido para nova confirmação de e-mail feito!"],
+            [ACCOUNT_IS_CONFIRMED, "Conta confirmada. Obrigado!"],
+            [ACCOUNT_CONFIRMATION_SUCCESS, "Conta confirmada com sucesso!"],
+            [ACCOUNT_CONFIRMATION_ERROR, "Erro a confirmar a conta: confirmação já foi feita, ou autorização para confirmação expirou. Faz novo pedido através da página inicia, por favor. Redireção para lá em alguns segundos..."],
             [NEW_PASSWORD, "Nova password"],
             [CONFIRM_NEW_PASSWORD, "Confirma nova password"],
             [SUBMIT, "Submeter"],
@@ -271,7 +289,7 @@ export class TranslationService {
             [ERROR_HANDLE_NOT_EMPTY, "Handle não pode estar vazio"],
             [ERROR_EMAIL_NOT_EMPTY, "E-mail não pode estar vazio"],
             [ERROR_PASSWORD_NOT_EMPTY, "Password não pode estar vazia"],
-            [ERROR_PASSWORD_RULES, "Password tem de ter pelo menos 8 caracters, e 1 caracter especial"],
+            [ERROR_PASSWORD_RULES, "Password tem de ter pelo menos: 8 caracters (tamanho), 1 letra maiúscula, 1 letra minúscula, e 1 caracter especial"],
             [ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, "Password e confirmação de password têm de ser iguais"],
             [ERROR_ACCEPT_TERMS_AND_CONDITIONS, "Necessário aceitar Termos & Condições"],
             [ERROR_SERVER_COMMS, "Erro na comunicação com o servidor"],
@@ -337,8 +355,13 @@ export class TranslationService {
             [I_THANK_YOU_FOR, "I thank you for"],
             [TEXT_NOT_EMPTY, "Thanks text cannot be empty"],
             [CREATE, "Create"],
+            [CHECK_YOUR_EMAIL_ACCOUNT_CREATE, "Please check your e-mail to find the confirmation link!"],
             [CREATE_USER, "Create User"],
             [RESET_PASSWORD, "Reset Password"],
+            [UPDATE_PASSWORD, "Update Password"],
+            [RESET_PASSWORD_SUCCESS, "Your password has been updated. Please go to the login page, or wait a few seconds for being redirected there"],
+            [RESET_PASSWORD_ERROR, "The password, and its confirmation, must match"],
+            [CANNOT_RESET_PASSWORD, "Cannot change password: time for updating has expired, or there was an error communicating to the server. Please try requesting a new password reset as soon as possible. Thank you!"],
             [NEW_CONFIRMATION, "Request new confirmation e-mail"],
             [NEW_CONFIRMATION_TITLE, "New confirmation e-mail"],
             [REQUEST_RESET_PASSWORD, "Request Password Reset"],
@@ -351,6 +374,7 @@ export class TranslationService {
             [HINT_GRATEFUL, "What made you Grateful today?"],
             [HINT_GRATEFUL_FOR, "What are you feeling Grateful for?"],
             [HINT_THANK_YOURSELF, "What do you want to thank yourself?"],
+            [HINT_WHAT_TO_THANK, "What would you like to show Gratitude for?"],
             [SEARCH_USERS_HINT, "Search for users"],
             [SEARCH_FOLLOWING_HINT, "Search by who you follow"],
             [PRIVATE, "Private"],
@@ -452,7 +476,7 @@ export class TranslationService {
             [ERROR_HANDLE_NOT_EMPTY, "Handle cannot be empty"],
             [ERROR_EMAIL_NOT_EMPTY, "E-mail cannot be empty"],
             [ERROR_PASSWORD_NOT_EMPTY, "Password cannot be empty"],
-            [ERROR_PASSWORD_RULES, "Password must have at least 8 characters, and 1 special character"],
+            [ERROR_PASSWORD_RULES, "Password must have at least: 8 characters length), 1 uppercase letter, 1 lowercase letter, and 1 special character"],
             [ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, "Password and password confirmation values must match"],
             [ERROR_ACCEPT_TERMS_AND_CONDITIONS, "Need to accept Terms & Conditions"],
             [ERROR_SERVER_COMMS, "Error communicating with the server"],
@@ -461,6 +485,9 @@ export class TranslationService {
             [ERROR_INVALID_EMAIL, "Provided e-mail is not a valid one:"],
             [PASSWORD_RESET_REQUEST_SENT, "Password reset request sent"],
             [NEW_CONFIRMATION_EMAIL_REQUESTED, "New confirmation e-mail requested"],
+            [ACCOUNT_IS_CONFIRMED, "Account is confirmed. Thank you!"],
+            [ACCOUNT_CONFIRMATION_SUCCESS, "Account has been successfully confirmed!"],
+            [ACCOUNT_CONFIRMATION_ERROR, "Error confirming account: it has already been done, or authorization expired. Please do a new a request from the Login page. You'll redirected there in a few seconds..."],
             [NEW_PASSWORD, "New password"],
             [CONFIRM_NEW_PASSWORD, "Confirm new password"],
             [SUBMIT, "Submit"],
@@ -521,7 +548,7 @@ export class TranslationService {
 
     private hintsList: string[] = [
         HINT_MADE_YOUR_DAY, HINT_MADE_YOU_HAPPY, HINT_MADE_YOU_SMILE, HINT_HELPED_YOU, HINT_GRATEFUL,
-        HINT_GRATEFUL_FOR, HINT_THANK_YOURSELF
+        HINT_GRATEFUL_FOR, HINT_THANK_YOURSELF, HINT_WHAT_TO_THANK
     ];
 
     private hintsOtherList: string[] = [

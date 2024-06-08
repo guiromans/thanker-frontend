@@ -36,6 +36,10 @@ export class UserService {
         return await http.patch(`${this.USERS_URL}/${userId}/reset-password/${resetPasswordId}`, newPassRequest);
     }
 
+    async checkResetPasswordExists(userId: string, resetPasswordId: string): Promise<AxiosResponse> {
+        return await http.get(`${this.USERS_URL}/${userId}/reset-password/${resetPasswordId}`);
+    }
+
     async searchUsers(query: string, page: number): Promise<AxiosResponse> {
         const params = { query: query, page: page };
 

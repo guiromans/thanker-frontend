@@ -151,6 +151,7 @@ const App = () => {
         <React.StrictMode>
         <HashRouter>
           <Routes>
+            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
             <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/>} />
             <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} />} />
@@ -158,14 +159,13 @@ const App = () => {
             <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
             <Route path="/users/reset-password" element={<RequestResetPasswordPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />
-            <Route path="/users/:userId/reset-password/:resetPasswordId" element={<ResetPasswordPage />} />
+            <Route path="/users/:userId/reset-password/:resetPasswordId" element={<ResetPasswordPage onError={openMainPage} />} />
             <Route path="/following" element={<FollowingPage userId={userId} onClick={handleFollowingClick} language={language} />} />
             <Route path="/settings" element={<SettingsPage language={language} />} />
             <Route path="/gdpr" element={<GDPRCard language={language} />} />
             <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} />} />
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
             <Route path="*" element={<NotFound />} />
-            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
           </Routes>
         </HashRouter>
         </React.StrictMode>

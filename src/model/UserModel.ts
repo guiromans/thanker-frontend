@@ -31,6 +31,12 @@ export interface ResetPasswordRequest {
     newPassword: string
 }
 
+export interface CheckResetPasswordResponse {
+    userId: string,
+    resetPasswordId: string,
+    exists: boolean
+}
+
 export interface UsernameChangeRequest {
     name: string
 }
