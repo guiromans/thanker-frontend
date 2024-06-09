@@ -116,6 +116,10 @@ const App = () => {
     window.location.href = "/#/settings";
   }
 
+  const handleUserNotFound = () => {
+    window.location.hash = "/not-found";
+  }
+
   if (loading) {
     return (
       <div className='main'>
@@ -156,10 +160,10 @@ const App = () => {
         <React.StrictMode>
         <HashRouter>
           <Routes>
-            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} /> } />
-            <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/>} />
-            <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} />} />
-            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} /> } />
+            <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/>} />
+            <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/:userId/activate/:confirmationId" element={<AccountConfirmationPage onConfirmationDone={openMainPage} />} />
             <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
             <Route path="/users/reset-password" element={<RequestResetPasswordPage language={language} onResetRequested={openMainPage} />} />

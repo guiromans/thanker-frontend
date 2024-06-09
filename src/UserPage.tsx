@@ -29,6 +29,7 @@ interface UserProps {
   userId: string | null | undefined;
   language: Language;
   loadingUsers: boolean;
+  onUserNotFound: () => void;
 }
 
 export const UserPage = (props: UserProps) => {
@@ -152,6 +153,12 @@ export const UserPage = (props: UserProps) => {
         setTimeout(() => {
           setLoadingPage(false);
         }, 500);
+      })
+      .catch((e) => {
+        const error: ErrorResponse = e.response.data as ErrorResponse;
+        if (error.status === 404) {
+          props.onUserNotFound();
+        }
       });
   }
 
