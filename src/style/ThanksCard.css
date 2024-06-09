@@ -36,6 +36,8 @@
     flex-direction: column;
     display: flex;
     justify-content: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .card-element {
@@ -44,6 +46,7 @@
 
 .text {
     padding-bottom: 4px;
+    overflow-wrap: break-word; 
 }
 
 .date {
