@@ -1,7 +1,7 @@
 import { UserPage } from './UserPage';
 import { LoginPage } from './LoginPage';
 import { AuthService } from './services/AuthService';
-import { BrowserRouter, HashRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { AccountConfirmationPage } from './AccountConfirmationPage';
 import { CreateUserPage } from './CreateUserPage';
@@ -62,11 +62,6 @@ const App = () => {
     setLanguage(language);
   }
 
-  const handleSearchedUserSelect = (userId: string) => {
-    window.location.href = `/#/users/${userId}`;
-    setUserId(userId);
-  }
-
   const handleHomePageClick = () => {
     setUserId(authService.readUserIdFromToken());
     goToHome();
@@ -91,8 +86,18 @@ const App = () => {
     }, 500);
   }
 
+  const handleClickedOnUser = (userId: string) => {
+    window.location.hash = `/users/${userId}`;
+    window.location.reload();
+    setUserId(userId);
+  }
+
   const handleFollowingClick  = (user: UserResponse) => {
-    window.location.href = `/#/users/${user.id}`;
+    handleClickedOnUser(user.id);
+  }
+
+  const handleSearchedUserSelect = (userId: string) => {
+    handleClickedOnUser(userId);
   }
 
   const handleFollowingSelect = () => {

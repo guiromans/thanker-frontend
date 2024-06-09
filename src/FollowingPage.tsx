@@ -4,6 +4,7 @@ import { UserResponse } from "./model/UserModel";
 import { UserService } from "./services/UserService";
 import { AxiosResponse } from "axios";
 import './style/Following.css';
+import './style/Styles.css';
 import { getUniqueById } from "./utils/UserUtils";
 import { UserItem } from "./cards/UserItem";
 import { Loader } from "./cards/Loader";
@@ -118,7 +119,9 @@ export const FollowingPage = (props: FollowingProps) => {
                         <UserItem key={user.id} user={user} onClick={(user) => handleUserClick(user)} size="page-size" />
                     ))}
                 </div>
-                {usersLoading && <Loader size="small" />}
+                <div className="loader-confirmations">
+                    {usersLoading && <Loader size="big" />}
+                </div>
                 { noneFollowing &&
                     <NoFollowingCard language={props.language} />
                 }
