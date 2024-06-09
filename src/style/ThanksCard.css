@@ -106,3 +106,12 @@
     cursor: pointer;
 }
 
+.text-label {
+    margin-left: 0px;
+    font-size: 12px;
+    color: #471F44;
+}
+
+.text-label:hover {
+    font-weight: bold;
+}

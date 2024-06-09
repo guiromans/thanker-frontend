@@ -11,7 +11,7 @@ export interface ThanksResponse {
     userId: string,
     giver: UserResponse,
     receiver: UserResponse,
-    text: String,
+    text: string,
     privacyType: PrivacyType,
     date: Date
 }

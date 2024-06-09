@@ -60,6 +60,7 @@ export const UPDATE: string = "update";
 export const ARE_YOU_SURE_TO_DELETE: string = "are-you-sure-to-delete";
 export const YES: string = "yes";
 export const NO: string = "no";
+export const SEE_MORE: string = "see-more";
 export const SHOW_GRATITUDE_TEXT: string = "show-gratitude-text";
 export const CRYPTOGRAPHY_INFO: string = "cryptography-info";
 export const INQUIRIES_AND_EMAIL: string = "inquiries-and-email";
@@ -157,6 +158,7 @@ export class TranslationService {
             [I_THANK_YOU_FOR, "Agradeço-te por"],
             [TEXT_NOT_EMPTY, "Agradecimento não pode estar vazio"],
             [CREATE, "Criar"],
+            [SEE_MORE, "...(Ver Mais)"],
             [CHECK_YOUR_EMAIL_ACCOUNT_CREATE, "Por favor consulta o teu e-mail para encontrares o link de confirmação!"],
             [CREATE_USER, "Criar Utilizador"],
             [RESET_PASSWORD, "Recuperar Password"],
@@ -355,6 +357,7 @@ export class TranslationService {
             [I_THANK_YOU_FOR, "I thank you for"],
             [TEXT_NOT_EMPTY, "Thanks text cannot be empty"],
             [CREATE, "Create"],
+            [SEE_MORE, "...(See More)"],
             [CHECK_YOUR_EMAIL_ACCOUNT_CREATE, "Please check your e-mail to find the confirmation link!"],
             [CREATE_USER, "Create User"],
             [RESET_PASSWORD, "Reset Password"],

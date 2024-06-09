@@ -1,7 +1,7 @@
 import { PrivacyType, ThanksResponse } from "../model/ThanksModel";
 import { toDateAndTimeString } from "../utils/DateUtils";
 import '../style/ThanksCard.css';
-import { Language, TranslationService } from "../services/TranslationService";
+import { Language, SEE_MORE, TranslationService } from "../services/TranslationService";
 import { AuthService } from "../services/AuthService";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { resolveImage } from "../utils/UserUtils";
@@ -21,12 +21,30 @@ export type ThanksCardProps = {
 
 const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
 
+    const MAX_INITIAL_TEXT_SIZE = 150;
+
     const translationService: TranslationService = new TranslationService();
     const authService: AuthService = new AuthService();
     const pageUserId: string | undefined | null = props.pageUserId;
     const [cardStyle, setCardStyle] = useState<string>('');
     const [privacyType, setPrivacyType] = useState<PrivacyType>(props.thanks.privacyType);
     const [profilePicUrl, setProfilePicUrl] = useState<string>(resolveImage(props.thanks.giver.profilePictureUrl));
+    const [text, setText] = useState<string>();
+    const [isTruncated, setIsTruncated] = useState<boolean>();
+    
+    useEffect(() => {
+        const textThanks: string = props.thanks.text;
+        let initialText: string;
+
+        if (textThanks.length > MAX_INITIAL_TEXT_SIZE) {
+            initialText = textThanks.substring(0, MAX_INITIAL_TEXT_SIZE);
+        } else {
+            initialText = textThanks;
+        }
+
+        setIsTruncated(textThanks.length > MAX_INITIAL_TEXT_SIZE);
+        setText(initialText);
+    }, []);
 
     useEffect(() => {
         setCardStyle(resolveCardStyle());
@@ -115,6 +133,11 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
         return Object.values(PrivacyType).filter(type => typeof type === 'string');
     }
 
+    const handleSeeMoreClick = () => {
+        setText(props.thanks.text);
+        setIsTruncated(false);
+    }
+
     return (
         <div className={cardStyle}>
             <div className="giver-thanks-card">
@@ -127,7 +150,8 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
                     {resolveIntro()}:
                 </div>
                 <div className="card-element text">
-                    <b>{props.thanks.text}</b>
+                    <b>{text}</b> {isTruncated && "..." && 
+                    (<label className="text-label" onClick={handleSeeMoreClick}>{translationService.getFor(SEE_MORE)}</label>)}
                 </div>
                 <div className="card-element date">
                     {toDateAndTimeString(props.thanks.date)}
