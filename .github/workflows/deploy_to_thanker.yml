@@ -8,19 +8,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
+    - uses: actions/checkout@v3
       with:
-        node-version: '16'
+        persist-credentials: false  # This is necessary for deployments using a custom domain
 
-    - name: Install Dependencies
+    - name: Set up Node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Set this to your node version
+
+    - name: Install dependencies
       run: npm install
 
-    - name: Deploy to GitHub Pages
-      run: npm run deploy
+    - name: Build
+      run: npm run build  # Your build script
 
-    - name: Update CNAME Record
-      run: echo "www.thanker.co" > ./build/CNAME
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build  # Set this to your build directory
+        cname: www.thanker.co  # Custom domain
