@@ -52,7 +52,7 @@ export const RequestResetPasswordPage = (props: RequestResetPassProps) => {
     }
 
     return (
-        <div className='top-padding'>
+        <div className='top-padding full-height'>
             <h1>{translationService.getFor(RESET_PASSWORD)}</h1><br/>
             <form onSubmit={requestPasswordReset}>
                 <input 

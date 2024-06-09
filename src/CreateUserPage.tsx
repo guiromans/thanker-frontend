@@ -228,7 +228,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                     </form>
                 </div>
             )}
-            {loading && <div className="full-center"><Loader size="big" /></div>}
+            {loading && <div className="loader-confirmations"><Loader size="big" /></div>}
             <br/>
             <br/>
         </div>

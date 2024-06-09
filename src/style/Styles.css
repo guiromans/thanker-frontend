@@ -199,7 +199,11 @@ body {
 }
 
 .loader-confirmations {
-    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    transform: translate(7%, 0%);
+
 }
 
 .confirming-section {
