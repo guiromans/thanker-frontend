@@ -3,7 +3,7 @@ import { LoginPage } from './LoginPage';
 import { AuthService } from './services/AuthService';
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { AccountConfirmationPage } from './AccountConfirmationPage';
+import AccountConfirmationPage from './AccountConfirmationPage';
 import { CreateUserPage } from './CreateUserPage';
 import { RequestResetPasswordPage } from './RequestResetPasswordPage';
 import { LogoutPage } from './LogoutPage';
@@ -23,7 +23,6 @@ import { UserResponse } from './model/UserModel';
 import { RequestNewConfirmationPage } from './RequestNewConfirmationPage';
 import { SettingsPage } from './SettingsPage';
 import { GDPRCard } from './cards/GDPRCard';
-import React from 'react';
 
 const App = () => {
   const authService = new AuthService();
@@ -36,7 +35,8 @@ const App = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetchUserId();    
+    fetchUserId();
+    console.log("getting userId")
   }, []);
 
   const hasValidToken = (): boolean => {
@@ -157,14 +157,13 @@ const App = () => {
           onLogoutClick={handleLogout}
           userId={userId}
         />
-        <React.StrictMode>
         <HashRouter>
           <Routes>
             <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} /> } />
             <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/>} />
             <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
-            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/:userId/activate/:confirmationId" element={<AccountConfirmationPage onConfirmationDone={openMainPage} />} />
+            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
             <Route path="/users/reset-password" element={<RequestResetPasswordPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />
@@ -177,7 +176,6 @@ const App = () => {
             <Route path="*" element={<NotFound />} />
           </Routes>
         </HashRouter>
-        </React.StrictMode>
         </SnackbarProvider>
     </div>  
   );
