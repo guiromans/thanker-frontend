@@ -135,7 +135,7 @@ const App = () => {
           userId={userId}
         />)
         }
-        <div className='top-padding'>
+        <div className='top-padding loader-confirmations'>
           <Loader size="big" />
         </div>
       </div>
