@@ -36,7 +36,6 @@ const App = () => {
   useEffect(() => {
     setLoading(true);
     fetchUserId();
-    console.log("getting userId")
   }, []);
 
   const hasValidToken = (): boolean => {

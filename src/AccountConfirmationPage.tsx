@@ -34,7 +34,6 @@ const AccountConfirmationPage: React.FC<ConfirmationProps> = (props: Confirmatio
     }, []);
 
     const confirmAccount = async() => {
-        console.log("Going to confirm account",params, userId, confirmationId, confirming, success)
         if (userId && confirmationId) {
             await confirmationService.confirmAccount(userId, confirmationId)
                 .then(() => {
