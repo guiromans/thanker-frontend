@@ -23,6 +23,8 @@ const UserCard = (props: UserProps) => {
     const [isEditingName, setIsEditingName] = useState<boolean>(false);
     const [imageUrl, setImageUrl] = useState<string>(resolveUserImage(props.user));
     const [loadingImage, setLoadingImage] = useState<boolean>(false);
+    const [nameAnchor, setNameAnchor] = useState<string>();
+    const [imageAnchor, setImageAnchor] = useState<string>();
     const inputNameRef = useRef<HTMLInputElement>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -30,6 +32,12 @@ const UserCard = (props: UserProps) => {
     const userService: UserService = new UserService();
     const authService: AuthService = new AuthService();
     const imageService: ImageService = new ImageService();
+
+    useEffect(() => {
+        const isOwnPage: boolean = authService.readUserIdFromToken() === props?.user?.id;
+        setNameAnchor(isOwnPage ? ".user-name" : "");
+        setImageAnchor(isOwnPage ? ".user-image" : "");
+    }, [])
 
     useEffect(() => {
         if (isEditingName && inputNameRef !== null && inputNameRef.current !== null) {
@@ -123,7 +131,7 @@ const UserCard = (props: UserProps) => {
 
     return (
         <div className="user-container">
-            {!isEditingName && <div className="user-data user-name" data-tooltip-id="tooltip-name" onClick={handleNameClick}>
+            {!isEditingName && <div className="user-data user-name" data-tooltip-id="tooltip-1" onClick={handleNameClick}>
                 <b>{username}</b>
             </div>
             }
@@ -135,7 +143,7 @@ const UserCard = (props: UserProps) => {
                 </form>
             }
             <div className="handle">{resolveHandle()}</div>
-            {!loadingImage && <div className="circle user-image" data-tooltip-id="tooltip-image" data-tooltip-content={translationService.getFor(CLICK_YOUR_PICTURE_UPDATE)}>
+            {!loadingImage && <div className="circle user-image" data-tooltip-id="tooltip-2" data-tooltip-content={translationService.getFor(CLICK_YOUR_PICTURE_UPDATE)}>
                 <img src={imageUrl} alt="Thanker profile image"
                     className={resolveImageClassName()}
                     onClick={handleImageClick}
@@ -143,14 +151,16 @@ const UserCard = (props: UserProps) => {
                 <input className="user-image" type="file" accept="image/png" ref={fileInputRef} onChange={handleImageSelection}/>
                 <br/>
             </div>}
+ 
             <div>
-                <Tooltip id="tooltip-name" anchorSelect=".user-name" place="top" className="tooltip">
+                <Tooltip id="tooltip-name" anchorSelect={nameAnchor} place="top" className="tooltip">
                         {translationService.getFor(CLICK_YOUR_NAME_UPDATE)}
                 </Tooltip>
-                <Tooltip id="tooltip-image" anchorSelect=".user-image" place="top" className="tooltip">
+                <Tooltip id="tooltip-imagee" anchorSelect={imageAnchor} place="top" className="tooltip">
                         {translationService.getFor(CLICK_YOUR_PICTURE_UPDATE)}
                 </Tooltip>
             </div>
+        
             {loadingImage && <div className="circle">
                 <Loader size="small"/>
             </div>}
