@@ -106,7 +106,8 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     const canChangePrivacy = (): boolean => {
         const thanks: ThanksResponse = props.thanks;
 
-        return pageUserId === thanks.giver.id || pageUserId === thanks.receiver.id;
+        return pageUserId === thanks.giver.id || pageUserId === thanks.receiver.id ||
+            authService.readUserIdFromToken() === thanks.giver.id;
     }
 
     const resolveCardColour = (): string => {
@@ -126,7 +127,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     }
 
     const resolvePrivacyOptions = (): PrivacyType[] => {
-        if (pageUserId !== props.thanks.giver.id) {
+        if (authService.readUserIdFromToken() !== props.thanks.giver.id) {
             return [PrivacyType.PRIVATE];
         }
 
