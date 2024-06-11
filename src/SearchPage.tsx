@@ -42,7 +42,6 @@ export const SearchPage = (props: SearchProps) => {
         if (div !== null && !isGettingUsers && canGetMoreUsers) {
           const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight -5;
           if (isAtBottom) {
-            props.onLoading(true);
             setTimeout(() => {
                 setPage((prevPage) => prevPage + 1);
             }, 1000);
@@ -52,6 +51,7 @@ export const SearchPage = (props: SearchProps) => {
 
     const searchUsers = async() => {
         setIsGettingUsers(true);
+        props.onLoading(true);
         if (query.length === 0) {
             setUsers([]);
             setIsGettingUsers(false);
