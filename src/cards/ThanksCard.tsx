@@ -62,7 +62,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
         const thanks: ThanksResponse = props.thanks;
         let message: string = "";
 
-        if (pageUserId && pageUserId === thanks.giver.id && thanks.giver.id === thanks.receiver.id) {
+        if (thisUserId === thanks.giver.id && thanks.giver.id === thanks.receiver.id) {
             // Thanks in own page
             message = `${translationService.getIntro()}`;
         } else if (thanks.receiver.id === thanks.giver.id) {
