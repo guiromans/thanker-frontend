@@ -51,24 +51,24 @@ export const SearchPage = (props: SearchProps) => {
 
     const searchUsers = async() => {
         setIsGettingUsers(true);
-        props.onLoading(true);
         if (query.length === 0) {
             setUsers([]);
             setIsGettingUsers(false);
         } else {
+            props.onLoading(true);
             await userService.searchUsers(query, page)
-            .then((resp) => {
-                const respUsers: UserResponse[] = resp.data as UserResponse[];
-                setUsers(prevUsers => [...prevUsers, ...respUsers]);
-                setCanGetMoreUsers(respUsers.length > 0);
-            })
-            .catch((e) => {
-                const err: ErrorResponse = e.response.data as ErrorResponse;
-            })
-            .finally(() => {
-                setIsGettingUsers(false);
-                props.onLoading(false);
-            });
+                .then((resp) => {
+                    const respUsers: UserResponse[] = resp.data as UserResponse[];
+                    setUsers(prevUsers => [...prevUsers, ...respUsers]);
+                    setCanGetMoreUsers(respUsers.length > 0);
+                })
+                .catch((e) => {
+                    const err: ErrorResponse = e.response.data as ErrorResponse;
+                })
+                .finally(() => {
+                    setIsGettingUsers(false);
+                    props.onLoading(false);
+                });
         }
     }
 
