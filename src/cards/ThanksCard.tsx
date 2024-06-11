@@ -25,7 +25,9 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
 
     const translationService: TranslationService = new TranslationService();
     const authService: AuthService = new AuthService();
+    // User ID of page we are visiting
     const pageUserId: string | undefined | null = props.pageUserId;
+    // Our own User ID
     const thisUserId: string = authService.readUserIdFromToken()!;
     const [cardStyle, setCardStyle] = useState<string>('');
     const [privacyType, setPrivacyType] = useState<PrivacyType>(props.thanks.privacyType);
