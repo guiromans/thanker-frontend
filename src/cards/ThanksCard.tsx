@@ -26,6 +26,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     const translationService: TranslationService = new TranslationService();
     const authService: AuthService = new AuthService();
     const pageUserId: string | undefined | null = props.pageUserId;
+    const thisUserId: string = authService.readUserIdFromToken()!;
     const [cardStyle, setCardStyle] = useState<string>('');
     const [privacyType, setPrivacyType] = useState<PrivacyType>(props.thanks.privacyType);
     const [profilePicUrl, setProfilePicUrl] = useState<string>(resolveImage(props.thanks.giver.profilePictureUrl));
@@ -106,8 +107,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     const canChangePrivacy = (): boolean => {
         const thanks: ThanksResponse = props.thanks;
 
-        return pageUserId === thanks.giver.id || pageUserId === thanks.receiver.id ||
-            authService.readUserIdFromToken() === thanks.giver.id;
+        return thisUserId === thanks.giver.id || thisUserId === thanks.receiver.id;
     }
 
     const resolveCardColour = (): string => {
@@ -119,7 +119,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     }
 
     const isUserRelated = (): boolean => {
-        return pageUserId === props.thanks.giver.id || pageUserId === props.thanks.receiver.id;
+        return thisUserId === props.thanks.giver.id || thisUserId === props.thanks.receiver.id;
     }
 
     const handleClickedDelete = () => {
