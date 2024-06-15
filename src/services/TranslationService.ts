@@ -85,6 +85,8 @@ export const UCLA_ARTICLE: string = "ucla-article";
 export const GDPR: string = "gdpr";
 export const FILES_MUST_BE: string = "files-must-be";
 export const PRIVACY_ICON_TOOLTIP: string = "privacy-icon-tooltip";
+export const GRATITUDE_WALL: string = "gratitude-wall";
+export const SEARCH: string = "search-label";
 
 export const INTRO_THANKFUL_FOR: string = "intro-thankful-for";
 export const INTRO_GRATEFUL_FOR: string = "intro-grateful-for";
@@ -230,6 +232,8 @@ export class TranslationService {
             [CLICK_YOUR_NAME_UPDATE, "Clica no teu nome para o atualizares"],
             [CLICK_YOUR_PICTURE_UPDATE, "Clica na tua imagem para a atualizares"],
             [UPDATE, "Atualiza"],
+            [GRATITUDE_WALL, "Mural de Gratidão"],
+            [SEARCH, "Pesquisa"],
             [ARE_YOU_SURE_TO_DELETE, "De certeza que queres apagar este Agradecimento?"],
             [YES, "Sim"],
             [NO, "Não"],
@@ -429,6 +433,8 @@ export class TranslationService {
             [CLICK_YOUR_NAME_UPDATE, "Click your name to update it"],
             [CLICK_YOUR_PICTURE_UPDATE, "Click your image to update it"],
             [UPDATE, "Update"],
+            [GRATITUDE_WALL, "Gratitude Wall"],
+            [SEARCH, "Search"],
             [ARE_YOU_SURE_TO_DELETE, "Are you sure you want to delete this Thanks?"],
             [YES, "Yes"],
             [NO, "No"],

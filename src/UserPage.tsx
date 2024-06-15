@@ -24,6 +24,8 @@ import { StorageService } from "./services/StorageService";
 import { NoThanksCard } from "./cards/NoThanksCard";
 import { Tooltip } from "react-tooltip";
 import { ImageService } from "./services/ImageService";
+import { isMobile } from "react-device-detect";
+import { SearchPage } from "./SearchPage";
 
 interface UserProps {
   userId: string | null | undefined;
@@ -321,10 +323,27 @@ export const UserPage = (props: UserProps) => {
     return isUserPage() || user?.isOpenProfile || false;
   }
 
+  const handleSearchUserClick = (userId: string) => {
+    setUserId(userId);
+  }
+
+  const handleSearchLoading = (isLoading: boolean) => {
+    setLoadingThanks(isLoading);
+  }
+
   if (loadingPage) {
     return (
       <div className="top-padding">
         <Loader size="massive" />
+      </div>
+    );
+  }
+
+  if (true) {
+    return (
+      <div className='container top-padding-mobile mobile-user'>
+        <SearchPage language={language} onClick={handleSearchUserClick} onLoading={handleSearchLoading} />
+        <UserCard user={user} language={props?.language} onImageUpdated={handleImageUpdated} />
       </div>
     );
   }

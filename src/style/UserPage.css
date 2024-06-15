@@ -94,3 +94,13 @@
     font-weight: bold;
     color: #50C878;
 }
+
+.mobile-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.top-padding-mobile {
+    padding-top: 2vh;
+}

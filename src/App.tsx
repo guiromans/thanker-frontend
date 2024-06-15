@@ -5,6 +5,7 @@ import { HashRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import AccountConfirmationPage from './AccountConfirmationPage';
 import { CreateUserPage } from './CreateUserPage';
+import { UserSearchPage } from './UserSearchPage';
 import { RequestResetPasswordPage } from './RequestResetPasswordPage';
 import { LogoutPage } from './LogoutPage';
 import { ResetPasswordPage } from './ResetPasswordPage';
@@ -23,6 +24,7 @@ import { UserResponse } from './model/UserModel';
 import { RequestNewConfirmationPage } from './RequestNewConfirmationPage';
 import { SettingsPage } from './SettingsPage';
 import { GDPRCard } from './cards/GDPRCard';
+import { isMobile } from 'react-device-detect';
 
 const App = () => {
   const authService = new AuthService();
@@ -32,6 +34,8 @@ const App = () => {
   const [language, setLanguage] = useState<Language>(storageService.getLanguage());
   const [loggingOut, setLoggingOut] = useState<boolean>(false);
   const [loadingUsers, setLoadingUsers] = useState<boolean>(false);
+
+  const MAX_MOBILE_WIDTH: number = 1024;
 
   useEffect(() => {
     setLoading(true);
@@ -140,7 +144,47 @@ const App = () => {
       </div>
       
     )
-  };
+  }
+
+  if (isMobile) {
+    return (
+      <div className='main'>
+      <SnackbarProvider maxSnack={3}>
+        <Header 
+          onLanguageChange={handleLanguageChange} 
+          onUserIdSelect={handleSearchedUserSelect}
+          onHomePageClick={handleHomePageClick}
+          onFollowingClick={handleFollowingSelect}
+          onLoadingUsers={handleLoadingUsers}
+          onSettingsClick={handleSettingsClick}
+          onAboutClick={handleAboutClick}
+          onLogoutClick={handleLogout}
+          userId={userId}
+        />
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} /> } />
+            <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/>} />
+            <Route path="/search" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserSearchPage language={language} onClick={handleFollowingClick} />} />
+            <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/users/:userId/activate/:confirmationId" element={<AccountConfirmationPage onConfirmationDone={openMainPage} />} />
+            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
+            <Route path="/users/reset-password" element={<RequestResetPasswordPage language={language} onResetRequested={openMainPage} />} />
+            <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />
+            <Route path="/users/:userId/reset-password/:resetPasswordId" element={<ResetPasswordPage onError={openMainPage} />} />
+            <Route path="/following" element={<FollowingPage userId={userId} onClick={handleFollowingClick} language={language} />} />
+            <Route path="/settings" element={<SettingsPage language={language} />} />
+            <Route path="/gdpr" element={<GDPRCard language={language} />} />
+            <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} />} />
+            <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </HashRouter>
+        </SnackbarProvider>
+    </div>  
+    );
+  } 
 
   return (
     <div className='main'>

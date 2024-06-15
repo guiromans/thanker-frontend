@@ -5,6 +5,7 @@ import { ErrorResponse } from "./model/ErrorResponse";
 import { getUniqueById } from "./utils/UserUtils";
 import { UserItem } from "./cards/UserItem";
 import { Language, SEARCH_USERS_HINT, TranslationService } from "./services/TranslationService";
+import { isMobile } from "react-device-detect";
 
 export interface SearchProps {
     onClick: (userId: string) => void;
