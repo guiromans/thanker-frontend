@@ -1,16 +1,30 @@
 .no-thanks {
     display: flex;
     flex-direction: column;
-    text-align: center;
-    margin-top: 14vh;
+    text-align: center; 
     margin-left: 24px;
     margin-right: 24px;
 }
 
+.desktop-specs {
+    margin-top: 14vh;
+}
+
+.mobile-specs {
+    margin-top: 96px;
+}
+
 .text-empty-thanks {
-    font-size: 32px;
     margin: 16px;
     font-weight: bold;
+}
+
+.text-desktop {
+    font-size: 32px;
+}
+
+.text-mobile {
+    font-size: 18px;
 }
 
 .emoji {

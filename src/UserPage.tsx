@@ -26,6 +26,7 @@ import { Tooltip } from "react-tooltip";
 import { ImageService } from "./services/ImageService";
 import { isMobile } from "react-device-detect";
 import { SearchPage } from "./SearchPage";
+import rightArrow from './assets/images/green_arrow.png';
 
 interface UserProps {
   userId: string | null | undefined;
@@ -64,6 +65,8 @@ export const UserPage = (props: UserProps) => {
   const [language, setLanguage] = useState<Language | undefined>(props?.language);
   const [timestamp, setTimestamp] = useState<number>(0);
   const [userImageUrl, setUserImageUrl] = useState<string | null>('');
+  const [thanksPlaceHolder, setThanksPlaceHolder] = useState<string>('');
+  const [isUserPageOpened, setIsuserPageOpened] = useState<boolean>(true);
   const { enqueueSnackbar } = useSnackbar();
 
   const userService: UserService = new UserService();
@@ -74,6 +77,7 @@ export const UserPage = (props: UserProps) => {
 
   useEffect(() => {
     setPrivacyType(loadDefaultThanksPrivacy());
+    setThanksPlaceHolder(resolveTextAreaPlaceholder());
   }, []);
 
   useEffect(() => {
@@ -331,6 +335,10 @@ export const UserPage = (props: UserProps) => {
     setLoadingThanks(isLoading);
   }
 
+  const handleRightArrowClick = () => {
+    setIsuserPageOpened(false);
+  }
+
   if (loadingPage) {
     return (
       <div className="top-padding">
@@ -341,11 +349,72 @@ export const UserPage = (props: UserProps) => {
 
   if (true) {
     return (
+      <div>
+      {isUserPageOpened && (
       <div className='container top-padding-mobile mobile-user'>
         <SearchPage language={language} onClick={handleSearchUserClick} onLoading={handleSearchLoading} />
         <UserCard user={user} language={props?.language} onImageUpdated={handleImageUpdated} />
+        {!isUserPage() && !isFollowing && <button onClick={handleFollowClick}>{translationService.getFor(FOLLOW)}</button>}
+        <b className="thanker-color">{isFollowing && translationService.getFor(FOLLOWING)}</b>
+        { resolveShowThanksForm() &&
+          <form onSubmit={handleGiveThanks} className="thanks-form">
+            <textarea
+              name='textThanks'
+              value={textThanks}
+              onChange={handleTextThanksChange}
+              className="thanks-text-box"
+              placeholder={thanksPlaceHolder}
+            />
+            <div className="privacy">
+              <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange} className="privacy privacy-select">
+                {Object.values(PrivacyType).filter(type => typeof type === 'string').map(type => (
+                  <option key={type} value={type}>{translationService.getFor(type)}</option>
+                ))}
+              </select>
+              <img 
+                src={infoIcon} 
+                className="info-icon"
+              />
+              <Tooltip id="privacy-tooltip" anchorSelect=".info-icon" place="top" className="tooltip">
+                {translationService.getFor(PRIVACY_ICON_TOOLTIP)}
+              </Tooltip>
+            </div>
+            <button type='submit' className="thanks-button">{translationService.getFor(THANK)}!</button>
+          </form>
+        }
+        {
+          authService.readUserIdFromToken() !== userId && !user?.isOpenProfile &&
+          <NoThanksCard language={language} isOpenProfile={false} />
+        }
+        <HurrayCard isVisible={showHurray} />
+        <div className="arrow">
+          <img src={rightArrow} className="arrow-specs" onClick={handleRightArrowClick}/>
+        </div>
       </div>
-    );
+    )}
+    {!isUserPageOpened && (
+      <div className='container top-padding-mobile mobile-user'>
+        <div className="thanks-container">
+          {getUniqueById(thanks).map(thanks => (
+            <ThanksCard
+              key={thanks.id}
+              thanks={thanks}
+              onPrivacyTypeChange={handleThanksPrivacyChange}
+              onUserImageClick={handleUserImageClick}
+              language={language}
+              onClickedDelete={handleClickedDelete}
+              userImageUrl={userImageUrl}
+              pageUserId={userId}
+              timestamp={timestamp}
+            />
+          ))}
+          {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} />}
+          <br />
+          {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
+        </div>
+      </div>
+    )}
+    </div>);
   }
 
   return (
@@ -361,7 +430,7 @@ export const UserPage = (props: UserProps) => {
               value={textThanks}
               onChange={handleTextThanksChange}
               className="thanks-text-box"
-              placeholder={resolveTextAreaPlaceholder()}
+              placeholder={thanksPlaceHolder}
             />
             <div className="privacy">
               <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange} className="privacy privacy-select">

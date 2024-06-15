@@ -3,6 +3,7 @@ import raisedHands from '../../src/assets/images/raisedhands.png';
 import handsTogether from '../../src/assets/images/handstogether.png';
 import party from '../../src/assets/images/party.png';
 import { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 
 export interface HurrayProps {
     isVisible: boolean;
@@ -23,7 +24,8 @@ export const HurrayCard = (props: HurrayProps) => {
     }
 
     const resolveStyle = (): string => {
-        return `hurray-overlay ${props.isVisible ? 'show' : ''}`;
+        const placeStyle: string = !isMobile ? "desktop-place" : "";
+        return `hurray-overlay ${placeStyle} ${props.isVisible ? 'show' : ''}`;
     }
 
     const handleHurrayClick = () => {
