@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { StorageService } from "./services/StorageService";
-import { HEADER_ABOUT, HEADER_FOLLOWING, HEADER_LOGOUT, HEADER_SETTINGS, Language, SEARCH, SEARCH_USERS_HINT, THANKS, TranslationService } from "./services/TranslationService";
+import { HEADER_ABOUT, HEADER_FOLLOWING, HEADER_LOGOUT, HEADER_QUOTE, HEADER_SETTINGS, Language, SEARCH, SEARCH_USERS_HINT, THANKS, TranslationService } from "./services/TranslationService";
 import { SearchPage } from "./SearchPage";
 import './style/Fonts.css';
 import './style/Header.css';
@@ -13,12 +13,14 @@ import HeaderIcon from "./cards/HeaderIcon";
 import { isMobile } from "react-device-detect";
 import { LanguageFlags } from "./cards/LanguageFlags";
 import styled from "styled-components";
+import SponsoredCard from "./cards/SponsoredCard";
 
 export interface HeaderProps {
     userId: string | null | undefined;
     onLanguageChange: (language: Language) => void;
     onUserIdSelect: (userId: string) => void;
     onFollowingClick: () => void;
+    onQuoteClick: () => void;
     onHomePageClick: () => void;
     onAboutClick: () => void;
     onSettingsClick: () => void;
@@ -56,12 +58,12 @@ const DropdownMenu = styled.div<{ open: boolean }>`
   left: 0;
   background-color: white;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  z-index: 1;
+  z-index: 100000;
   margin-left: 15%;
   margin-right: 15%;
 
   & .header-label {
-    padding: 12px 16px;
+    padding: 18px 18px;
     display: block;
     color: black;
     text-decoration: none;
@@ -117,22 +119,23 @@ export const Header = (props: HeaderProps) => {
     }
 
     const handleSettingsClick = () => {
-        props.onSettingsClick();
         hideMenu();
+        props.onSettingsClick();
     }
 
     const handleLogoutClick = () => {
-        props.onLogoutClick();
         hideMenu();
+        props.onLogoutClick();
     }
 
     const handleLogoClick = () => {
+        hideMenu();
         window.location.href = '/';
     }
 
     const handleAboutClick = () => {
-        props.onAboutClick();
         hideMenu();
+        props.onAboutClick();
     }
 
     const resolveHeaderClasses = () => {
@@ -142,7 +145,13 @@ export const Header = (props: HeaderProps) => {
     }
 
     const handleFollowingClick = () => {
+        hideMenu();
         props.onFollowingClick();
+    }
+
+    const handleQuoteClick = () => {
+        hideMenu();
+        props.onQuoteClick();
     }
 
     const handleLoading = (isLoading: boolean) => {
@@ -157,7 +166,7 @@ export const Header = (props: HeaderProps) => {
         setOpenMenu(false);
     }
 
-    if (true) { // isMobile
+    if (isMobile) {
         return (
             <div className={resolveHeaderClasses()}>
                 <div><h1 className='logo' onClick={handleLogoClick}>Thanker</h1></div>
@@ -170,9 +179,14 @@ export const Header = (props: HeaderProps) => {
                         </HamburgerButton>
                         <DropdownMenu open={openMenu} ref={menuRef}>
                           <label className="header-label" onClick={handleLogoClick}>{translationService.getFor(THANKS)}</label>
+                          <label className="header-label" onClick={handleFollowingClick}>{translationService.getFor(HEADER_FOLLOWING)}</label>
+                          <label className="header-label" onClick={handleQuoteClick}>{translationService.getFor(HEADER_QUOTE)}</label>
                           <label className="header-label" onClick={handleSettingsClick}>{translationService.getFor(HEADER_SETTINGS)}</label>
                           <label className="header-label" onClick={handleAboutClick}>{translationService.getFor(HEADER_ABOUT)}</label>
                           <label className="header-label" onClick={handleLogoutClick}>{translationService.getFor(HEADER_LOGOUT)}</label>
+                          <div className='no-overflow mobile-ad'>
+                            <SponsoredCard language={language}/>
+                          </div>
                         </DropdownMenu>
                     </div>
                     )}

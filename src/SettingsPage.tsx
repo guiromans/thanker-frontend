@@ -7,6 +7,7 @@ import './style/Styles.css';
 import { enqueueSnackbar } from 'notistack';
 import { StorageService } from './services/StorageService';
 import { PrivacyType } from './model/ThanksModel';
+import { isMobile } from 'react-device-detect';
 
 export interface SettingsProps {
     language: Language | undefined;
@@ -65,8 +66,12 @@ export const SettingsPage = (props: SettingsProps) => {
         return checked ? "success" : "info";
     }
 
+    const resolveContainerClasses = (): string => {
+        return `${isMobile ? "mobile" : "desktop"}`;
+    }
+
     return(
-        <div className='settings-container'>
+        <div className={resolveContainerClasses()}>
             <SettingItem 
                 isChecked={openProfileChecked}
                 onSwitched={handleSwitchedOpenProfile}

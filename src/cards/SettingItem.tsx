@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import '../style/Settings.css';
 import { Language, TranslationService } from "../services/TranslationService";
+import { isMobile } from "react-device-detect";
 
 export interface SettingItemProps {
     isChecked: boolean | undefined;
@@ -31,9 +32,13 @@ export const SettingItem = (props: SettingItemProps) => {
         props.onSwitched(updatedChecked);
     }
 
+    const resolveCheckboxClasses = (): string => {
+        return `${isMobile ? "switch-mobile" : "switch-desktop"}`;
+    }
+
     return (
         <div className="setting-item">
-            <label className="switch">
+            <label className={resolveCheckboxClasses()}>
                 <input 
                     className="checkbox"
                     type="checkbox"

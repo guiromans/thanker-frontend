@@ -25,6 +25,7 @@ import { RequestNewConfirmationPage } from './RequestNewConfirmationPage';
 import { SettingsPage } from './SettingsPage';
 import { GDPRCard } from './cards/GDPRCard';
 import { isMobile } from 'react-device-detect';
+import QuoteCard from './cards/QuoteCard';
 
 const App = () => {
   const authService = new AuthService();
@@ -119,6 +120,10 @@ const App = () => {
     window.location.href = "/#/settings";
   }
 
+  const handleQuoteClick = () => {
+    window.location.hash = "/quote"
+  }
+
   const handleUserNotFound = () => {
     window.location.hash = "/not-found";
   }
@@ -132,6 +137,7 @@ const App = () => {
           onFollowingClick={handleFollowingSelect}
           onHomePageClick={handleHomePageClick}
           onLoadingUsers={handleLoadingUsers}
+          onQuoteClick={handleQuoteClick}
           onSettingsClick={handleSettingsClick}
           onAboutClick={handleAboutClick}
           onLogoutClick={handleLogout}
@@ -155,6 +161,7 @@ const App = () => {
           onUserIdSelect={handleSearchedUserSelect}
           onHomePageClick={handleHomePageClick}
           onFollowingClick={handleFollowingSelect}
+          onQuoteClick={handleQuoteClick}
           onLoadingUsers={handleLoadingUsers}
           onSettingsClick={handleSettingsClick}
           onAboutClick={handleAboutClick}
@@ -167,6 +174,7 @@ const App = () => {
             <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/>} />
             <Route path="/search" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserSearchPage language={language} onClick={handleFollowingClick} />} />
             <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/quote" element={hasValidToken() ? <QuoteCard language={language} pageUserId={authService.readUserIdFromToken()} /> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/:userId/activate/:confirmationId" element={<AccountConfirmationPage onConfirmationDone={openMainPage} />} />
             <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
@@ -194,6 +202,7 @@ const App = () => {
           onUserIdSelect={handleSearchedUserSelect}
           onHomePageClick={handleHomePageClick}
           onFollowingClick={handleFollowingSelect}
+          onQuoteClick={handleQuoteClick}
           onLoadingUsers={handleLoadingUsers}
           onSettingsClick={handleSettingsClick}
           onAboutClick={handleAboutClick}

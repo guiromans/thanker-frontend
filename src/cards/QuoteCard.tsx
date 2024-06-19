@@ -5,6 +5,7 @@ import { Language, PLATO, TranslationService, UNKNOWN } from '../services/Transl
 import '../style/QuoteCard.css';
 import SponsoredCard from './SponsoredCard';
 import { AuthService } from '../services/AuthService';
+import { isMobile } from 'react-device-detect';
 
 export interface QuoteProps {
     language: Language | undefined;
@@ -41,10 +42,18 @@ const QuoteCard = (props: QuoteProps) => {
         return professions.filter((profession): profession is string => profession !== undefined);
     }
 
+    const resolveTextClasses = (): string => {
+        return isMobile ? "quote-text-mobile" : "quote-text";
+    }
+
+    const resolveContainerClasses = (): string => {
+        return `quote-container ${isMobile ? "container-mobile": ""}`; 
+    }
+
     return(
         <div className='quote-section-container'>
-            <div className='quote-container'>
-                <div className='quote-text'><i>{quote && translationService.getFor(quote.quoteKey)}</i></div>
+            <div className={resolveContainerClasses()}>
+                <div className={resolveTextClasses()}><i>{quote && translationService.getFor(quote.quoteKey)}</i></div>
                 <br/>
                 <div>{quote && `- ${resolveAuthor(quote.authorName)}`}</div>
                 {
@@ -54,7 +63,7 @@ const QuoteCard = (props: QuoteProps) => {
                     </div>
                 }
             </div>
-            {   !isUserPage() &&
+            {   !isUserPage() && !isMobile &&
                 <div className='no-overflow'>
                     <SponsoredCard language={props.language}/>
                 </div>

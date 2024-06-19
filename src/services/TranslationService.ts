@@ -125,6 +125,7 @@ export const INSPIRATION_6: string = "inspiration-6";
 export const HEADER_HOME: string = "header-home";
 export const HEADER_FOLLOWING: string = "header-following";
 export const HEADER_SETTINGS: string = "header-settings";
+export const HEADER_QUOTE: string = "header-quote";
 export const HEADER_ABOUT: string = "header-about";
 export const HEADER_LOGOUT: string = "header-logout";
 
@@ -272,6 +273,7 @@ export class TranslationService {
             [INSPIRATION_6, "Dá-te o teu Reconhecimento"],
             [HEADER_HOME, "Início"],
             [HEADER_FOLLOWING, "Seguindo"],
+            [HEADER_QUOTE, "Citação"],
             [HEADER_SETTINGS, "Configurações"],
             [HEADER_ABOUT, "Sobre"],
             [HEADER_LOGOUT, "Sair"],
@@ -473,6 +475,7 @@ export class TranslationService {
             [INSPIRATION_6, "Acknowledge Yourself"],
             [HEADER_HOME, "Home"],
             [HEADER_FOLLOWING, "Following"],
+            [HEADER_QUOTE, "Citação"],
             [HEADER_SETTINGS, "Settings"],
             [HEADER_ABOUT, "About"],
             [HEADER_LOGOUT, "Logout"],

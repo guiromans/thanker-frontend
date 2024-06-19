@@ -9,6 +9,7 @@ import { getUniqueById } from "./utils/UserUtils";
 import { UserItem } from "./cards/UserItem";
 import { Loader } from "./cards/Loader";
 import { NoFollowingCard } from "./cards/NoFollowingCard";
+import { isMobile } from "react-device-detect";
 
 export interface UserSearchProps {
     language: Language | undefined;
@@ -56,7 +57,7 @@ export const UserSearchPage = (props: UserSearchProps) => {
       };
 
     const searchUsers = () => {
-        if (true) {
+        if (isMobile) {
             setUsersLoading(true);
             const searchMethod = query.length > 0 ? searchByName : searchPaged;
             callSearch(searchMethod);

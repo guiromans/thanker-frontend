@@ -32,8 +32,16 @@
     align-items: center;
     position: relative;
     width: 100%;
+  }
+
+  .desktop {  
     transform: translate(-15%, 30%);
   }
+
+.mobile {
+  position: absolute;
+  margin: auto;
+}
 
   .centered {
     display: flex;

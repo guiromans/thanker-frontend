@@ -3,6 +3,7 @@ import './style/About.css';
 import { useEffect, useState } from 'react';
 import { Loader } from './cards/Loader';
 import { BERKELEY_ARTICLE, CRYPTOGRAPHY_INFO, HARVARD_ARTICLE, INQUIRIES_AND_EMAIL, Language, SHOW_GRATITUDE_TEXT, THANKING_MAKES_YOU_HAPPIER, TranslationService, UCLA_ARTICLE } from './services/TranslationService';
+import { isMobile } from 'react-device-detect';
 
 export interface AboutProps {
     language: Language| undefined;
@@ -18,6 +19,10 @@ export const About = (props: AboutProps) => {
         setLoading(false);
     }, [])
 
+    const resolveContainerClasses = (): string => {
+        return `top-padding about-container ${isMobile ? "mobile" : "desktop"}`;
+    }
+
     if (loading) {
         <div>
             <Loader size="massive" />
@@ -25,7 +30,7 @@ export const About = (props: AboutProps) => {
     }
 
     return (
-        <div className="top-padding about-container">
+        <div className={resolveContainerClasses()}>
             <div className='about-section'>
                 <h1>{translationService.getFor(THANKING_MAKES_YOU_HAPPIER)}</h1>
             </div>

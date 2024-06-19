@@ -48,3 +48,9 @@
 label:hover {
   font-weight: bold;
 }
+
+.mobile-ad {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}

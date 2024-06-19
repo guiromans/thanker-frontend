@@ -23,7 +23,6 @@ import { Modal } from "./cards/Modal";
 import { StorageService } from "./services/StorageService";
 import { NoThanksCard } from "./cards/NoThanksCard";
 import { Tooltip } from "react-tooltip";
-import { ImageService } from "./services/ImageService";
 import { isMobile } from "react-device-detect";
 import { SearchPage } from "./SearchPage";
 import rightArrow from './assets/images/green_arrow.png';
@@ -66,7 +65,7 @@ export const UserPage = (props: UserProps) => {
   const [timestamp, setTimestamp] = useState<number>(0);
   const [userImageUrl, setUserImageUrl] = useState<string | null>('');
   const [thanksPlaceHolder, setThanksPlaceHolder] = useState<string>('');
-  const [isUserPageOpened, setIsuserPageOpened] = useState<boolean>(true);
+  const [isUserPageOpened, setIsUserPageOpened] = useState<boolean>(true);
   const { enqueueSnackbar } = useSnackbar();
 
   const userService: UserService = new UserService();
@@ -336,8 +335,13 @@ export const UserPage = (props: UserProps) => {
   }
 
   const handleRightArrowClick = () => {
-    setIsuserPageOpened(false);
+    setIsUserPageOpened(false);
   }
+
+  const handleLeftArrowClick = () => {
+    setIsUserPageOpened(true);
+  }
+
 
   if (loadingPage) {
     return (
@@ -347,7 +351,7 @@ export const UserPage = (props: UserProps) => {
     );
   }
 
-  if (true) {
+  if (isMobile) {
     return (
       <div>
       {isUserPageOpened && (
@@ -387,7 +391,7 @@ export const UserPage = (props: UserProps) => {
           <NoThanksCard language={language} isOpenProfile={false} />
         }
         <HurrayCard isVisible={showHurray} />
-        <div className="arrow">
+        <div className="arrow right-arrow">
           <img src={rightArrow} className="arrow-specs" onClick={handleRightArrowClick}/>
         </div>
       </div>
@@ -411,6 +415,9 @@ export const UserPage = (props: UserProps) => {
           {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} />}
           <br />
           {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
+        </div>
+        <div className="arrow left-arrow">
+          <img src={rightArrow} className="arrow-specs" onClick={handleLeftArrowClick}/>
         </div>
       </div>
     )}

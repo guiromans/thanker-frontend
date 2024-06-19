@@ -9,10 +9,15 @@
     text-align: left;
 }
 
-.settings-container {
+.desktop {
     top: 30%;
     left: 30%;
     position: absolute;
+}
+
+.mobile {
+  display: flex;
+  flex-direction: column;
 }
 
 .settings-text {
@@ -21,10 +26,17 @@
     align-items: center;
 }
 
-.switch {
+.switch-desktop {
     position: relative;
     display: inline-block;
     width: 60px;
+    height: 34px;
+  }
+
+  .switch-mobile {
+    position: relative;
+    display: inline-block;
+    width: 100px;
     height: 34px;
   }
   

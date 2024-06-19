@@ -6,7 +6,15 @@
     text-align: center;
     display: flex;
     flex-direction: column;
+}
+
+.desktop {
     padding-top: 20vh;
+}
+
+.mobile {
+    padding-top: 1vh;
+    overflow-y: auto;
 }
 
 .about-section {
