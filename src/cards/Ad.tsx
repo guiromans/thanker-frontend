@@ -45,13 +45,7 @@ const Ad = () => {
 
   return (
     <div className="ad-container">
-      {/* <ins className="adsbygoogle"
-        style={{ display: 'block', maxHeight: "100px" }}
-        data-ad-client="ca-pub-1133652107517781"
-        data-ad-slot="9894104602"
-        data-ad-format="rectangle,horizontal"
-        data-full-width-responsive="true">
-      </ins> */}
+      <script async="async" data-cfasync="false" src="//pl23563071.highrevenuenetwork.com/65a59bdda9561054a6dd3e362af167cd/invoke.js"></script>
       <div id="container-65a59bdda9561054a6dd3e362af167cd"></div>
     </div>
   );
