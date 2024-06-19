@@ -45,7 +45,7 @@ const Ad = () => {
 
   return (
     <div className="ad-container">
-      <script async="async" data-cfasync="false" src="//pl23563071.highrevenuenetwork.com/65a59bdda9561054a6dd3e362af167cd/invoke.js"></script>
+      <script async data-cfasync="false" src="//pl23563071.highrevenuenetwork.com/65a59bdda9561054a6dd3e362af167cd/invoke.js"></script>
       <div id="container-65a59bdda9561054a6dd3e362af167cd"></div>
     </div>
   );
