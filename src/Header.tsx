@@ -61,10 +61,13 @@ const DropdownMenu = styled.div<{ open: boolean }>`
   z-index: 100000;
   margin-left: 15%;
   margin-right: 15%;
+  overflow: auto;
 
   & .header-label {
-    padding: 18px 18px;
-    display: block;
+    padding: 16px 16px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
     color: black;
     text-decoration: none;
 

@@ -32,6 +32,7 @@ interface UserProps {
   language: Language;
   loadingUsers: boolean;
   onUserNotFound: () => void;
+  onSelectUserId(userId: string): void;
 }
 
 export const UserPage = (props: UserProps) => {
@@ -76,7 +77,6 @@ export const UserPage = (props: UserProps) => {
 
   useEffect(() => {
     setPrivacyType(loadDefaultThanksPrivacy());
-    setThanksPlaceHolder(resolveTextAreaPlaceholder());
   }, []);
 
   useEffect(() => {
@@ -115,6 +115,7 @@ export const UserPage = (props: UserProps) => {
 
   const checkScroll = () => {
     const div = thanksScrollableDivRef.current;
+    console.log("Check scroll method")
     if (div !== null && !gettingMoreThanks) {
       const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight - 20;
       if (isAtBottom) {
@@ -154,6 +155,7 @@ export const UserPage = (props: UserProps) => {
       .then((resp) => {
         const user: UserResponse = resp.data as UserResponse;
         setUser(user);
+        setThanksPlaceHolder(resolveTextAreaPlaceholder(user));
         setUserImageUrl(user.profilePictureUrl);
         setTimeout(() => {
           setLoadingPage(false);
@@ -230,7 +232,7 @@ export const UserPage = (props: UserProps) => {
     }
   }
 
-  const resolveTextAreaPlaceholder = (): string => {
+  const resolveTextAreaPlaceholder = (user: UserResponse): string => {
     const chosenHint: string | undefined = isUserPage() ? translationService.getHint()
       : `${translationService.getHintOther()} ${user?.name}?`;
 
@@ -327,7 +329,7 @@ export const UserPage = (props: UserProps) => {
   }
 
   const handleSearchUserClick = (userId: string) => {
-    setUserId(userId);
+    props.onSelectUserId(userId);
   }
 
   const handleSearchLoading = (isLoading: boolean) => {
@@ -353,51 +355,53 @@ export const UserPage = (props: UserProps) => {
 
   if (isMobile) {
     return (
-      <div>
+      <div className="mobile-container-user-page">
       {isUserPageOpened && (
-      <div className='container top-padding-mobile mobile-user'>
-        <SearchPage language={language} onClick={handleSearchUserClick} onLoading={handleSearchLoading} />
-        <UserCard user={user} language={props?.language} onImageUpdated={handleImageUpdated} />
-        {!isUserPage() && !isFollowing && <button onClick={handleFollowClick}>{translationService.getFor(FOLLOW)}</button>}
-        <b className="thanker-color">{isFollowing && translationService.getFor(FOLLOWING)}</b>
-        { resolveShowThanksForm() &&
-          <form onSubmit={handleGiveThanks} className="thanks-form">
-            <textarea
-              name='textThanks'
-              value={textThanks}
-              onChange={handleTextThanksChange}
-              className="thanks-text-box"
-              placeholder={thanksPlaceHolder}
-            />
-            <div className="privacy">
-              <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange} className="privacy privacy-select">
-                {Object.values(PrivacyType).filter(type => typeof type === 'string').map(type => (
-                  <option key={type} value={type}>{translationService.getFor(type)}</option>
-                ))}
-              </select>
-              <img 
-                src={infoIcon} 
-                className="info-icon"
+      <div className='mobile-user container top-padding-mobile'>
+        <div className="user-container-mobile">
+          <SearchPage language={language} onClick={handleSearchUserClick} onLoading={handleSearchLoading} />
+          <UserCard user={user} language={props?.language} onImageUpdated={handleImageUpdated} />
+          {!isUserPage() && !isFollowing && <button onClick={handleFollowClick}>{translationService.getFor(FOLLOW)}</button>}
+          <b className="thanker-color">{isFollowing && translationService.getFor(FOLLOWING)}</b>
+          { resolveShowThanksForm() &&
+            <form onSubmit={handleGiveThanks} className="thanks-form">
+              <textarea
+                name='textThanks'
+                value={textThanks}
+                onChange={handleTextThanksChange}
+                className="thanks-text-box"
+                placeholder={thanksPlaceHolder}
               />
-              <Tooltip id="privacy-tooltip" anchorSelect=".info-icon" place="top" className="tooltip">
-                {translationService.getFor(PRIVACY_ICON_TOOLTIP)}
-              </Tooltip>
-            </div>
-            <button type='submit' className="thanks-button">{translationService.getFor(THANK)}!</button>
-          </form>
-        }
-        {
-          authService.readUserIdFromToken() !== userId && !user?.isOpenProfile &&
-          <NoThanksCard language={language} isOpenProfile={false} />
-        }
-        <HurrayCard isVisible={showHurray} />
-        <div className="arrow right-arrow">
-          <img src={rightArrow} className="arrow-specs" onClick={handleRightArrowClick}/>
+              <div className="privacy">
+                <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange} className="privacy privacy-select">
+                  {Object.values(PrivacyType).filter(type => typeof type === 'string').map(type => (
+                    <option key={type} value={type}>{translationService.getFor(type)}</option>
+                  ))}
+                </select>
+                <img 
+                  src={infoIcon} 
+                  className="info-icon"
+                />
+                <Tooltip id="privacy-tooltip" anchorSelect=".info-icon" place="top" className="tooltip">
+                  {translationService.getFor(PRIVACY_ICON_TOOLTIP)}
+                </Tooltip>
+              </div>
+              <button type='submit' className="thanks-button">{translationService.getFor(THANK)}!</button>
+            </form>
+          }
+          {
+            authService.readUserIdFromToken() !== userId && !user?.isOpenProfile &&
+            <NoThanksCard language={language} isOpenProfile={false} />
+          }
+          <HurrayCard isVisible={showHurray} />
+          <div className="arrow right-arrow">
+            <img src={rightArrow} className="arrow-specs" onClick={handleRightArrowClick}/>
+          </div>
         </div>
       </div>
     )}
     {!isUserPageOpened && (
-      <div className='container top-padding-mobile mobile-user'>
+      <div className='container top-padding-mobile mobile-user' ref={thanksScrollableDivRef} onScroll={checkScroll}>
         <div className="thanks-container">
           {getUniqueById(thanks).map(thanks => (
             <ThanksCard

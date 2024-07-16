@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import '../style/Ad.css';
+import adLotr from '../assets/images/lotr_amazon.jpg';
+import adPrime1 from '../assets/images/adPrimeVideo1.jpg';
 
 const Ad = () => {
 
@@ -45,18 +47,8 @@ const Ad = () => {
 
   return (
     <div className="ad-container">
-    <script async="async" data-cfasync="false" src="//pl23563071.highrevenuenetwork.com/65a59bdda9561054a6dd3e362af167cd/invoke.js"></script>
-    <div id="container-65a59bdda9561054a6dd3e362af167cd"></div>
+      <a target="_blank" href="https://www.amazon.co.uk/b?_encoding=UTF8&tag=gromao-21&linkCode=ur2&linkId=42a84c933913e88a50e3cb953632805f&camp=1634&creative=6738&node=3010085031"><img src={adPrime1} className="img-ad" /></a>
     </div>
-    /* <div className="ad-container">
-      <ins className="adsbygoogle"
-        style={{ display: 'block', maxHeight: "100px" }}
-        data-ad-client="ca-pub-1133652107517781"
-        data-ad-slot="9894104602"
-        data-ad-format="rectangle,horizontal"
-        data-full-width-responsive="true">
-      </ins>
-    </div> */
   );
 
 }

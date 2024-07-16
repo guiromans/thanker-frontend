@@ -116,7 +116,10 @@ export const UserSearchPage = (props: UserSearchProps) => {
             <div className="users-container" ref={scrollableDivRef} onScroll={checkScroll}>
                 <div className="user-items">
                     {getUniqueById(users).map(user =>(
-                        <UserItem key={user.id} user={user} onClick={(user) => handleUserClick(user)} size="page-size" />
+                        <UserItem 
+                        key={user.id} 
+                        user={user} 
+                        onClick={(user) => handleUserClick(user)} size="page-size" />
                     ))}
                 </div>
                 <div className="loader-confirmations">

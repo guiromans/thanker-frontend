@@ -85,6 +85,7 @@ export const UCLA_ARTICLE: string = "ucla-article";
 export const GDPR: string = "gdpr";
 export const FILES_MUST_BE: string = "files-must-be";
 export const PRIVACY_ICON_TOOLTIP: string = "privacy-icon-tooltip";
+export const LOCK_ICON_TOOLTIP: string = "lock-icon-tooltip";
 export const GRATITUDE_WALL: string = "gratitude-wall";
 export const SEARCH: string = "search-label";
 
@@ -230,6 +231,7 @@ export class TranslationService {
             [GDPR, GDPR_PT_HTML],
             [FILES_MUST_BE, "Ficheiros têm de ser"],
             [PRIVACY_ICON_TOOLTIP, "Privado: só tu (e a quem deres) conseguem visualizar o Thanks.\nPúblico: toda a gente conseguirá ver este Thanks."],
+            [LOCK_ICON_TOOLTIP, "Os Thanks são encriptados na base de dados"],
             [CLICK_YOUR_NAME_UPDATE, "Clica no teu nome para o atualizares"],
             [CLICK_YOUR_PICTURE_UPDATE, "Clica na tua imagem para a atualizares"],
             [UPDATE, "Atualiza"],
@@ -398,8 +400,8 @@ export class TranslationService {
             [INTRO_THANKFUL_FOR, "I'm thankful for"],
             [INTRO_GRATEFUL_FOR, "I feel grateful for"],
             [INTRO_THANKS_FOR, "Thanks for"],
-            [OTHER_INTRO_THANKS, "thanks for"],
-            [OTHER_INTRO_EXPRESSED_GRATITUDE, "expresses gratitude for"],
+            [OTHER_INTRO_THANKS, "thanks"],
+            [OTHER_INTRO_EXPRESSED_GRATITUDE, "expresses gratitude to"],
             [OTHER_INTRO_IS_THANKFUL_TO, "feels gratitude towards"],
             [TERMS_AND_CONDITIONS, "I accept the Terms and Conditions of the Thanker platform"],
             [THANKER_INTRO, "Thanker is your Gratitude Journal, where other people can write, too 😉"],
@@ -432,6 +434,7 @@ export class TranslationService {
             [GDPR, GDPR_EN_HTML],
             [FILES_MUST_BE, "Files must be"],
             [PRIVACY_ICON_TOOLTIP, "Private: only you (and who you give to) will be able to see this Thanks.\nPublic: everyone can see the Thanks."],
+            [LOCK_ICON_TOOLTIP, "Thanks are encrypted on the database"],
             [CLICK_YOUR_NAME_UPDATE, "Click your name to update it"],
             [CLICK_YOUR_PICTURE_UPDATE, "Click your image to update it"],
             [UPDATE, "Update"],

@@ -9,7 +9,7 @@ export interface LoaderProps {
 export const Loader = (props: LoaderProps) => {
 
     const resolveDivClasses = (): string => {
-        return `loader ${isMobile ? "big mobile" : `desktop ${props.size}`}`;
+        return `loader ${isMobile ? "big mobile-loader" : `desktop ${props.size}`}`;
     }
 
     return (

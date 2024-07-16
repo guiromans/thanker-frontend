@@ -6,6 +6,7 @@ import { getUniqueById } from "./utils/UserUtils";
 import { UserItem } from "./cards/UserItem";
 import { Language, SEARCH_USERS_HINT, TranslationService } from "./services/TranslationService";
 import { isMobile } from "react-device-detect";
+import './style/Search.css';
 
 export interface SearchProps {
     onClick: (userId: string) => void;
@@ -92,8 +93,12 @@ export const SearchPage = (props: SearchProps) => {
         }, 200);
     }
 
+    const resolveResultClasses = (): string => {
+        return `overlay search-box search-box-height ${isMobile ? "mobile-search-result" : ""}`;
+    }
+
     return (
-        <div>
+        <div className={isMobile ? "mobile-page-search" : ""}>
             <input 
                 type='text' 
                 name='query' 
@@ -105,7 +110,7 @@ export const SearchPage = (props: SearchProps) => {
                 autoComplete="off"
             /><br/>
             {query.length > 0 && hasFocus && users.length > 0 && (
-                <div ref={resultsDivRef} className='overlay search-box search-box-height' onScroll={checkScroll}>
+                <div ref={resultsDivRef} className={resolveResultClasses()} onScroll={checkScroll}>
                     {getUniqueById(users).map(user =>
                         <UserItem key={user.id} user={user} onClick={(user) => handleUserClick(user)} size="user-search-size" />
                     )}

@@ -36,8 +36,6 @@ const App = () => {
   const [loggingOut, setLoggingOut] = useState<boolean>(false);
   const [loadingUsers, setLoadingUsers] = useState<boolean>(false);
 
-  const MAX_MOBILE_WIDTH: number = 1024;
-
   useEffect(() => {
     setLoading(true);
     fetchUserId();
@@ -170,13 +168,13 @@ const App = () => {
         />
         <HashRouter>
           <Routes>
-            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} /> } />
-            <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/>} />
+            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/> : <LoginPage onLogged={handleLogged} /> } />
+            <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/>} />
             <Route path="/search" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserSearchPage language={language} onClick={handleFollowingClick} />} />
-            <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/quote" element={hasValidToken() ? <QuoteCard language={language} pageUserId={authService.readUserIdFromToken()} /> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/:userId/activate/:confirmationId" element={<AccountConfirmationPage onConfirmationDone={openMainPage} />} />
-            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
             <Route path="/users/reset-password" element={<RequestResetPasswordPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />
@@ -211,11 +209,11 @@ const App = () => {
         />
         <HashRouter>
           <Routes>
-            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} /> } />
-            <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/>} />
-            <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/" element={hasValidToken() ? <UserPage userId={userId} language={language} loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/> : <LoginPage onLogged={handleLogged} /> } />
+            <Route path="/login" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onSelectUserId={handleSearchedUserSelect} onUserNotFound={handleUserNotFound}/>} />
+            <Route path="/users/" element={hasValidToken() ? <UserPage userId={userId} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/:userId/activate/:confirmationId" element={<AccountConfirmationPage onConfirmationDone={openMainPage} />} />
-            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound}/> : <LoginPage onLogged={handleLogged} />} />
+            <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
             <Route path="/users/reset-password" element={<RequestResetPasswordPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />

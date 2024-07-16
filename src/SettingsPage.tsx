@@ -67,7 +67,7 @@ export const SettingsPage = (props: SettingsProps) => {
     }
 
     const resolveContainerClasses = (): string => {
-        return `${isMobile ? "mobile" : "desktop"}`;
+        return `top-padding ${isMobile ? "mobile" : "desktop"}`;
     }
 
     return(

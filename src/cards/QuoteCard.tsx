@@ -47,7 +47,7 @@ const QuoteCard = (props: QuoteProps) => {
     }
 
     const resolveContainerClasses = (): string => {
-        return `quote-container ${isMobile ? "container-mobile": ""}`; 
+        return `quote-container ${isMobile ? "container-mobile": "container-desktop"}`; 
     }
 
     return(

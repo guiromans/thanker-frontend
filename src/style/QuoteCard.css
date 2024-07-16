@@ -2,16 +2,19 @@
   .quote-container {
     margin: 24px;
     display: flex;
+    flex-direction: column;
     overflow-y: hidden;
-    align-items: center;
-    text-align: center;
     height: 100vh;
   }
 
   .container-mobile {
-    display: flex;
-    flex-direction: column;
     margin-top: 16vh;
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  .container-desktop {
+    margin-top: 12vh;
   }
 
   .quote-text {

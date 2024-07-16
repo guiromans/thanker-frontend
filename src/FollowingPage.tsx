@@ -9,6 +9,7 @@ import { getUniqueById } from "./utils/UserUtils";
 import { UserItem } from "./cards/UserItem";
 import { Loader } from "./cards/Loader";
 import { NoFollowingCard } from "./cards/NoFollowingCard";
+import { isMobile } from "react-device-detect";
 
 export interface FollowingProps {
     language: Language | undefined;
@@ -116,7 +117,12 @@ export const FollowingPage = (props: FollowingProps) => {
             <div className="users-container" ref={scrollableDivRef} onScroll={checkScroll}>
                 <div className="user-items">
                     {getUniqueById(users).map(user =>(
-                        <UserItem key={user.id} user={user} onClick={(user) => handleUserClick(user)} size="page-size" />
+                        <UserItem 
+                            key={user.id} 
+                            user={user} 
+                            onClick={(user) => handleUserClick(user)} 
+                            size={isMobile ? "page-size-mobile" : "page-size"} 
+                        />
                     ))}
                 </div>
                 <div className="loader-confirmations">

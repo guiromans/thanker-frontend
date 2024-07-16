@@ -1,3 +1,8 @@
+.thanks-card-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .card-thanks {
     margin-bottom: 16px;
     margin-right: auto;
@@ -11,6 +16,7 @@
     justify-content: center; 
     opacity: 0;
     animation: fadeIn 1.5s ease-in-out forwards;
+    position: relative;
 }
 
 .private-thanks-color {
@@ -40,17 +46,31 @@
     word-break: break-word;
 }
 
+.thanks-content {
+    display: flex;
+    flex-direction: column;
+}
+
 .card-element {
     padding: 2px;
+    width: 100%;
+    padding-left: 8px;
+    padding-right: 4px;
 }
 
 .text {
     padding-bottom: 4px;
     overflow-wrap: break-word; 
+    text-align: start;
 }
 
 .date {
     font-size: 12px;
+}
+
+.bottom-thanks-container {
+    display: block;
+    justify-content: start;
 }
 
 @keyframes fadeIn {
@@ -61,12 +81,16 @@
 .circle-thanks {
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 16px;
 }
 
 .thanks-card-size {
     width: 56px;
     height: 56px;
+}
+
+.thanks-card-size-mobile {
+    width: 40px;
+    height: 40px;
 }
 
 .user-search-size {
@@ -81,13 +105,17 @@
 }
 
 .privacy-box {
-    position: relative;
-    top: 0;
-    right: 0;
-    margin-left: 16px;
-    padding-left: 16px;
-    margin-right: 8px;
-    margin-top: 0px;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.select-thanks-privacy {
+    text-align: start;
+    display: flex;
+    justify-content: start;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    padding: 2px;
 }
 
 .clickable:hover {
@@ -117,4 +145,17 @@
 
 .text-label:hover {
     font-weight: bold;
+}
+
+.lock {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    padding: 8px;
+    padding-right: 16px;
+}
+
+.lock-img {
+    width: 16px;
+    height: 16px;
 }

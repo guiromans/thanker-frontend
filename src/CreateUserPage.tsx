@@ -2,13 +2,15 @@ import { ChangeEvent, useState } from "react";
 import { UserService } from "./services/UserService";
 import { CreateUserRequest } from "./model/UserModel";
 import { ErrorResponse } from "./model/ErrorResponse";
-import { CHECK_YOUR_EMAIL_ACCOUNT_CREATE, CREATE, CREATE_USER, ERRORS_IN_FORM, ERROR_ACCEPT_TERMS_AND_CONDITIONS, ERROR_EMAIL_NOT_EMPTY, ERROR_HANDLE_NOT_EMPTY, ERROR_NAME_NOT_EMPTY, ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, ERROR_PASSWORD_NOT_EMPTY, ERROR_PASSWORD_RULES, Language, REGISTER_CONFIRM_PASSWORD, REGISTER_EMAIL, REGISTER_HANDLE, REGISTER_NAME, REGISTER_PASSWORD, TERMS_AND_CONDITIONS, TranslationService, USER_CREATED_TEXT } from "./services/TranslationService";
+import { CHECK_YOUR_EMAIL_ACCOUNT_CREATE, CREATE, CREATE_USER, ERRORS_IN_FORM, ERROR_ACCEPT_TERMS_AND_CONDITIONS, ERROR_EMAIL_NOT_EMPTY, ERROR_HANDLE_NOT_EMPTY, ERROR_NAME_NOT_EMPTY, ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, ERROR_PASSWORD_NOT_EMPTY, ERROR_PASSWORD_RULES, Language, PASSWORD, REGISTER_CONFIRM_PASSWORD, REGISTER_EMAIL, REGISTER_HANDLE, REGISTER_NAME, REGISTER_PASSWORD, TERMS_AND_CONDITIONS, TranslationService, USER_CREATED_TEXT } from "./services/TranslationService";
 import { useSnackbar } from "notistack";
 import './style/CreateUser.css';
 import './style/Styles.css';
 import { Loader } from "./cards/Loader";
 import { validatePasswordRules } from "./utils/PasswordUtils";
 import { newWindowOf } from "./utils/WindowUtils";
+import { isMobile } from "react-device-detect";
+import { PasswordCard } from "./cards/PasswordCard";
 
 export interface CreateUserProps {
     language: Language | undefined;
@@ -61,8 +63,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
         setEmail(updatedEmail);
     }
   
-    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const updatedPassword: string = event.target.value;
+    const handlePasswordChange = (updatedPassword: string) => {
         if (validatePasswordRules(updatedPassword)) {
             setErrorPassword(false);
             setErrorConfirmPass(false);
@@ -74,13 +75,11 @@ export const CreateUserPage = (props: CreateUserProps) => {
         return password === confirmPass;
     }
 
-    const handleConfirmPassChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const updatedPassword: string = event.target.value;
-
+    const handleConfirmPassChange = (updatedPassword: string) => {
         if (password === updatedPassword) {
             setErrorConfirmPass(false);   
         }
-        setConfirmPass(event.target.value);
+        setConfirmPass(updatedPassword);
     }
 
     const createUser = async(event: React.FormEvent) => {
@@ -165,6 +164,10 @@ export const CreateUserPage = (props: CreateUserProps) => {
         newWindowOf("gdpr");
     }
 
+    const resolveInputClass = (): string => {
+        return isMobile ? "smaller-input" : "wider-input";
+    }
+
     return (
         <div className='top-padding full-center'>
             <div className="success-message">
@@ -180,7 +183,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                                 <label className="label-create-error">{translationService.getFor(ERROR_NAME_NOT_EMPTY)}</label>
                             </div>
                         )}
-                        <input className='wider-input' type='text' name='name' value={name} onChange={handleNameChange} placeholder={translationService.getFor(REGISTER_NAME)} /><br/>
+                        <input className={resolveInputClass()} type='text' name='name' value={name} onChange={handleNameChange} placeholder={translationService.getFor(REGISTER_NAME)} /><br/>
                         { /* Handle */ }
                         {errorHandle && (
                             <div className="error-label-container">
@@ -188,7 +191,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                                 
                             </div>
                         )}
-                        <input className='wider-input' type='text' name='handle' value={handle} onChange={handleHandleChange} placeholder={translationService.getFor(REGISTER_HANDLE)} /><br/>
+                        <input className={resolveInputClass()} type='text' name='handle' value={handle} onChange={handleHandleChange} placeholder={translationService.getFor(REGISTER_HANDLE)} /><br/>
                         { /* E-Mail */ }
                         {errorEmail && (
                             <div className="error-label-container">
@@ -196,7 +199,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                                 
                             </div>
                         )}
-                        <input className='wider-input' type='email' name='email' value={email} onChange={handleEmailChange} placeholder={translationService.getFor(REGISTER_EMAIL)}/><br/>
+                        <input className={resolveInputClass()} type='email' name='email' value={email} onChange={handleEmailChange} placeholder={translationService.getFor(REGISTER_EMAIL)}/><br/>
                         { /* Password */ }
                         {errorPassword && (
                             <div className="error-label-container">
@@ -208,20 +211,21 @@ export const CreateUserPage = (props: CreateUserProps) => {
                                 <label className="label-create-error">{translationService.getFor(ERROR_PASSWORD_RULES)}</label>
                             </div>
                         )}
-                        <input className='wider-input' type='password' name='password' value={password} onChange={handlePasswordChange} placeholder={translationService.getFor(REGISTER_PASSWORD)}/><br/>
+                        <PasswordCard onPasswordUpdate={handlePasswordChange} disabled={loading} className={resolveInputClass()} placeholder={translationService.getFor(PASSWORD)} />
                         { /* Password Confirmation */ }
                         {errorConfirmPass && (
                             <div className="error-label-container">
                                 <label className="label-create-error">{translationService.getFor(ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING)}</label>
                             </div>
                         )}
-                        <input className='wider-input' type='password' name='confirmPassword' value={confirmPass} onChange={handleConfirmPassChange} placeholder={translationService.getFor(REGISTER_CONFIRM_PASSWORD)}/><br/><br/>
+                        <PasswordCard onPasswordUpdate={handleConfirmPassChange} disabled={loading} className={resolveInputClass()} placeholder={translationService.getFor(REGISTER_CONFIRM_PASSWORD)}/>
                         { /* Terms */ }
                         {errorTerms && (
                             <div className="error-label-container">
                                 <label className="label-create-error">{translationService.getFor(ERROR_ACCEPT_TERMS_AND_CONDITIONS)}</label>
                             </div>
                         )}
+                        <br/>
                         <input type='checkbox' checked={acceptedTerms} onChange={handleTermsConditionsCheckboxChange} className='checkbox' /> 
                         <label onClick={handleGdprClick}>{translationService.getFor(TERMS_AND_CONDITIONS)}</label><br/><br/>
                         <button type='submit' className="thanker-button">{translationService.getFor(CREATE)}</button>

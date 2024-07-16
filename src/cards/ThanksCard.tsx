@@ -1,12 +1,15 @@
 import { PrivacyType, ThanksResponse } from "../model/ThanksModel";
 import { toDateAndTimeString } from "../utils/DateUtils";
 import '../style/ThanksCard.css';
-import { Language, SEE_MORE, TranslationService } from "../services/TranslationService";
+import { LOCK_ICON_TOOLTIP, Language, SEE_MORE, TranslationService } from "../services/TranslationService";
 import { AuthService } from "../services/AuthService";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { resolveImage } from "../utils/UserUtils";
 import { privacyTypeOf } from "../utils/ThanksUtils";
 import deleteIcon from "../assets/images/delete_icon.png";
+import lockIcon from "../assets/images/lock.png";
+import { Tooltip } from "react-tooltip";
+import { isMobile } from "react-device-detect";
 
 export type ThanksCardProps = {
     thanks: ThanksResponse;
@@ -97,7 +100,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     }
 
     const resolveImageStyle = (): string => {
-        let style = "circle-thanks thanks-card-size";
+        let style = `circle-thanks ${isMobile ? "thanks-card-size-mobile" : "thanks-card-size"}`;
 
         if (!isUserPage()) {
             style += " clickable"
@@ -141,37 +144,49 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
         setIsTruncated(false);
     }
 
+    const resolveTextClasses = (): string => {
+        return `card-element text ${isMobile ? "mobile-thanks-text" : ""}`;
+    }
+
     return (
-        <div className={cardStyle}>
-            <div className="giver-thanks-card">
-                <div className={resolveImageStyle()}>
-                    <img src={profilePicUrl} onClick={handleUserImageClick} />
+        <div className="thanks-card-container">
+            <div className={cardStyle}>
+                <div className="giver-thanks-card">
+                    <div className={resolveImageStyle()}>
+                        <img src={profilePicUrl} onClick={handleUserImageClick} />
+                    </div>
+                </div>
+                <div className={resolveTextClasses()}>
+                    <div className="card-element">
+                        {resolveIntro()}:
+                    </div>
+                    <div className="card-element text">
+                        <b>{text}</b> {isTruncated && "..." && 
+                        (<label className="text-label" onClick={handleSeeMoreClick}>{translationService.getFor(SEE_MORE)}</label>)}
+                    </div>
+                    <div className="card-element date">
+                        {toDateAndTimeString(props.thanks.date)}
+                        {canChangePrivacy() && <div className="privacy-box">
+                            <select value={privacyType} className="select-thanks-privacy" name='privacyType' onChange={handlePrivacyTypeChange}>
+                                {resolvePrivacyOptions().map(type => (
+                                    <option key={type} value={type}>{translationService.getFor(type)}</option>
+                                ))}
+                            </select>
+                        </div>
+                        }
+                    </div>
+                </div>
+                { isUserRelated() && <div className="delete-container">
+                    <img src={deleteIcon} className="delete-icon" onClick={handleClickedDelete}/>
+                </div>
+                }
+                <div className="lock">
+                    <img src={lockIcon} className="lock-img" data-tooltip-id="tooltip-lock" />
+                    <Tooltip id="tooltip-lock" anchorSelect="lock-image" place="top" className="tooltip">
+                            {translationService.getFor(LOCK_ICON_TOOLTIP)}
+                    </Tooltip>
                 </div>
             </div>
-            <div className="content-thanks-card">
-                <div className="card-element">
-                    {resolveIntro()}:
-                </div>
-                <div className="card-element text">
-                    <b>{text}</b> {isTruncated && "..." && 
-                    (<label className="text-label" onClick={handleSeeMoreClick}>{translationService.getFor(SEE_MORE)}</label>)}
-                </div>
-                <div className="card-element date">
-                    {toDateAndTimeString(props.thanks.date)}
-                </div>
-            </div>
-            {canChangePrivacy() && <div className="privacy-box">
-                <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange}>
-                    {resolvePrivacyOptions().map(type => (
-                        <option key={type} value={type}>{translationService.getFor(type)}</option>
-                    ))}
-                </select>
-            </div>
-            }
-            { isUserRelated() && <div className="delete-container">
-                <img src={deleteIcon} className="delete-icon" onClick={handleClickedDelete}/>
-            </div>
-            }
         </div>
     );
 
