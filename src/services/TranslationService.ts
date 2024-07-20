@@ -85,6 +85,10 @@ export const UCLA_ARTICLE: string = "ucla-article";
 export const GDPR: string = "gdpr";
 export const FILES_MUST_BE: string = "files-must-be";
 export const PRIVACY_ICON_TOOLTIP: string = "privacy-icon-tooltip";
+export const LOCK_ICON_TOOLTIP: string = "lock-icon-tooltip";
+export const GRATITUDE_WALL: string = "gratitude-wall";
+export const SEARCH: string = "search-label";
+export const GIVING_THANKS_PLEASE_HOLD: string = "giving-thanks-please-hold";
 
 export const INTRO_THANKFUL_FOR: string = "intro-thankful-for";
 export const INTRO_GRATEFUL_FOR: string = "intro-grateful-for";
@@ -123,6 +127,7 @@ export const INSPIRATION_6: string = "inspiration-6";
 export const HEADER_HOME: string = "header-home";
 export const HEADER_FOLLOWING: string = "header-following";
 export const HEADER_SETTINGS: string = "header-settings";
+export const HEADER_QUOTE: string = "header-quote";
 export const HEADER_ABOUT: string = "header-about";
 export const HEADER_LOGOUT: string = "header-logout";
 
@@ -227,9 +232,13 @@ export class TranslationService {
             [GDPR, GDPR_PT_HTML],
             [FILES_MUST_BE, "Ficheiros têm de ser"],
             [PRIVACY_ICON_TOOLTIP, "Privado: só tu (e a quem deres) conseguem visualizar o Thanks.\nPúblico: toda a gente conseguirá ver este Thanks."],
+            [LOCK_ICON_TOOLTIP, "Os Thanks são encriptados na base de dados"],
             [CLICK_YOUR_NAME_UPDATE, "Clica no teu nome para o atualizares"],
             [CLICK_YOUR_PICTURE_UPDATE, "Clica na tua imagem para a atualizares"],
             [UPDATE, "Atualiza"],
+            [GRATITUDE_WALL, "Mural de Gratidão"],
+            [SEARCH, "Pesquisa"],
+            [GIVING_THANKS_PLEASE_HOLD, "A dar o Agradecimento. Por favor aguarda :)"],
             [ARE_YOU_SURE_TO_DELETE, "De certeza que queres apagar este Agradecimento?"],
             [YES, "Sim"],
             [NO, "Não"],
@@ -268,6 +277,7 @@ export class TranslationService {
             [INSPIRATION_6, "Dá-te o teu Reconhecimento"],
             [HEADER_HOME, "Início"],
             [HEADER_FOLLOWING, "Seguindo"],
+            [HEADER_QUOTE, "Citação"],
             [HEADER_SETTINGS, "Configurações"],
             [HEADER_ABOUT, "Sobre"],
             [HEADER_LOGOUT, "Sair"],
@@ -330,7 +340,7 @@ export class TranslationService {
             [QUOTE_32, "Algumas pessoas queixam-se que as rosas têm espinhos. Eu agradeço que os espinhos tenham rosas"],
             [QUOTE_33, "Ó Senhor que me dás a vida, dá-me também um coração cheio de Gratidão"],
             [QUOTE_34, "A melhor coisa que podes fazer para mudares a tua vida hoje, é começares a agradecer pelo que tens neste momento"],
-            [QUOTE_35, "Na vida o que faz a diferença é se tomas as coisas por garantidas, ou se as tomas com Gratidão"],
+            [QUOTE_35, "Na vida o que faz a diferença é se tomas as coisas como garantidas, ou se as tomas com Gratidão"],
             [QUOTE_36, "Ser-se grato não significa que tudo é necessariamente bom. Significa apenas que podes aceitar tudo como uma dádiva"],
             [QUOTE_37, "O poder de encontrar beleza na mais humilde das coisas, torna a tua casa feliz, e a vida bonita"],
             [QUOTE_38, "Gratidão é riqueza"],
@@ -392,8 +402,8 @@ export class TranslationService {
             [INTRO_THANKFUL_FOR, "I'm thankful for"],
             [INTRO_GRATEFUL_FOR, "I feel grateful for"],
             [INTRO_THANKS_FOR, "Thanks for"],
-            [OTHER_INTRO_THANKS, "thanks for"],
-            [OTHER_INTRO_EXPRESSED_GRATITUDE, "expresses gratitude for"],
+            [OTHER_INTRO_THANKS, "thanks"],
+            [OTHER_INTRO_EXPRESSED_GRATITUDE, "expresses gratitude to"],
             [OTHER_INTRO_IS_THANKFUL_TO, "feels gratitude towards"],
             [TERMS_AND_CONDITIONS, "I accept the Terms and Conditions of the Thanker platform"],
             [THANKER_INTRO, "Thanker is your Gratitude Journal, where other people can write, too 😉"],
@@ -426,9 +436,13 @@ export class TranslationService {
             [GDPR, GDPR_EN_HTML],
             [FILES_MUST_BE, "Files must be"],
             [PRIVACY_ICON_TOOLTIP, "Private: only you (and who you give to) will be able to see this Thanks.\nPublic: everyone can see the Thanks."],
+            [LOCK_ICON_TOOLTIP, "Thanks are encrypted on the database"],
             [CLICK_YOUR_NAME_UPDATE, "Click your name to update it"],
             [CLICK_YOUR_PICTURE_UPDATE, "Click your image to update it"],
             [UPDATE, "Update"],
+            [GRATITUDE_WALL, "Gratitude Wall"],
+            [SEARCH, "Search"],
+            [GIVING_THANKS_PLEASE_HOLD, "Giving Thanks. Please hold :)"],
             [ARE_YOU_SURE_TO_DELETE, "Are you sure you want to delete this Thanks?"],
             [YES, "Yes"],
             [NO, "No"],
@@ -467,6 +481,7 @@ export class TranslationService {
             [INSPIRATION_6, "Acknowledge Yourself"],
             [HEADER_HOME, "Home"],
             [HEADER_FOLLOWING, "Following"],
+            [HEADER_QUOTE, "Citação"],
             [HEADER_SETTINGS, "Settings"],
             [HEADER_ABOUT, "About"],
             [HEADER_LOGOUT, "Logout"],

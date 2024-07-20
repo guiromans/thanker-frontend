@@ -9,6 +9,8 @@ import { AuthResponse } from "./model/AuthResponse";
 import { ThankerIntro } from "./cards/ThankerIntro";
 import { Loader } from "./cards/Loader";
 import { enqueueSnackbar } from "notistack";
+import { isMobile } from "react-device-detect";
+import { PasswordCard } from "./cards/PasswordCard";
 
 export interface LoginProps {
   onLogged: () => void;
@@ -28,8 +30,8 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
       setEmail(event.target.value)
     }
 
-    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-      setPassword(event.target.value)
+    const handlePasswordChange = (updatedPwd: string) => {
+      setPassword(updatedPwd);
     }
 
     const performLogin = async(event: React.FormEvent) => {
@@ -62,6 +64,10 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
     const requestNewConfirmation = () => {
       navigate('/users/new-confirmation');
     }
+
+    const resolveOptionsClass = () => {
+      return isMobile ? "options-mobile" : "options";
+    }
     
     // Login form and logic
     return (
@@ -79,18 +85,12 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
             placeholder="E-Mail"
             className="smaller-input"
           /><br/>
-          <input 
-            type='password' 
-            name='password' 
-            value={password} 
-            onChange={handlePasswordChange}
-            placeholder={translationService.getFor(PASSWORD)}
-            className="smaller-input"
-          /><br/><br/>
+          <PasswordCard onPasswordUpdate={handlePasswordChange} className="smaller-input" disabled={authenticating} placeholder={translationService.getFor(PASSWORD)} />
+          <br/><br/>
           {!authenticating && <button type='submit' className="thanker-button">{translationService.getFor(LOGIN)}</button>}
           {authenticating && <div className='centerish'><Loader size="small" /></div>}
         </form>
-        <div className="options">
+        <div className={resolveOptionsClass()}>
           {!authenticating && <a className='label-link' onClick={openRegisterPage}>{translationService.getFor(CREATE_USER)}</a>}
           {!authenticating && <a className='label-link' onClick={openResetPasswordPage}>{translationService.getFor(RESET_PASSWORD)}</a>}
           {!authenticating && <a className='label-link' onClick={requestNewConfirmation}>{translationService.getFor(NEW_CONFIRMATION)}</a>}

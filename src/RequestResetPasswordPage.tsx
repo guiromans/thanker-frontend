@@ -6,6 +6,7 @@ import './style/Fonts.css';
 import './style/Styles.css';
 import { ERROR_EMAIL_NOT_EXISTS, ERROR_INVALID_EMAIL, Language, PASSWORD_RESET_REQUEST_SENT, REQUEST_RESET_PASSWORD, RESET_PASSWORD, TranslationService, YOUR_EMAIL } from "./services/TranslationService";
 import { useSnackbar } from "notistack";
+import { isMobile } from "react-device-detect";
 
 export interface RequestResetPassProps {
     language: Language | undefined;
@@ -51,6 +52,10 @@ export const RequestResetPasswordPage = (props: RequestResetPassProps) => {
         }
     }
 
+    const resolveInputClass = () => {
+        return isMobile ? "smaller-input" : "medium-input";
+    }
+
     return (
         <div className='top-padding full-height'>
             <h1>{translationService.getFor(RESET_PASSWORD)}</h1><br/>
@@ -61,7 +66,7 @@ export const RequestResetPasswordPage = (props: RequestResetPassProps) => {
                     value={email} 
                     onChange={handleEmailChange}
                     placeholder={translationService.getFor(YOUR_EMAIL)}
-                    className='medium-input'
+                    className={resolveInputClass()}
                     disabled={disableFields}
                 /><br/><br/><br/>
                 <button type='submit' className="thanker-button" disabled={disableFields}>{translationService.getFor(REQUEST_RESET_PASSWORD)}</button>

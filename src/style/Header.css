@@ -5,6 +5,7 @@
     padding: 0 32px;
     background-color: white;
     height: 10vh;
+    width: 100%;
 }
 
 .shadow {
@@ -39,3 +40,17 @@
     margin-right: 32px;
   }
 
+  .search-text-mobile {
+    margin-right: 16px;
+    width: 4px;
+  }
+
+label:hover {
+  font-weight: bold;
+}
+
+.mobile-ad {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}

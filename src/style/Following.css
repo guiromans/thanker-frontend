@@ -32,10 +32,11 @@
 }
 
 .user-items {
-    width: 35%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
     padding-bottom: 8px;
+    padding-top: 16px;
 }
 
 .top-padding-following {
@@ -47,4 +48,12 @@
     font-weight: bold;
     text-align: center;
     align-items: center;
+}
+
+.loader-search-users {
+    position: absolute;
+    margin-top: 24px;
+    left: 0;
+    right: 0;
+    z-index: 2000;
 }

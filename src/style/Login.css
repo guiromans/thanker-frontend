@@ -3,3 +3,10 @@
     margin-bottom: 54px;
     justify-content: space-evenly;
 }
+
+.options-mobile {
+    margin-top: 32px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+}

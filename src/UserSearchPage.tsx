@@ -11,13 +11,12 @@ import { Loader } from "./cards/Loader";
 import { NoFollowingCard } from "./cards/NoFollowingCard";
 import { isMobile } from "react-device-detect";
 
-export interface FollowingProps {
+export interface UserSearchProps {
     language: Language | undefined;
-    userId: string | undefined | null;
     onClick(user: UserResponse): void;
 }
 
-export const FollowingPage = (props: FollowingProps) => {
+export const UserSearchPage = (props: UserSearchProps) => {
 
     const translationService: TranslationService = new TranslationService();
     const userService: UserService = new UserService();
@@ -41,9 +40,7 @@ export const FollowingPage = (props: FollowingProps) => {
     }, []);
 
     useEffect(() => {
-        setTimeout(() => {
-            searchUsers();
-        }, 1000);
+        searchUsers();
     }, [query, page]);
 
     useEffect(() => {
@@ -62,7 +59,7 @@ export const FollowingPage = (props: FollowingProps) => {
       };
 
     const searchUsers = () => {
-        if (props.userId && props.userId !== null) {
+        if (isMobile) {
             setUsersLoading(true);
             const searchMethod = query.length > 0 ? searchByName : searchPaged;
             callSearch(searchMethod);
@@ -110,7 +107,6 @@ export const FollowingPage = (props: FollowingProps) => {
 
     return (
         <div className="following-container top-padding-following">
-            {usersLoading && <div className="loader-search-users"><Loader size="small" /></div>}
             <div className="search-container">
                 <input className="search-following"
                     type="text" 
@@ -123,12 +119,13 @@ export const FollowingPage = (props: FollowingProps) => {
                 <div className="user-items">
                     {getUniqueById(users).map(user =>(
                         <UserItem 
-                            key={user.id} 
-                            user={user} 
-                            onClick={(user) => handleUserClick(user)} 
-                            size={isMobile ? "page-size-mobile" : "page-size"} 
-                        />
+                        key={user.id} 
+                        user={user} 
+                        onClick={(user) => handleUserClick(user)} size="page-size" />
                     ))}
+                </div>
+                <div className="loader-confirmations">
+                    {usersLoading && <Loader size="big" />}
                 </div>
                 { noneFollowing &&
                     <NoFollowingCard language={props.language} />

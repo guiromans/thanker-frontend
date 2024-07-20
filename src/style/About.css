@@ -1,23 +1,44 @@
 .about-container {
     width: 100%;
-    height: 70%;
+    height: 100vh;
     justify-content: center;
     align-items: center;
     text-align: center;
     display: flex;
     flex-direction: column;
-    padding-top: 20vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.desktop-about-container {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mobile-about-container {
+    overflow-y: scroll;
+    height: 100%;
+    position: relative;
+    padding-bottom: 12vh;
+}
+
+.mobile {
+    overflow-y: scroll;
+    height: 100%;
 }
 
 .about-section {
-    width: 70%;
+    width: 80%;
     text-align: center;
     margin: 16px;
+    margin-left: auto;
+    margin-right: auto;
     display: flex;
     flex-direction: column;
 }
 
-a {
+.about-link {
     text-align: center;
     color: #50C878;
     text-decoration: none;

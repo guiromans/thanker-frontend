@@ -4,7 +4,7 @@ import { CreateThanksRequest, DeleteThanksResponse, PrivacyChangeResponse, Priva
 import { ErrorResponse } from "./model/ErrorResponse";
 import { getUniqueById, privacyTypeOf } from "./utils/ThanksUtils";
 import { AuthService } from "./services/AuthService";
-import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, Language, PRIVACY_ICON_TOOLTIP, TEXT_NOT_EMPTY, THANK, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
+import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, GIVING_THANKS_PLEASE_HOLD, Language, PRIVACY_ICON_TOOLTIP, TEXT_NOT_EMPTY, THANK, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
 import { FollowerResponse } from "./model/FollowerModel";
 import { UserResponse } from "./model/UserModel";
 import { UserService } from "./services/UserService";
@@ -23,13 +23,17 @@ import { Modal } from "./cards/Modal";
 import { StorageService } from "./services/StorageService";
 import { NoThanksCard } from "./cards/NoThanksCard";
 import { Tooltip } from "react-tooltip";
-import { ImageService } from "./services/ImageService";
+import { isMobile } from "react-device-detect";
+import { SearchPage } from "./SearchPage";
+import rightArrow from './assets/images/green_arrow.png';
+import rightArrowTransparent from './assets/images/green_arrow_transparent.png';
 
 interface UserProps {
   userId: string | null | undefined;
   language: Language;
   loadingUsers: boolean;
   onUserNotFound: () => void;
+  onSelectUserId(userId: string): void;
 }
 
 export const UserPage = (props: UserProps) => {
@@ -62,6 +66,12 @@ export const UserPage = (props: UserProps) => {
   const [language, setLanguage] = useState<Language | undefined>(props?.language);
   const [timestamp, setTimestamp] = useState<number>(0);
   const [userImageUrl, setUserImageUrl] = useState<string | null>('');
+  const [thanksPlaceHolder, setThanksPlaceHolder] = useState<string>('');
+  const [isUserPageOpened, setIsUserPageOpened] = useState<boolean>(true);
+  const [selectedArrow, setSelectedArrow] = useState<string>(rightArrow);
+  const [classThanksButton, setClassThanksButton] = useState<string>("thanks-button");
+  const [disableThanks, setDisableThanks] = useState<boolean>(false);
+  const [loadingUsers, setLoadingUsers] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
 
   const userService: UserService = new UserService();
@@ -106,10 +116,21 @@ export const UserPage = (props: UserProps) => {
     if (props && props?.language !== language) {
       setLanguage(props.language);
     }
-  }, [props?.language])
+  }, [props?.language]);
+
+  useEffect(() => {
+    if (!disableThanks) {
+      setClassThanksButton("thanks-button");
+      setThanksPlaceHolder(resolveTextAreaPlaceholder(user!));
+    } else {
+      setClassThanksButton("thanks-button-disabled");
+      setThanksPlaceHolder(translationService.getFor(GIVING_THANKS_PLEASE_HOLD) || "Giving thanks. Please hold :)");
+    }
+  }, [disableThanks]);
 
   const checkScroll = () => {
     const div = thanksScrollableDivRef.current;
+    console.log("Check scroll method")
     if (div !== null && !gettingMoreThanks) {
       const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight - 20;
       if (isAtBottom) {
@@ -149,6 +170,7 @@ export const UserPage = (props: UserProps) => {
       .then((resp) => {
         const user: UserResponse = resp.data as UserResponse;
         setUser(user);
+        setThanksPlaceHolder(resolveTextAreaPlaceholder(user));
         setUserImageUrl(user.profilePictureUrl);
         setTimeout(() => {
           setLoadingPage(false);
@@ -188,6 +210,7 @@ export const UserPage = (props: UserProps) => {
     if (userId) {
       if (textThanks.length > 0) {
         setShowHurray(true);
+        setDisableThanks(true);
         const thanksRequest: CreateThanksRequest = {
           receiverId: userId,
           text: textThanks,
@@ -217,6 +240,7 @@ export const UserPage = (props: UserProps) => {
           .finally(() => {
             setTimeout(() => {
               setShowHurray(false);
+              setDisableThanks(false);
             }, 1500);
           })
       } else {
@@ -225,7 +249,7 @@ export const UserPage = (props: UserProps) => {
     }
   }
 
-  const resolveTextAreaPlaceholder = (): string => {
+  const resolveTextAreaPlaceholder = (user: UserResponse): string => {
     const chosenHint: string | undefined = isUserPage() ? translationService.getHint()
       : `${translationService.getHintOther()} ${user?.name}?`;
 
@@ -321,12 +345,108 @@ export const UserPage = (props: UserProps) => {
     return isUserPage() || user?.isOpenProfile || false;
   }
 
+  const handleSearchUserClick = (userId: string) => {
+    props.onSelectUserId(userId);
+  }
+
+  const handleSearchLoading = (isLoading: boolean) => {
+    setLoadingUsers(isLoading);
+  }
+
+  const handleRightArrowClick = () => {
+    setIsUserPageOpened(false);
+    setSelectedArrow(rightArrowTransparent);
+  }
+
+  const handleLeftArrowClick = () => {
+    setIsUserPageOpened(true);
+    setSelectedArrow(rightArrow);
+  }
+
+
   if (loadingPage) {
     return (
       <div className="top-padding">
         <Loader size="massive" />
       </div>
     );
+  }
+
+  if (isMobile) {
+    return (
+      <div className="mobile-container-user-page">
+      {isUserPageOpened && (
+      <div className='mobile-user container top-padding-mobile'>
+        <div className="user-container-mobile">
+          <SearchPage language={language} onClick={handleSearchUserClick} onLoading={handleSearchLoading} />
+          {loadingUsers && <div className="loader-search-users"><Loader size="small" /></div> }
+          <UserCard user={user} language={props?.language} onImageUpdated={handleImageUpdated} />
+          {!isUserPage() && !isFollowing && <button onClick={handleFollowClick}>{translationService.getFor(FOLLOW)}</button>}
+          <b className="thanker-color">{isFollowing && translationService.getFor(FOLLOWING)}</b>
+          { resolveShowThanksForm() &&
+            <form onSubmit={handleGiveThanks} className="thanks-form">
+              <textarea
+                name='textThanks'
+                value={textThanks}
+                onChange={handleTextThanksChange}
+                className="thanks-text-box"
+                placeholder={thanksPlaceHolder}
+                disabled={disableThanks}
+              />
+              <div className="privacy">
+                <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange} className="privacy privacy-select">
+                  {Object.values(PrivacyType).filter(type => typeof type === 'string').map(type => (
+                    <option key={type} value={type}>{translationService.getFor(type)}</option>
+                  ))}
+                </select>
+                <img 
+                  src={infoIcon} 
+                  className="info-icon"
+                />
+                <Tooltip id="privacy-tooltip" anchorSelect=".info-icon" place="top" className="tooltip">
+                  {translationService.getFor(PRIVACY_ICON_TOOLTIP)}
+                </Tooltip>
+              </div>
+              <button type='submit' className={classThanksButton} disabled={disableThanks}>{translationService.getFor(THANK)}!</button>
+            </form>
+          }
+          {
+            authService.readUserIdFromToken() !== userId && !user?.isOpenProfile &&
+            <NoThanksCard language={language} isOpenProfile={false} />
+          }
+          <HurrayCard isVisible={showHurray} />
+          <div className="arrow right-arrow">
+            <img src={selectedArrow} className="arrow-specs" onClick={handleRightArrowClick}/>
+          </div>
+        </div>
+      </div>
+    )}
+    {!isUserPageOpened && (
+      <div className='container top-padding-mobile mobile-user' ref={thanksScrollableDivRef} onScroll={checkScroll}>
+        <div className="thanks-container">
+          {getUniqueById(thanks).map(thanks => (
+            <ThanksCard
+              key={thanks.id}
+              thanks={thanks}
+              onPrivacyTypeChange={handleThanksPrivacyChange}
+              onUserImageClick={handleUserImageClick}
+              language={language}
+              onClickedDelete={handleClickedDelete}
+              userImageUrl={userImageUrl}
+              pageUserId={userId}
+              timestamp={timestamp}
+            />
+          ))}
+          {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} />}
+          <br />
+          {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
+        </div>
+        <div className="arrow left-arrow">
+          <img src={selectedArrow} className="arrow-specs" onClick={handleLeftArrowClick}/>
+        </div>
+      </div>
+    )}
+    </div>);
   }
 
   return (
@@ -342,7 +462,8 @@ export const UserPage = (props: UserProps) => {
               value={textThanks}
               onChange={handleTextThanksChange}
               className="thanks-text-box"
-              placeholder={resolveTextAreaPlaceholder()}
+              placeholder={thanksPlaceHolder}
+              disabled={disableThanks}
             />
             <div className="privacy">
               <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange} className="privacy privacy-select">
@@ -358,7 +479,7 @@ export const UserPage = (props: UserProps) => {
                 {translationService.getFor(PRIVACY_ICON_TOOLTIP)}
               </Tooltip>
             </div>
-            <button type='submit' className="thanks-button">{translationService.getFor(THANK)}!</button>
+            <button type='submit' className={classThanksButton} disabled={disableThanks}>{translationService.getFor(THANK)}!</button>
           </form>
         }
       </div>

@@ -156,7 +156,7 @@ const UserCard = (props: UserProps) => {
                 <Tooltip id="tooltip-name" anchorSelect={nameAnchor} place="top" className="tooltip">
                         {translationService.getFor(CLICK_YOUR_NAME_UPDATE)}
                 </Tooltip>
-                <Tooltip id="tooltip-imagee" anchorSelect={imageAnchor} place="top" className="tooltip">
+                <Tooltip id="tooltip-image" anchorSelect={imageAnchor} place="top" className="tooltip">
                         {translationService.getFor(CLICK_YOUR_PICTURE_UPDATE)}
                 </Tooltip>
             </div>

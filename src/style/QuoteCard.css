@@ -1,11 +1,29 @@
 
   .quote-container {
     margin: 24px;
+    display: flex;
+    flex-direction: column;
     overflow-y: hidden;
   }
 
+  .container-mobile {
+    margin-top: 16vh;
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  .container-desktop {
+    margin-top: 5vh;
+  }
+
   .quote-text {
-    font-size: 2vw;
+    font-size: 1.7vw;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    color: #2d2d2d;
+  }
+
+  .quote-text-mobile {
+    font-size: 36px;
     animation: fadeIn 1.5s ease-in-out forwards;
     color: #2d2d2d;
   }
@@ -13,7 +31,6 @@
   .quote-section-container {
     align-items: center;
     width: 100%;
-    height: 90%;
     overflow-y: hidden;
     display: flex;
     flex-direction: column;
@@ -28,4 +45,5 @@
   font-size: 14px;
   font-style: italic;
   margin-top: 4px;
+  height: 100%;
 }

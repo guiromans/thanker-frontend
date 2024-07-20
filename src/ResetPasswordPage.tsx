@@ -7,6 +7,7 @@ import { CANNOT_RESET_PASSWORD, CONFIRM_NEW_PASSWORD, NEW_PASSWORD, RESET_PASSWO
 import { validatePasswordRules } from "./utils/PasswordUtils";
 import { Loader } from "./cards/Loader";
 import { CheckResetPasswordResponse } from "./model/UserModel";
+import { PasswordCard } from "./cards/PasswordCard";
 
 export interface ResetPasswordProps {
     onError: () => void;
@@ -51,12 +52,12 @@ export const ResetPasswordPage = (props: ResetPasswordProps) => {
         }
     }
 
-    const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
+    const handlePasswordChange = (updatedPwd: string) => {
+        setPassword(updatedPwd);
     }
 
-    const handleConfirmPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setConfirmPassword(event.target.value);
+    const handleConfirmPasswordChange = (updatedConfirmPwd: string) => {
+        setConfirmPassword(updatedConfirmPwd);
     }
 
     const setNewPassword = async(event: React.FormEvent) => {
@@ -100,8 +101,8 @@ export const ResetPasswordPage = (props: ResetPasswordProps) => {
                     <h2>{translationService.getFor(UPDATE_PASSWORD)}</h2>
                     <br/>
                     <form onSubmit={setNewPassword} className="form">
-                        <input type='password' name='password' className="text-fields" disabled={disableFields} onChange={handlePasswordChange} placeholder={translationService.getFor(NEW_PASSWORD)} /><br/>
-                        <input type='password' name='confirmPassword' className="text-fields" disabled={disableFields} onChange={handleConfirmPasswordChange} placeholder={translationService.getFor(CONFIRM_NEW_PASSWORD)} /><br/><br/>
+                        <PasswordCard onPasswordUpdate={handlePasswordChange} disabled={disableFields} className="text-fields" placeholder={translationService.getFor(NEW_PASSWORD)}/> <br/>
+                        <PasswordCard onPasswordUpdate={handleConfirmPasswordChange} disabled={disableFields} className="text-fields" placeholder={translationService.getFor(CONFIRM_NEW_PASSWORD)} /> <br/><br/>
                         <button type='submit' className="thanker-button" disabled={disableFields}>{translationService.getFor(SUBMIT)}</button>
                     </form>
                     <br/>
