@@ -62,6 +62,7 @@ const DropdownMenu = styled.div<{ open: boolean }>`
   margin-left: 15%;
   margin-right: 15%;
   overflow: auto;
+  border-radius: 0 0 10px 10px;
 
   & .header-label {
     padding: 16px 16px;

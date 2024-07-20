@@ -38,7 +38,7 @@
     flex-direction: column;
 }
 
-a {
+.about-link {
     text-align: center;
     color: #50C878;
     text-decoration: none;

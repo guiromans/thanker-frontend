@@ -30,6 +30,8 @@ export const FollowingPage = (props: FollowingProps) => {
     const [canLoadMoreFollowing, setCanLoadMoreFollowing] = useState<boolean>(true);
     const [noneFollowing, setNoneFollowing] = useState<boolean>(false);
     const scrollableDivRef = useRef<HTMLDivElement>(null);
+
+    const PAGE_SIZE: number = isMobile ? 20 : 10;
     
     useEffect(() => {
         searchUsers();
@@ -39,7 +41,9 @@ export const FollowingPage = (props: FollowingProps) => {
     }, []);
 
     useEffect(() => {
-        searchUsers();
+        setTimeout(() => {
+            searchUsers();
+        }, 1000);
     }, [query, page]);
 
     useEffect(() => {
@@ -81,11 +85,11 @@ export const FollowingPage = (props: FollowingProps) => {
     }
 
     const searchPaged = async(): Promise<AxiosResponse> => {
-        return await userService.searchPagedFollowingUsers(page)
+        return await userService.searchPagedFollowingUsers(page, PAGE_SIZE);
     }
 
     const searchByName = async(): Promise<AxiosResponse> => {
-        return await userService.searchFollowingUsersByName(query, page);
+        return await userService.searchFollowingUsersByName(query, page, PAGE_SIZE);
     }
 
     const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -106,6 +110,7 @@ export const FollowingPage = (props: FollowingProps) => {
 
     return (
         <div className="following-container top-padding-following">
+            {usersLoading && <div className="loader-search-users"><Loader size="small" /></div>}
             <div className="search-container">
                 <input className="search-following"
                     type="text" 
@@ -124,9 +129,6 @@ export const FollowingPage = (props: FollowingProps) => {
                             size={isMobile ? "page-size-mobile" : "page-size"} 
                         />
                     ))}
-                </div>
-                <div className="loader-confirmations">
-                    {usersLoading && <Loader size="big" />}
                 </div>
                 { noneFollowing &&
                     <NoFollowingCard language={props.language} />

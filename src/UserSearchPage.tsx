@@ -29,6 +29,8 @@ export const UserSearchPage = (props: UserSearchProps) => {
     const [canLoadMoreFollowing, setCanLoadMoreFollowing] = useState<boolean>(true);
     const [noneFollowing, setNoneFollowing] = useState<boolean>(false);
     const scrollableDivRef = useRef<HTMLDivElement>(null);
+
+    const PAGE_SIZE: number = isMobile ? 20 : 10;
     
     useEffect(() => {
         searchUsers();
@@ -80,11 +82,11 @@ export const UserSearchPage = (props: UserSearchProps) => {
     }
 
     const searchPaged = async(): Promise<AxiosResponse> => {
-        return await userService.searchPagedFollowingUsers(page)
+        return await userService.searchPagedFollowingUsers(page, PAGE_SIZE);
     }
 
     const searchByName = async(): Promise<AxiosResponse> => {
-        return await userService.searchFollowingUsersByName(query, page);
+        return await userService.searchFollowingUsersByName(query, page, PAGE_SIZE);
     }
 
     const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {

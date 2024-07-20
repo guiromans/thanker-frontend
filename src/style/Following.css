@@ -49,3 +49,11 @@
     text-align: center;
     align-items: center;
 }
+
+.loader-search-users {
+    position: absolute;
+    margin-top: 24px;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+}

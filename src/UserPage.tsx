@@ -4,7 +4,7 @@ import { CreateThanksRequest, DeleteThanksResponse, PrivacyChangeResponse, Priva
 import { ErrorResponse } from "./model/ErrorResponse";
 import { getUniqueById, privacyTypeOf } from "./utils/ThanksUtils";
 import { AuthService } from "./services/AuthService";
-import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, Language, PRIVACY_ICON_TOOLTIP, TEXT_NOT_EMPTY, THANK, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
+import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, GIVING_THANKS_PLEASE_HOLD, Language, PRIVACY_ICON_TOOLTIP, TEXT_NOT_EMPTY, THANK, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
 import { FollowerResponse } from "./model/FollowerModel";
 import { UserResponse } from "./model/UserModel";
 import { UserService } from "./services/UserService";
@@ -26,6 +26,7 @@ import { Tooltip } from "react-tooltip";
 import { isMobile } from "react-device-detect";
 import { SearchPage } from "./SearchPage";
 import rightArrow from './assets/images/green_arrow.png';
+import rightArrowTransparent from './assets/images/green_arrow_transparent.png';
 
 interface UserProps {
   userId: string | null | undefined;
@@ -67,6 +68,10 @@ export const UserPage = (props: UserProps) => {
   const [userImageUrl, setUserImageUrl] = useState<string | null>('');
   const [thanksPlaceHolder, setThanksPlaceHolder] = useState<string>('');
   const [isUserPageOpened, setIsUserPageOpened] = useState<boolean>(true);
+  const [selectedArrow, setSelectedArrow] = useState<string>(rightArrow);
+  const [classThanksButton, setClassThanksButton] = useState<string>("thanks-button");
+  const [disableThanks, setDisableThanks] = useState<boolean>(false);
+  const [loadingUsers, setLoadingUsers] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
 
   const userService: UserService = new UserService();
@@ -111,7 +116,17 @@ export const UserPage = (props: UserProps) => {
     if (props && props?.language !== language) {
       setLanguage(props.language);
     }
-  }, [props?.language])
+  }, [props?.language]);
+
+  useEffect(() => {
+    if (!disableThanks) {
+      setClassThanksButton("thanks-button");
+      setThanksPlaceHolder(resolveTextAreaPlaceholder(user!));
+    } else {
+      setClassThanksButton("thanks-button-disabled");
+      setThanksPlaceHolder(translationService.getFor(GIVING_THANKS_PLEASE_HOLD) || "Giving thanks. Please hold :)");
+    }
+  }, [disableThanks]);
 
   const checkScroll = () => {
     const div = thanksScrollableDivRef.current;
@@ -195,6 +210,7 @@ export const UserPage = (props: UserProps) => {
     if (userId) {
       if (textThanks.length > 0) {
         setShowHurray(true);
+        setDisableThanks(true);
         const thanksRequest: CreateThanksRequest = {
           receiverId: userId,
           text: textThanks,
@@ -224,6 +240,7 @@ export const UserPage = (props: UserProps) => {
           .finally(() => {
             setTimeout(() => {
               setShowHurray(false);
+              setDisableThanks(false);
             }, 1500);
           })
       } else {
@@ -333,15 +350,17 @@ export const UserPage = (props: UserProps) => {
   }
 
   const handleSearchLoading = (isLoading: boolean) => {
-    setLoadingThanks(isLoading);
+    setLoadingUsers(isLoading);
   }
 
   const handleRightArrowClick = () => {
     setIsUserPageOpened(false);
+    setSelectedArrow(rightArrowTransparent);
   }
 
   const handleLeftArrowClick = () => {
     setIsUserPageOpened(true);
+    setSelectedArrow(rightArrow);
   }
 
 
@@ -360,6 +379,7 @@ export const UserPage = (props: UserProps) => {
       <div className='mobile-user container top-padding-mobile'>
         <div className="user-container-mobile">
           <SearchPage language={language} onClick={handleSearchUserClick} onLoading={handleSearchLoading} />
+          {loadingUsers && <div className="loader-search-users"><Loader size="small" /></div> }
           <UserCard user={user} language={props?.language} onImageUpdated={handleImageUpdated} />
           {!isUserPage() && !isFollowing && <button onClick={handleFollowClick}>{translationService.getFor(FOLLOW)}</button>}
           <b className="thanker-color">{isFollowing && translationService.getFor(FOLLOWING)}</b>
@@ -371,6 +391,7 @@ export const UserPage = (props: UserProps) => {
                 onChange={handleTextThanksChange}
                 className="thanks-text-box"
                 placeholder={thanksPlaceHolder}
+                disabled={disableThanks}
               />
               <div className="privacy">
                 <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange} className="privacy privacy-select">
@@ -386,7 +407,7 @@ export const UserPage = (props: UserProps) => {
                   {translationService.getFor(PRIVACY_ICON_TOOLTIP)}
                 </Tooltip>
               </div>
-              <button type='submit' className="thanks-button">{translationService.getFor(THANK)}!</button>
+              <button type='submit' className={classThanksButton} disabled={disableThanks}>{translationService.getFor(THANK)}!</button>
             </form>
           }
           {
@@ -395,7 +416,7 @@ export const UserPage = (props: UserProps) => {
           }
           <HurrayCard isVisible={showHurray} />
           <div className="arrow right-arrow">
-            <img src={rightArrow} className="arrow-specs" onClick={handleRightArrowClick}/>
+            <img src={selectedArrow} className="arrow-specs" onClick={handleRightArrowClick}/>
           </div>
         </div>
       </div>
@@ -421,7 +442,7 @@ export const UserPage = (props: UserProps) => {
           {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
         </div>
         <div className="arrow left-arrow">
-          <img src={rightArrow} className="arrow-specs" onClick={handleLeftArrowClick}/>
+          <img src={selectedArrow} className="arrow-specs" onClick={handleLeftArrowClick}/>
         </div>
       </div>
     )}
@@ -442,6 +463,7 @@ export const UserPage = (props: UserProps) => {
               onChange={handleTextThanksChange}
               className="thanks-text-box"
               placeholder={thanksPlaceHolder}
+              disabled={disableThanks}
             />
             <div className="privacy">
               <select value={privacyType} name='privacyType' onChange={handlePrivacyTypeChange} className="privacy privacy-select">
@@ -457,7 +479,7 @@ export const UserPage = (props: UserProps) => {
                 {translationService.getFor(PRIVACY_ICON_TOOLTIP)}
               </Tooltip>
             </div>
-            <button type='submit' className="thanks-button">{translationService.getFor(THANK)}!</button>
+            <button type='submit' className={classThanksButton} disabled={disableThanks}>{translationService.getFor(THANK)}!</button>
           </form>
         }
       </div>

@@ -88,6 +88,7 @@ export const PRIVACY_ICON_TOOLTIP: string = "privacy-icon-tooltip";
 export const LOCK_ICON_TOOLTIP: string = "lock-icon-tooltip";
 export const GRATITUDE_WALL: string = "gratitude-wall";
 export const SEARCH: string = "search-label";
+export const GIVING_THANKS_PLEASE_HOLD: string = "giving-thanks-please-hold";
 
 export const INTRO_THANKFUL_FOR: string = "intro-thankful-for";
 export const INTRO_GRATEFUL_FOR: string = "intro-grateful-for";
@@ -237,6 +238,7 @@ export class TranslationService {
             [UPDATE, "Atualiza"],
             [GRATITUDE_WALL, "Mural de Gratidão"],
             [SEARCH, "Pesquisa"],
+            [GIVING_THANKS_PLEASE_HOLD, "A dar o Agradecimento. Por favor aguarda :)"],
             [ARE_YOU_SURE_TO_DELETE, "De certeza que queres apagar este Agradecimento?"],
             [YES, "Sim"],
             [NO, "Não"],
@@ -338,7 +340,7 @@ export class TranslationService {
             [QUOTE_32, "Algumas pessoas queixam-se que as rosas têm espinhos. Eu agradeço que os espinhos tenham rosas"],
             [QUOTE_33, "Ó Senhor que me dás a vida, dá-me também um coração cheio de Gratidão"],
             [QUOTE_34, "A melhor coisa que podes fazer para mudares a tua vida hoje, é começares a agradecer pelo que tens neste momento"],
-            [QUOTE_35, "Na vida o que faz a diferença é se tomas as coisas por garantidas, ou se as tomas com Gratidão"],
+            [QUOTE_35, "Na vida o que faz a diferença é se tomas as coisas como garantidas, ou se as tomas com Gratidão"],
             [QUOTE_36, "Ser-se grato não significa que tudo é necessariamente bom. Significa apenas que podes aceitar tudo como uma dádiva"],
             [QUOTE_37, "O poder de encontrar beleza na mais humilde das coisas, torna a tua casa feliz, e a vida bonita"],
             [QUOTE_38, "Gratidão é riqueza"],
@@ -440,6 +442,7 @@ export class TranslationService {
             [UPDATE, "Update"],
             [GRATITUDE_WALL, "Gratitude Wall"],
             [SEARCH, "Search"],
+            [GIVING_THANKS_PLEASE_HOLD, "Giving Thanks. Please hold :)"],
             [ARE_YOU_SURE_TO_DELETE, "Are you sure you want to delete this Thanks?"],
             [YES, "Yes"],
             [NO, "No"],

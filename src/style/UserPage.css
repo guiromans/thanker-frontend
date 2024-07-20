@@ -29,7 +29,7 @@
     height: 100%;
     flex-direction: column;
     overflow-y: hidden;
-    padding-bottom: 14vh;
+    padding-bottom: 3vh;
 }
 
 .info-icon {
@@ -135,8 +135,9 @@
 }
 
 .left-arrow {
-    left: 2%;
+    right: 2%;
     transform: rotate(-0.5turn);
+    opacity: 0.7;
 }
 
 @keyframes fadeIn {
@@ -146,4 +147,11 @@
 
 .user-page-search {
     margin-bottom: 16px;
+}
+
+.loader-search-users {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 2000;
 }

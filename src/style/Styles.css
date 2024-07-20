@@ -145,6 +145,16 @@ button {
     color: #F9F6EE;
 }
 
+.thanks-button-disabled {
+    width: 45%;
+    height: 64px;
+    border-color: #AFE1AF;
+    background-color: lightgrey;
+    font-weight: bold;
+    font-size: 24px;
+    color: #F9F6EE;
+}
+
 .thanker-button {
     border-color: #AFE1AF;
     background-color: #50C878;

@@ -43,12 +43,12 @@ export const About = (props: AboutProps) => {
                 </div>
                 <div className='email about-section'>
                     {translationService.getFor(INQUIRIES_AND_EMAIL)}:
-                    <a href="mailto:beatrue@thanker.co">beatrue@thanker.co</a>
+                    <a className="about-link" href="mailto:beatrue@thanker.co">beatrue@thanker.co</a>
                 </div>
                 <div className='about-section'>
-                    <a href='https://www.health.harvard.edu/healthbeat/giving-thanks-can-make-you-happier' target="_blank">{translationService.getFor(HARVARD_ARTICLE)}</a>
-                    <a href='https://greatergood.berkeley.edu/article/item/how_gratitude_changes_you_and_your_brain' target="_blank">{translationService.getFor(BERKELEY_ARTICLE)}</a>
-                    <a href='https://www.uclahealth.org/news/article/health-benefits-gratitude' target="_blank">{translationService.getFor(UCLA_ARTICLE)}</a>
+                    <a className="about-link" href='https://www.health.harvard.edu/healthbeat/giving-thanks-can-make-you-happier' target="_blank">{translationService.getFor(HARVARD_ARTICLE)}</a>
+                    <a className="about-link" href='https://greatergood.berkeley.edu/article/item/how_gratitude_changes_you_and_your_brain' target="_blank">{translationService.getFor(BERKELEY_ARTICLE)}</a>
+                    <a className="about-link" href='https://www.uclahealth.org/news/article/health-benefits-gratitude' target="_blank">{translationService.getFor(UCLA_ARTICLE)}</a>
                 </div>
             </div>
         </div>

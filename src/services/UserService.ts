@@ -62,16 +62,16 @@ export class UserService {
         );
     }
 
-    async searchFollowingUsersByName(query: string, page: number): Promise<AxiosResponse> {
+    async searchFollowingUsersByName(query: string, page: number, size: number): Promise<AxiosResponse> {
         const queryDto = { "query": query };
         return await http.post(
-            `${this.USERS_URL}/following/search-by-name?page=${page}`, queryDto
+            `${this.USERS_URL}/following/search-by-name?page=${page}&size=${size}`, queryDto
         );
     }
 
-    async searchPagedFollowingUsers(page: number): Promise<AxiosResponse> {
+    async searchPagedFollowingUsers(page: number, size: number): Promise<AxiosResponse> {
         return await http.post(
-            `${this.USERS_URL}/following/search-by-page?page=${page}`
+            `${this.USERS_URL}/following/search-by-page?page=${page}&size=${size}`
         );
     }
 
