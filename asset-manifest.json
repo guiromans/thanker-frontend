@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.00eac019.css",
+    "main.css": "/static/css/main.83b2bcac.css",
     "main.js": "/static/js/main.e90a1bf5.js",
     "static/js/787.c0d8b2aa.chunk.js": "/static/js/787.c0d8b2aa.chunk.js",
     "static/media/sunglasses.png": "/static/media/sunglasses.aadfed4431674723db3f.png",
@@ -19,12 +19,12 @@
     "static/media/amazon_wardrobe.jpg": "/static/media/amazon_wardrobe.41d238ba3031728e7b04.jpg",
     "static/media/profile_colorized_white_bg.png": "/static/media/profile_colorized_white_bg.7459455197ee7848d384.png",
     "index.html": "/index.html",
-    "main.00eac019.css.map": "/static/css/main.00eac019.css.map",
+    "main.83b2bcac.css.map": "/static/css/main.83b2bcac.css.map",
     "main.e90a1bf5.js.map": "/static/js/main.e90a1bf5.js.map",
     "787.c0d8b2aa.chunk.js.map": "/static/js/787.c0d8b2aa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.00eac019.css",
+    "static/css/main.83b2bcac.css",
     "static/js/main.e90a1bf5.js"
   ]
 }
