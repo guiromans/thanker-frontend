@@ -216,7 +216,7 @@ export const UserPage = (props: UserProps) => {
           text: textThanks,
           privacyType: privacyType!
         }
-        await thanksService.giveThanksTo(thanksRequest)
+        await thanksService.giveThanksTo(thanksRequest, language!)
           .then((resp) => {
             const thanksResponse: ThanksResponse = resp.data as ThanksResponse;
             setThanks(prevThanks => [thanksResponse, ...prevThanks]);

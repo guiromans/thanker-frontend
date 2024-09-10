@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import { CreateThanksRequest, PrivacyType } from "../model/ThanksModel";
 import { AuthService } from "./AuthService";
 import { http } from "./Interceptor";
+import { Language } from "./TranslationService";
 
 export class ThanksService {
 
@@ -16,8 +17,8 @@ export class ThanksService {
         return await http.get(`${this.THANKS_PATH_FROM_USER}${userId}`, { params: pageParams });
     }
 
-    async giveThanksTo(thanksRequest: CreateThanksRequest): Promise<AxiosResponse> {
-        return await http.post(this.THANKS_PATH, thanksRequest);
+    async giveThanksTo(thanksRequest: CreateThanksRequest, language: Language): Promise<AxiosResponse> {
+        return await http.post(`${this.THANKS_PATH}?language=${language}`, thanksRequest);
     }
 
     async deleteById(thanksId: string): Promise<AxiosResponse> {
