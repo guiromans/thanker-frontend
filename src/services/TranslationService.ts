@@ -137,7 +137,7 @@ export const ERROR_CHANGE_PRIVACY_TYPE: string = "error-change-privacy-type";
 export const ERROR_EMAIL_NOT_EXISTS: string = "error-email-not-exists";
 export const ERROR_INVALID_EMAIL: string = "error-invalid-email";
 export const ERROR_NAME_NOT_EMPTY: string = "error-name-not-empty";
-export const ERROR_HANDLE_NOT_EMPTY: string = "error-handle-not-empty";
+export const ERROR_HANDLE_VALIDITY: string = "error-handle-validity";
 export const ERROR_EMAIL_NOT_EMPTY: string = "error-email-not-empty";
 export const ERROR_PASSWORD_NOT_EMPTY: string = "error-password-not-empty";
 export const ERROR_PASSWORD_RULES: string = "error-password-rules";
@@ -298,7 +298,7 @@ export class TranslationService {
             [CONFIRM_NEW_PASSWORD, "Confirma nova password"],
             [SUBMIT, "Submeter"],
             [ERROR_NAME_NOT_EMPTY, "Nome não pode estar vazio"],
-            [ERROR_HANDLE_NOT_EMPTY, "Handle não pode estar vazio"],
+            [ERROR_HANDLE_VALIDITY, "Handle não pode estar vazio, e tem de ter alfanumérico (caracteres maiúsculos e minúsculos, sem sinais, e também números)"],
             [ERROR_EMAIL_NOT_EMPTY, "E-mail não pode estar vazio"],
             [ERROR_PASSWORD_NOT_EMPTY, "Password não pode estar vazia"],
             [ERROR_PASSWORD_RULES, "Password tem de ter pelo menos: 8 caracters (tamanho), 1 letra maiúscula, 1 letra minúscula, e 1 caracter especial"],
@@ -491,7 +491,7 @@ export class TranslationService {
             [ERRORS, "Errors"],
             [ERRORS_IN_FORM, "Errors in form"],
             [ERROR_NAME_NOT_EMPTY, "Name cannot be empty"],
-            [ERROR_HANDLE_NOT_EMPTY, "Handle cannot be empty"],
+            [ERROR_HANDLE_VALIDITY, "Handle cannot be empty, and just have alphanumeric characters (lower and upper cases, and numbers)"],
             [ERROR_EMAIL_NOT_EMPTY, "E-mail cannot be empty"],
             [ERROR_PASSWORD_NOT_EMPTY, "Password cannot be empty"],
             [ERROR_PASSWORD_RULES, "Password must have at least: 8 characters length), 1 uppercase letter, 1 lowercase letter, and 1 special character"],

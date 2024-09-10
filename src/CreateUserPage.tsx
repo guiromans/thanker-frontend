@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from "react";
 import { UserService } from "./services/UserService";
 import { CreateUserRequest } from "./model/UserModel";
 import { ErrorResponse } from "./model/ErrorResponse";
-import { CHECK_YOUR_EMAIL_ACCOUNT_CREATE, CREATE, CREATE_USER, ERRORS_IN_FORM, ERROR_ACCEPT_TERMS_AND_CONDITIONS, ERROR_EMAIL_NOT_EMPTY, ERROR_HANDLE_NOT_EMPTY, ERROR_NAME_NOT_EMPTY, ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, ERROR_PASSWORD_NOT_EMPTY, ERROR_PASSWORD_RULES, Language, PASSWORD, REGISTER_CONFIRM_PASSWORD, REGISTER_EMAIL, REGISTER_HANDLE, REGISTER_NAME, REGISTER_PASSWORD, TERMS_AND_CONDITIONS, TranslationService, USER_CREATED_TEXT } from "./services/TranslationService";
+import { CHECK_YOUR_EMAIL_ACCOUNT_CREATE, CREATE, CREATE_USER, ERRORS_IN_FORM, ERROR_ACCEPT_TERMS_AND_CONDITIONS, ERROR_EMAIL_NOT_EMPTY, ERROR_HANDLE_VALIDITY, ERROR_NAME_NOT_EMPTY, ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, ERROR_PASSWORD_NOT_EMPTY, ERROR_PASSWORD_RULES, Language, PASSWORD, REGISTER_CONFIRM_PASSWORD, REGISTER_EMAIL, REGISTER_HANDLE, REGISTER_NAME, REGISTER_PASSWORD, TERMS_AND_CONDITIONS, TranslationService, USER_CREATED_TEXT } from "./services/TranslationService";
 import { useSnackbar } from "notistack";
 import './style/CreateUser.css';
 import './style/Styles.css';
@@ -128,7 +128,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
     }
 
     const validateHandle = (handle: string): boolean => {
-        return handle !== undefined && handle !== null && handle.length > 0;
+        return handle !== undefined && handle !== null && handle.length > 0 && /^[a-zA-Z0-9]+$/.test(handle);;
     }
 
     const validateEmail = (email: string): boolean => {
@@ -187,7 +187,7 @@ export const CreateUserPage = (props: CreateUserProps) => {
                         { /* Handle */ }
                         {errorHandle && (
                             <div className="error-label-container">
-                                <label className="label-create-error error-label-container">{translationService.getFor(ERROR_HANDLE_NOT_EMPTY)}</label>
+                                <label className="label-create-error error-label-container">{translationService.getFor(ERROR_HANDLE_VALIDITY)}</label>
                                 
                             </div>
                         )}
