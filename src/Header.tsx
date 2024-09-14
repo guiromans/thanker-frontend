@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { StorageService } from "./services/StorageService";
-import { HEADER_ABOUT, HEADER_FOLLOWING, HEADER_LOGOUT, HEADER_QUOTE, HEADER_SETTINGS, Language, SEARCH, SEARCH_USERS_HINT, THANKS, TranslationService } from "./services/TranslationService";
+import { HEADER_ABOUT, HEADER_FOLLOWING, HEADER_GRATITUDE_WALL, HEADER_LOGOUT, HEADER_QUOTE, HEADER_SETTINGS, Language, PROFILE_PAGE, SEARCH, SEARCH_USERS_HINT, THANKS, TranslationService } from "./services/TranslationService";
 import { SearchPage } from "./SearchPage";
 import './style/Fonts.css';
 import './style/Header.css';
@@ -9,6 +9,7 @@ import logoutIcon from '../src/assets/images/logout_icon.png';
 import groupIcon from '../src/assets/images/group_icon.png';
 import portalIcon from '../src/assets/images/portal_icon.png';
 import settingsIcon from '../src/assets/images/settings_icon.png';
+import wallIcon from '../src/assets/images/wall_icon.png';
 import HeaderIcon from "./cards/HeaderIcon";
 import { isMobile } from "react-device-detect";
 import { LanguageFlags } from "./cards/LanguageFlags";
@@ -20,6 +21,7 @@ export interface HeaderProps {
     onLanguageChange: (language: Language) => void;
     onUserIdSelect: (userId: string) => void;
     onFollowingClick: () => void;
+    onGratitudeWallClick: () => void;
     onQuoteClick: () => void;
     onHomePageClick: () => void;
     onAboutClick: () => void;
@@ -153,6 +155,11 @@ export const Header = (props: HeaderProps) => {
         props.onFollowingClick();
     }
 
+    const handleGratitudeWallClick = () => {
+        hideMenu();
+        props.onGratitudeWallClick();
+    }
+
     const handleQuoteClick = () => {
         hideMenu();
         props.onQuoteClick();
@@ -182,8 +189,9 @@ export const Header = (props: HeaderProps) => {
                           <Bar />
                         </HamburgerButton>
                         <DropdownMenu open={openMenu} ref={menuRef}>
-                          <label className="header-label" onClick={handleLogoClick}>{translationService.getFor(THANKS)}</label>
+                          <label className="header-label" onClick={handleLogoClick}>{translationService.getFor(PROFILE_PAGE)}</label>
                           <label className="header-label" onClick={handleFollowingClick}>{translationService.getFor(HEADER_FOLLOWING)}</label>
+                          <label className="header-label" onClick={handleGratitudeWallClick}>{translationService.getFor(HEADER_GRATITUDE_WALL)}</label>
                           <label className="header-label" onClick={handleQuoteClick}>{translationService.getFor(HEADER_QUOTE)}</label>
                           <label className="header-label" onClick={handleSettingsClick}>{translationService.getFor(HEADER_SETTINGS)}</label>
                           <label className="header-label" onClick={handleAboutClick}>{translationService.getFor(HEADER_ABOUT)}</label>
@@ -205,6 +213,7 @@ export const Header = (props: HeaderProps) => {
                 <div className='header-left'>
                     <div className="header-left"><h1 className='logo' onClick={handleLogoClick}>Thanker</h1></div>
                     {userIdExists() && <HeaderIcon textKey={HEADER_FOLLOWING} language={language} imageSrc={groupIcon} onClick={handleFollowingClick} />}
+                    {userIdExists() && <HeaderIcon textKey={HEADER_GRATITUDE_WALL} language={language} imageSrc={wallIcon} onClick={handleGratitudeWallClick} />}
                     {userIdExists() && <HeaderIcon textKey={HEADER_SETTINGS} language={language} imageSrc={settingsIcon} onClick={handleSettingsClick}/>}
                     {userIdExists() && <HeaderIcon textKey={HEADER_ABOUT} language={language} imageSrc={portalIcon} onClick={handleAboutClick} />}
                     {userIdExists() && <HeaderIcon textKey={HEADER_LOGOUT} language={language} imageSrc={logoutIcon} onClick={handleLogoutClick}/>}

@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
-import { BE_THE_FIRST_THANKER, Language, THIS_IS_PRIVATE_PROFILE, TranslationService } from '../services/TranslationService';
+import { BE_THE_FIRST_THANKER, FOLLOW_TO_SEE_THANKS, Language, THIS_IS_PRIVATE_PROFILE, TranslationService } from '../services/TranslationService';
 import '../style/NoThanks.css';
 import { isMobile } from 'react-device-detect';
+import { PageType } from '../model/PageType';
 
 export interface NoThanksProps {
     language: Language | undefined;
     isOpenProfile: boolean;
+    pageType: PageType;
 }
 
 export const NoThanksCard = (props: NoThanksProps) => {
@@ -15,7 +17,11 @@ export const NoThanksCard = (props: NoThanksProps) => {
     const translationService: TranslationService = new TranslationService();
 
     useEffect(() => {
-        setTextkey(props.isOpenProfile ? BE_THE_FIRST_THANKER : THIS_IS_PRIVATE_PROFILE);
+        if (props.pageType === PageType.WALL) {
+            setTextkey(FOLLOW_TO_SEE_THANKS);
+        } else {
+            setTextkey(props.isOpenProfile ? BE_THE_FIRST_THANKER : THIS_IS_PRIVATE_PROFILE);
+        }   
     }, [props.isOpenProfile]);
 
     const resolveHeaderClasses = (): string => {

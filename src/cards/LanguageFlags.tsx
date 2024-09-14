@@ -27,7 +27,7 @@ export const LanguageFlags = (props: FlagProps) => {
                 fullWidth={false}
                 countries={Object.values(Language)}
                 customLabels={
-                    {"PT": "PT", "GB": "EN"}
+                    {"PT": "PT", "GB": "EN", "ES": "ES", "JP": "JP"}
                 }
                 selected={language}
                 onSelect={handleLanguageChange}

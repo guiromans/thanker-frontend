@@ -27,6 +27,7 @@ import { isMobile } from "react-device-detect";
 import { SearchPage } from "./SearchPage";
 import rightArrow from './assets/images/green_arrow.png';
 import rightArrowTransparent from './assets/images/green_arrow_transparent.png';
+import { PageType } from "./model/PageType";
 
 interface UserProps {
   userId: string | null | undefined;
@@ -412,7 +413,7 @@ export const UserPage = (props: UserProps) => {
           }
           {
             authService.readUserIdFromToken() !== userId && !user?.isOpenProfile &&
-            <NoThanksCard language={language} isOpenProfile={false} />
+            <NoThanksCard language={language} isOpenProfile={false} pageType={PageType.USER} />
           }
           <HurrayCard isVisible={showHurray} />
           <div className="arrow right-arrow">
@@ -437,7 +438,7 @@ export const UserPage = (props: UserProps) => {
               timestamp={timestamp}
             />
           ))}
-          {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} />}
+          {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} pageType={PageType.USER} />}
           <br />
           {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
         </div>
@@ -502,7 +503,7 @@ export const UserPage = (props: UserProps) => {
               timestamp={timestamp}
             />
           ))}
-          {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} />}
+          {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} pageType={PageType.USER} />}
           <br />
           {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
         </div>

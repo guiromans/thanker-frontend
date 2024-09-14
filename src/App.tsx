@@ -26,6 +26,7 @@ import { SettingsPage } from './SettingsPage';
 import { GDPRCard } from './cards/GDPRCard';
 import { isMobile } from 'react-device-detect';
 import QuoteCard from './cards/QuoteCard';
+import { GratitudeWallPage } from './GratitudeWallPage';
 
 const App = () => {
   const authService = new AuthService();
@@ -106,6 +107,10 @@ const App = () => {
     window.location.href = '/#/following';
   }
 
+  const handleGratitudeWallSelect = () => {
+    window.location.href = '/#/gratitude-wall';
+  }
+
   const openMainPage = () => {
     window.location.href = "/";
   }
@@ -133,6 +138,7 @@ const App = () => {
           onLanguageChange={handleLanguageChange} 
           onUserIdSelect={handleSearchedUserSelect}
           onFollowingClick={handleFollowingSelect}
+          onGratitudeWallClick={handleGratitudeWallSelect}
           onHomePageClick={handleHomePageClick}
           onLoadingUsers={handleLoadingUsers}
           onQuoteClick={handleQuoteClick}
@@ -159,6 +165,7 @@ const App = () => {
           onUserIdSelect={handleSearchedUserSelect}
           onHomePageClick={handleHomePageClick}
           onFollowingClick={handleFollowingSelect}
+          onGratitudeWallClick={handleGratitudeWallSelect}
           onQuoteClick={handleQuoteClick}
           onLoadingUsers={handleLoadingUsers}
           onSettingsClick={handleSettingsClick}
@@ -180,6 +187,7 @@ const App = () => {
             <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/:userId/reset-password/:resetPasswordId" element={<ResetPasswordPage onError={openMainPage} />} />
             <Route path="/following" element={<FollowingPage userId={userId} onClick={handleFollowingClick} language={language} />} />
+            <Route path="/gratitude-wall" element={<GratitudeWallPage onUserClick={handleFollowingSelect} language={language} />} />
             <Route path="/settings" element={<SettingsPage language={language} />} />
             <Route path="/gdpr" element={<GDPRCard language={language} />} />
             <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} />} />
@@ -200,6 +208,7 @@ const App = () => {
           onUserIdSelect={handleSearchedUserSelect}
           onHomePageClick={handleHomePageClick}
           onFollowingClick={handleFollowingSelect}
+          onGratitudeWallClick={handleGratitudeWallSelect}
           onQuoteClick={handleQuoteClick}
           onLoadingUsers={handleLoadingUsers}
           onSettingsClick={handleSettingsClick}
@@ -219,6 +228,7 @@ const App = () => {
             <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/:userId/reset-password/:resetPasswordId" element={<ResetPasswordPage onError={openMainPage} />} />
             <Route path="/following" element={<FollowingPage userId={userId} onClick={handleFollowingClick} language={language} />} />
+            <Route path="/gratitude-wall" element={<GratitudeWallPage onUserClick={handleFollowingSelect} language={language} />} />
             <Route path="/settings" element={<SettingsPage language={language} />} />
             <Route path="/gdpr" element={<GDPRCard language={language} />} />
             <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} />} />
