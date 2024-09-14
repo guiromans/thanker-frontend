@@ -21,6 +21,10 @@ export class ThanksService {
         return await http.post(`${this.THANKS_PATH}?language=${language}`, thanksRequest);
     }
 
+    async getGratitudeWallThanks(page: number, size: number): Promise<AxiosResponse> {
+        return await http.get(`${this.THANKS_PATH}/gratitude-wall?page=${page}&size=${size}`);
+    }
+
     async deleteById(thanksId: string): Promise<AxiosResponse> {
         return await http.delete(`${this.THANKS_PATH}/${thanksId}`)
     }
