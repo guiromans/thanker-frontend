@@ -30,11 +30,14 @@ export const GratitudeWallPage = (props: WallProps) => {
     const [loadingThanks, setLoadingThanks] = useState<boolean>(false);
     const [language, setLanguage] = useState<Language>(props.language!);
     const [userId, setUserId] = useState<string>(userService.getUserId()!);
+    const [canRequestMoreThanks, SetCanRequestMoreThanks] = useState<boolean>(true);
     
     const thanksScrollableDivRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        loadThanks(page);
+        if (canRequestMoreThanks) {
+            loadThanks(page);
+        }
     }, [page]);
 
     const loadThanks = async(page: number) => {
@@ -42,7 +45,11 @@ export const GratitudeWallPage = (props: WallProps) => {
         await thanksService.getGratitudeWallThanks(page, PAGE_SIZE)
             .then(resp => {
                 const newThanks: ThanksResponse[] = resp.data as ThanksResponse[];
-                updateThanks(newThanks);
+                if (newThanks.length > 0) {
+                    updateThanks(newThanks);
+                } else {
+                    SetCanRequestMoreThanks(false);
+                }
             })
             .catch(e => enqueueSnackbar(`Error loading thanks: ${e}`, { variant: 'error' }))
             .finally(() => {
@@ -62,7 +69,7 @@ export const GratitudeWallPage = (props: WallProps) => {
     const checkScroll = () => {
         const div = thanksScrollableDivRef.current;
         console.log("Check scroll method")
-        if (div !== null && !loadingThanks) {
+        if (div !== null && !loadingThanks && canRequestMoreThanks) {
           const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight - 20;
           if (isAtBottom) {
             setPage((prevPage) => prevPage + 1);
