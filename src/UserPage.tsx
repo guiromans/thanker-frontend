@@ -438,7 +438,7 @@ export const UserPage = (props: UserProps) => {
               timestamp={timestamp}
             />
           ))}
-          {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} pageType={PageType.USER} />}
+          {thanks.length === 0 && page === 0 && !loadingThanks && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} pageType={PageType.USER} />}
           <br />
           {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
         </div>
@@ -503,7 +503,7 @@ export const UserPage = (props: UserProps) => {
               timestamp={timestamp}
             />
           ))}
-          {thanks.length === 0 && page === 0 && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} pageType={PageType.USER} />}
+          {thanks.length === 0 && page === 0 && !loadingThanks && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} pageType={PageType.USER} />}
           <br />
           {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
         </div>

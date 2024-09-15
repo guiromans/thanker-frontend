@@ -112,7 +112,7 @@ export const GratitudeWallPage = (props: WallProps) => {
                         timestamp={0}
                     />
                 ))}
-                {thanks.length === 0 && page === 0 && <NoThanksCard language={language} pageType={PageType.WALL} isOpenProfile={true} />}
+                {thanks.length === 0 && page === 0 && !loadingThanks && <NoThanksCard language={language} pageType={PageType.WALL} isOpenProfile={true} />}
                 <br />
                 {loadingThanks && <div className='centerish'><Loader size="small" /></div>}
             </div>
