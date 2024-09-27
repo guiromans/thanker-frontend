@@ -28,6 +28,7 @@ import { SearchPage } from "./SearchPage";
 import rightArrow from './assets/images/green_arrow.png';
 import rightArrowTransparent from './assets/images/green_arrow_transparent.png';
 import { PageType } from "./model/PageType";
+import SponsoredCard from "./cards/SponsoredCard";
 
 interface UserProps {
   userId: string | null | undefined;
@@ -411,6 +412,9 @@ export const UserPage = (props: UserProps) => {
               <button type='submit' className={classThanksButton} disabled={disableThanks}>{translationService.getFor(THANK)}!</button>
             </form>
           }
+          <div className="ad">
+            <SponsoredCard language={language} />
+          </div>
           {
             authService.readUserIdFromToken() !== userId && !user?.isOpenProfile &&
             <NoThanksCard language={language} isOpenProfile={false} pageType={PageType.USER} />

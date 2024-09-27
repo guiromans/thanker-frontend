@@ -63,7 +63,7 @@ const QuoteCard = (props: QuoteProps) => {
                     </div>
                 }
             </div>
-            {   !isUserPage() && !isMobile &&
+            {   !isMobile &&
                 <div className='no-overflow'>
                     <SponsoredCard language={props.language}/>
                 </div>

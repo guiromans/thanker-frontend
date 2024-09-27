@@ -1,6 +1,7 @@
 import primeVideo from '../assets/images/adPrimeVideo1.jpg';
 import kindleUnlimited from '../assets/images/kindle_unlimited.jpg';
 import amazonWardrobe from '../assets/images/amazon_wardrobe.jpg';
+import expedia1 from '../assets/images/expedia_1.jpg';
 
 export interface AdModel {
     banner: string,
@@ -21,6 +22,10 @@ export class AdService {
         {
             banner: amazonWardrobe,
             targetUrl: "https://www.amazon.co.uk/tbyb/huc?pf=1&tag=gromao-21"
+        },
+        {
+            banner: expedia1,
+            targetUrl: "https://expedia.com/affiliate/TQbcirZ"
         }
     ]
 
