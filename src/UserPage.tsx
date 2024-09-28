@@ -378,7 +378,7 @@ export const UserPage = (props: UserProps) => {
     return (
       <div className="mobile-container-user-page">
       {isUserPageOpened && (
-      <div className='mobile-user container top-padding-mobile'>
+      <div className='mobile-user container top-padding-mobile bottom-padding-mobile'>
         <div className="user-container-mobile">
           <SearchPage language={language} onClick={handleSearchUserClick} onLoading={handleSearchLoading} />
           {loadingUsers && <div className="loader-search-users"><Loader size="small" /></div> }

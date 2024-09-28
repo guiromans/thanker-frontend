@@ -117,6 +117,10 @@
     padding-top: 2vh;
 }
 
+.bottom-padding-mobile {
+    padding-bottom: 6vh;
+}
+
 .arrow {
     position: absolute;
     margin: 16px;
