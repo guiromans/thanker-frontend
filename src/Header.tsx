@@ -196,6 +196,7 @@ export const Header = (props: HeaderProps) => {
                           <label className="header-label" onClick={handleSettingsClick}>{translationService.getFor(HEADER_SETTINGS)}</label>
                           <label className="header-label" onClick={handleAboutClick}>{translationService.getFor(HEADER_ABOUT)}</label>
                           <label className="header-label" onClick={handleLogoutClick}>{translationService.getFor(HEADER_LOGOUT)}</label>
+                          <SponsoredCard language={language} />
                         </DropdownMenu>
                     </div>
                     )}

@@ -412,9 +412,10 @@ export const UserPage = (props: UserProps) => {
               <button type='submit' className={classThanksButton} disabled={disableThanks}>{translationService.getFor(THANK)}!</button>
             </form>
           }
-          <div className="ad">
-            <SponsoredCard language={language} />
-          </div>
+          { !isUserPage() && <div className="ad">
+              <SponsoredCard language={language} />
+            </div>
+          }
           {
             authService.readUserIdFromToken() !== userId && !user?.isOpenProfile &&
             <NoThanksCard language={language} isOpenProfile={false} pageType={PageType.USER} />
