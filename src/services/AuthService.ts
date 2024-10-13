@@ -5,6 +5,7 @@ import { AuthRequest, GoogleAuthRequest } from "../model/AuthRequest";
 import { AuthResponse } from "../model/AuthResponse";
 import { StorageService } from "./StorageService";
 import { authenticatedJsonHeadersWith } from "../utils/HttpUtils";
+import { Language } from "./TranslationService";
 
 export class AuthService {
 
@@ -101,11 +102,11 @@ export class AuthService {
         });
     }
 
-    async loginWithGoogle(googleCredential: string): Promise<AxiosResponse> {
+    async loginWithGoogle(googleCredential: string, language: Language): Promise<AxiosResponse> {
         const authRequest: GoogleAuthRequest = {
             googleCredential: googleCredential
         }
-        return await axios.post(this.SERVICE_GOOGLE_LOGIN_URL, authRequest, {
+        return await axios.post(`${this.SERVICE_GOOGLE_LOGIN_URL}?language=${language}`, authRequest, {
             headers: {
               'Content-Type': 'application/json',
             },

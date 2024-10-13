@@ -12,6 +12,7 @@ import { enqueueSnackbar } from "notistack";
 import { isMobile } from "react-device-detect";
 import { PasswordCard } from "./cards/PasswordCard";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { StorageService } from "./services/StorageService";
 
 export interface LoginProps {
   onLogged: () => void;
@@ -26,6 +27,7 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
 
     const authService: AuthService = new AuthService();
     const translationService: TranslationService = new TranslationService();
+    const storageService: StorageService = new StorageService();
 
     const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
       setEmail(event.target.value)
@@ -75,7 +77,7 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
         setAuthenticating(true);
         const credential: string = credentialResponse.credential
 
-        await authService.loginWithGoogle(credential)
+        await authService.loginWithGoogle(credential, storageService.getLanguage())
           .then((resp) => {
             const authResponse: AuthResponse = resp.data as AuthResponse;
             authService.saveTokensFrom(authResponse);
