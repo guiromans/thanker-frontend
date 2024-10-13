@@ -7,6 +7,7 @@ import { isMobile } from 'react-device-detect';
 
 export interface AboutProps {
     language: Language| undefined;
+    onGdprClick: () =>  void;
 }
 
 export const About = (props: AboutProps) => {
@@ -21,6 +22,10 @@ export const About = (props: AboutProps) => {
 
     const resolveContainerClasses = (): string => {
         return `about-container ${isMobile ? "" : "top-padding"}`;
+    }
+
+    const clickedGpdr = () => {
+        props.onGdprClick();
     }
 
     if (loading) {
@@ -49,6 +54,9 @@ export const About = (props: AboutProps) => {
                     <a className="about-link" href='https://www.health.harvard.edu/healthbeat/giving-thanks-can-make-you-happier' target="_blank">{translationService.getFor(HARVARD_ARTICLE)}</a>
                     <a className="about-link" href='https://greatergood.berkeley.edu/article/item/how_gratitude_changes_you_and_your_brain' target="_blank">{translationService.getFor(BERKELEY_ARTICLE)}</a>
                     <a className="about-link" href='https://www.uclahealth.org/news/article/health-benefits-gratitude' target="_blank">{translationService.getFor(UCLA_ARTICLE)}</a>
+                </div>
+                <div className='about-section'>
+                    <a className='about-link' onClick={clickedGpdr}>GDPR</a>
                 </div>
             </div>
         </div>

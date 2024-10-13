@@ -133,6 +133,10 @@ const App = () => {
     window.location.hash = "/not-found";
   }
 
+  const handleGdprClick = () => {
+    window.location.hash = '/gdpr';
+  }
+
   if (loading) {
     return (
       <div className='main'>
@@ -192,7 +196,7 @@ const App = () => {
             <Route path="/gratitude-wall" element={<GratitudeWallPage onUserClick={handleFollowingSelect} language={language} />} />
             <Route path="/settings" element={<SettingsPage language={language} />} />
             <Route path="/gdpr" element={<GDPRCard language={language} />} />
-            <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} />} />
+            <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} onGdprClick={handleGdprClick} />} />
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
@@ -233,7 +237,7 @@ const App = () => {
             <Route path="/gratitude-wall" element={<GratitudeWallPage onUserClick={handleFollowingSelect} language={language} />} />
             <Route path="/settings" element={<SettingsPage language={language} />} />
             <Route path="/gdpr" element={<GDPRCard language={language} />} />
-            <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} />} />
+            <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} onGdprClick={handleGdprClick} />} />
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
