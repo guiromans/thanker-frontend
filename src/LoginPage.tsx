@@ -12,7 +12,6 @@ import { enqueueSnackbar } from "notistack";
 import { isMobile } from "react-device-detect";
 import { PasswordCard } from "./cards/PasswordCard";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
 
 export interface LoginProps {
   onLogged: () => void;
