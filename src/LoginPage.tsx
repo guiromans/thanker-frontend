@@ -86,6 +86,7 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
             const errorKey: string = error && error.status && error.status === 400 ? ERROR_LOGIN_MSG : ERROR_SERVER_COMMS;
             enqueueSnackbar(`${translationService.getFor(errorKey)}`, { variant: 'error' })
           })
+          .finally(() => setAuthenticating(false));
 
       } else {
         displayGoogleLoginFail();
