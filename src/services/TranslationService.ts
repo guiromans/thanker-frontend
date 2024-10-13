@@ -147,6 +147,7 @@ export const ERROR_PASSWORD_RULES: string = "error-password-rules";
 export const ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING: string = "error-password-and-confirmation-not-matching";
 export const ERROR_ACCEPT_TERMS_AND_CONDITIONS: string = "error-accept-terms-and-conditions";
 export const ERROR_SERVER_COMMS: string = "error-server-comms";
+export const ERROR_GOOGLE_LOGIN: string = "error-google-login";
 
 export class TranslationService {
     storageService: StorageService = new StorageService();
@@ -311,6 +312,7 @@ export class TranslationService {
             [ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, "Password e confirmação de password têm de ser iguais"],
             [ERROR_ACCEPT_TERMS_AND_CONDITIONS, "Necessário aceitar Termos & Condições"],
             [ERROR_SERVER_COMMS, "Erro na comunicação com o servidor"],
+            [ERROR_GOOGLE_LOGIN, "Erro no login com Google"],
             [THANKER_IS_THANKFUL_TO, "O Thanker agradece a:"],
             [QUOTE_1, "A Gratidão dá sentido ao nosso passado, traz paz ao presente, e cria uma visão para o amanhã"],
             [QUOTE_2, "A raíz da Felicidade é a Gratidão"],
@@ -507,6 +509,7 @@ export class TranslationService {
             [ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, "Password and password confirmation values must match"],
             [ERROR_ACCEPT_TERMS_AND_CONDITIONS, "Need to accept Terms & Conditions"],
             [ERROR_SERVER_COMMS, "Error communicating with the server"],
+            [ERROR_GOOGLE_LOGIN, "Error logging in with Google"],
             [ERROR_CHANGE_PRIVACY_TYPE, "Error changing thanks privacy to:"],
             [ERROR_EMAIL_NOT_EXISTS, "E-mail does not exist:"],
             [ERROR_INVALID_EMAIL, "Provided e-mail is not a valid one:"],
@@ -714,6 +717,7 @@ export class TranslationService {
             [ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, "La contraseña y la confirmación de la contraseña deben coincidir"],
             [ERROR_ACCEPT_TERMS_AND_CONDITIONS, "Debe aceptar los Términos y Condiciones"],
             [ERROR_SERVER_COMMS, "Error al comunicarse con el servidor"],
+            [ERROR_GOOGLE_LOGIN, "Error en el inicio de sesión con Google"],
             [ERROR_CHANGE_PRIVACY_TYPE, "Error al cambiar la privacidad de los agradecimientos a:"],
             [ERROR_EMAIL_NOT_EXISTS, "El correo electrónico no existe:"],
             [ERROR_INVALID_EMAIL, "El correo electrónico proporcionado no es válido:"],
@@ -922,6 +926,7 @@ export class TranslationService {
                 [ERROR_PASSWORD_AND_CONFIRMATION_NOT_MATCHING, "パスワードとパスワード確認の値が一致する必要があります"],
                 [ERROR_ACCEPT_TERMS_AND_CONDITIONS, "利用規約に同意する必要があります"],
                 [ERROR_SERVER_COMMS, "サーバーとの通信エラー"],
+                [ERROR_GOOGLE_LOGIN, "Googleでのログインにエラーが発生しました"],
                 [ERROR_CHANGE_PRIVACY_TYPE, "感謝のプライバシー設定変更エラー:"],
                 [ERROR_EMAIL_NOT_EXISTS, "メールアドレスが存在しません:"],
                 [ERROR_INVALID_EMAIL, "提供されたメールアドレスは無効です:"],

@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { SERVICE_URL } from "../Constants";
 import { Token } from "../model/Token";
-import { AuthRequest } from "../model/AuthRequest";
+import { AuthRequest, GoogleAuthRequest } from "../model/AuthRequest";
 import { AuthResponse } from "../model/AuthResponse";
 import { StorageService } from "./StorageService";
 import { authenticatedJsonHeadersWith } from "../utils/HttpUtils";
@@ -9,6 +9,7 @@ import { authenticatedJsonHeadersWith } from "../utils/HttpUtils";
 export class AuthService {
 
     SERVICE_LOGIN_URL: string = `${SERVICE_URL}/users/authenticate`;
+    SERVICE_GOOGLE_LOGIN_URL: string = `${SERVICE_URL}/users/google-sign-on`;
 
     storageService: StorageService = new StorageService();
 
@@ -94,6 +95,17 @@ export class AuthService {
             password: password
         };
         return await axios.post(this.SERVICE_LOGIN_URL, authRequest, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+        });
+    }
+
+    async loginWithGoogle(googleCredential: string): Promise<AxiosResponse> {
+        const authRequest: GoogleAuthRequest = {
+            googleCredential: googleCredential
+        }
+        return await axios.post(this.SERVICE_GOOGLE_LOGIN_URL, authRequest, {
             headers: {
               'Content-Type': 'application/json',
             },
