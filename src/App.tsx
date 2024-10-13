@@ -27,6 +27,8 @@ import { GDPRCard } from './cards/GDPRCard';
 import { isMobile } from 'react-device-detect';
 import QuoteCard from './cards/QuoteCard';
 import { GratitudeWallPage } from './GratitudeWallPage';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import React from 'react';
 
 const App = () => {
   const authService = new AuthService();

@@ -10,3 +10,22 @@
     display: flex;
     flex-direction: column;
 }
+
+.login-google {
+    display: grid;
+    place-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.main-login {
+    overflow-y: scroll;
+    height: 100vh;
+    margin-bottom: 32px;
+}
+
+.page-bottom {
+    padding-bottom: 80px;
+}
