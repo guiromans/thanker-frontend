@@ -11,6 +11,7 @@ import { NoThanksCard } from "./cards/NoThanksCard";
 import { PageType } from "./model/PageType";
 import './style/UserPage.css';
 import { isMobile } from "react-device-detect";
+import { UserResponse } from "./model/UserModel";
 
 export interface WallProps {
     language?: Language;
@@ -29,16 +30,32 @@ export const GratitudeWallPage = (props: WallProps) => {
     const [thanks, setThanks] = useState<ThanksResponse[]>([]);
     const [loadingThanks, setLoadingThanks] = useState<boolean>(false);
     const [language, setLanguage] = useState<Language>(props.language!);
+    const [user, setUser] = useState<UserResponse>();
     const [userId, setUserId] = useState<string>(userService.getUserId()!);
     const [canRequestMoreThanks, SetCanRequestMoreThanks] = useState<boolean>(true);
+    const [canSendEmail, setCanSendEmail] = useState<boolean>(false);
+    const [sendingEmail, setSendingEmail] = useState<boolean>(false);
     
     const thanksScrollableDivRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        loadUser();
+    }, []);
 
     useEffect(() => {
         if (canRequestMoreThanks) {
             loadThanks(page);
         }
     }, [page]);
+
+    const loadUser = async() => {
+        await userService.getUser(userService.getUserId()!)
+            .then((resp) => {
+                const respUser: UserResponse = resp.data as UserResponse;
+                setUser(respUser);
+                setCanSendEmail(respUser.canSendEmail);
+            })
+    }
 
     const loadThanks = async(page: number) => {
         setLoadingThanks(true);
@@ -68,7 +85,6 @@ export const GratitudeWallPage = (props: WallProps) => {
 
     const checkScroll = () => {
         const div = thanksScrollableDivRef.current;
-        console.log("Check scroll method")
         if (div !== null && !loadingThanks && canRequestMoreThanks) {
           const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight - 20;
           if (isAtBottom) {
@@ -93,6 +109,14 @@ export const GratitudeWallPage = (props: WallProps) => {
         return `container mobile-user ${isMobile ? "top-padding-mobile" : "centerish-2 top-padding" }`; 
       }
 
+      const resolveCanSendEmail = (thanks: ThanksResponse): boolean => {
+        return canSendEmail && thanks.giver.id === userService.getUserId()! &&
+          thanks.giver.id !== thanks.receiver.id;
+      }
+
+      const handleSentEmail = () => {
+        setCanSendEmail(false);
+      }
 
       return (
         <div className={resolveDivClasses()} ref={thanksScrollableDivRef} onScroll={checkScroll}>
@@ -110,11 +134,13 @@ export const GratitudeWallPage = (props: WallProps) => {
                         userImageUrl={thanksItem.giver.profilePictureUrl}
                         pageUserId={userId}
                         timestamp={0}
+                        userCanSendEmail={canSendEmail !== undefined && canSendEmail}
+                        sentEmail={handleSentEmail}
                     />
                 ))}
                 {thanks.length === 0 && page === 0 && !loadingThanks && <NoThanksCard language={language} pageType={PageType.WALL} isOpenProfile={true} />}
                 <br />
-                {loadingThanks && <div className='centerish'><Loader size="massive" /></div>}
+                {(loadingThanks || sendingEmail) && <div className='centerish'><Loader size="massive" /></div>}
             </div>
         </div>
       )

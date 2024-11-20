@@ -1,0 +1,29 @@
+.pro-item-container {
+    width: 100%;
+    height: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.pro-icon-container {
+    width: 10%;
+    text-align: center;
+    margin: 4px;
+    align-items: center;
+}
+
+.pro-icon-img {
+    width: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pro-text-container {
+    width: 90%;
+    text-align: left;
+    margin: 4px;
+    align-items: center;
+}

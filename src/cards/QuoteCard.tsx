@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { QuotesService } from '../services/translations/QuotesService';
 import { Quote } from '../model/Quote';
 import { Language, PLATO, TranslationService, UNKNOWN } from '../services/TranslationService';
@@ -6,6 +6,9 @@ import '../style/QuoteCard.css';
 import SponsoredCard from './SponsoredCard';
 import { AuthService } from '../services/AuthService';
 import { isMobile } from 'react-device-detect';
+import { StorageService } from '../services/StorageService';
+import { UserService } from '../services/UserService';
+import { IsSubscriberResponse } from '../model/UserModel';
 
 export interface QuoteProps {
     language: Language | undefined;
@@ -16,8 +19,16 @@ const QuoteCard = (props: QuoteProps) => {
 
     const quotesService: QuotesService = new QuotesService();
     const translationService: TranslationService = new TranslationService();
+    const userService: UserService = new UserService();
+    const storageService: StorageService = new StorageService();
     const authService: AuthService = new AuthService();
     const quote: Quote | undefined = quotesService.getQuote();
+
+    const [hideAds, setHideAds] = useState<boolean>(true);
+
+    useEffect(() => {
+        resolveHideAds();
+    }, []);
 
     const isUserPage = (): boolean => {
         const thisUserId = authService.readUserIdFromToken();
@@ -50,6 +61,14 @@ const QuoteCard = (props: QuoteProps) => {
         return `quote-container ${isMobile ? "container-mobile": "container-desktop"}`; 
     }
 
+    const resolveHideAds = async() => {
+        await userService.isSubscriber()
+            .then((resp) => {
+                const subscriberResponse: IsSubscriberResponse = resp.data as IsSubscriberResponse;
+                setHideAds(subscriberResponse.isSubscriber && storageService.getHideAds());
+            })
+    }
+
     return(
         <div className='quote-section-container'>
             <div className={resolveContainerClasses()}>
@@ -63,7 +82,7 @@ const QuoteCard = (props: QuoteProps) => {
                     </div>
                 }
             </div>
-            {   !isMobile &&
+            {   !isMobile && !hideAds &&
                 <div className='no-overflow'>
                     <SponsoredCard language={props.language}/>
                 </div>

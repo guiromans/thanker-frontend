@@ -1,15 +1,22 @@
 import { PrivacyType, ThanksResponse } from "../model/ThanksModel";
 import { toDateAndTimeString } from "../utils/DateUtils";
 import '../style/ThanksCard.css';
-import { LOCK_ICON_TOOLTIP, Language, SEE_MORE, TranslationService } from "../services/TranslationService";
+import { AI_PRO_EMAIL_ERROR, AI_PRO_EMAIL_SENT, AI_PRO_SEND_EMAIL_TOOLTIP, LOCK_ICON_TOOLTIP, Language, SEE_MORE, TranslationService } from "../services/TranslationService";
 import { AuthService } from "../services/AuthService";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { resolveImage } from "../utils/UserUtils";
 import { privacyTypeOf } from "../utils/ThanksUtils";
 import deleteIcon from "../assets/images/delete_icon.png";
 import lockIcon from "../assets/images/lock.png";
+import sendIcon from '../assets/images/send_white.png';
 import { Tooltip } from "react-tooltip";
 import { isMobile } from "react-device-detect";
+import { ThanksService } from "../services/ThanksService";
+import { enqueueSnackbar } from "notistack";
+import { AxiosError } from "axios";
+import { ErrorResponse } from "../model/ErrorResponse";
+import { UserService } from "../services/UserService";
+import { Loader } from "./Loader";
 
 export type ThanksCardProps = {
     thanks: ThanksResponse;
@@ -20,6 +27,8 @@ export type ThanksCardProps = {
     userImageUrl: string | null;
     pageUserId: string | null | undefined;
     timestamp: number;
+    userCanSendEmail: boolean;
+    sentEmail: () => void;
 }
 
 const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
@@ -28,6 +37,8 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
 
     const translationService: TranslationService = new TranslationService();
     const authService: AuthService = new AuthService();
+    const thanksService: ThanksService = new ThanksService();
+    const userService: UserService = new UserService();
     // User ID of page we are visiting
     const pageUserId: string | undefined | null = props.pageUserId;
     // Our own User ID
@@ -37,6 +48,9 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
     const [profilePicUrl, setProfilePicUrl] = useState<string>(resolveImage(props.thanks.giver.profilePictureUrl));
     const [text, setText] = useState<string>();
     const [isTruncated, setIsTruncated] = useState<boolean>();
+    const [canSendEmail, setCanSendEmail] = useState<boolean>(false);
+    const [sendingEmail, setSendingEmail] = useState<boolean>(false);
+    const [textMessage, setTextMessage] = useState<string>();
     
     useEffect(() => {
         const textThanks: string = props.thanks.text;
@@ -50,6 +64,8 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
 
         setIsTruncated(textThanks.length > MAX_INITIAL_TEXT_SIZE);
         setText(initialText);
+        setCanSendEmail(resolveCanSendEmail(props.thanks));
+        resolveIntroCallBack();
     }, []);
 
     useEffect(() => {
@@ -63,23 +79,30 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
         }
     }, [props.timestamp]);
 
-    const resolveIntro = (): string => {
-        const thanks: ThanksResponse = props.thanks;
-        let message: string = "";
+    useEffect(() => {
+        setCanSendEmail(resolveCanSendEmail(props.thanks));
+    }, [sendingEmail]);
 
-        if (thisUserId === thanks.giver.id && thanks.giver.id === thanks.receiver.id) {
-            // Thanks in own page
-            message = `${translationService.getIntro()}`;
-        } else if (thanks.receiver.id === thanks.giver.id) {
-            // The other person's thanks on her/his own page
-            message = `${thanks.giver.name} ${translationService.getOthersIntro()}`
-        } else {
-            // Another person thanking in another one's page
-            message = `${thanks.giver.name} ${translationService.getOthersIntro()} ${thanks.receiver.name}`
+    const resolveIntroCallBack = useCallback(() => {
+        const resolveIntro = () => {
+            const thanks: ThanksResponse = props.thanks;
+            let message: string = "";
+    
+            if (thisUserId === thanks.giver.id && thanks.giver.id === thanks.receiver.id) {
+                // Thanks in own page
+                message = `${translationService.getIntro()}`;
+            } else if (thanks.receiver.id === thanks.giver.id) {
+                // The other person's thanks on her/his own page
+                message = `${thanks.giver.name} ${translationService.getOthersIntro()}`
+            } else {
+                // Another person thanking in another one's page
+                message = `${thanks.giver.name} ${translationService.getOthersIntro()} ${thanks.receiver.name}`
+            }
+    
+            setTextMessage(message);
         }
-
-        return message;
-    }
+        resolveIntro();
+    }, []);
 
     const handlePrivacyTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
         const updatedPrivacyType: PrivacyType = privacyTypeOf(event.target.value);
@@ -148,6 +171,28 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
         return `card-element text ${isMobile ? "mobile-thanks-text" : ""}`;
     }
 
+    const resolveCanSendEmail = (thanks: ThanksResponse): boolean => {
+        return thanks.giver.id === userService.getUserId()! &&
+          !sendingEmail && thanks.giver.id !== thanks.receiver.id && !thanks.sentEmail;
+      }
+
+    const handleSendEmailClick = async() => {
+        setSendingEmail(true);
+        await thanksService.sendPremiumEmail(props.thanks.id)
+        .then(() => {
+          enqueueSnackbar(translationService.getFor(AI_PRO_EMAIL_SENT), { variant: 'success' })
+          setCanSendEmail(false);
+          props.sentEmail();
+        })
+        .catch((e: AxiosError) => {
+          const error: ErrorResponse = e.response?.data as ErrorResponse;
+          enqueueSnackbar(`${translationService.getFor(AI_PRO_EMAIL_ERROR)}: ${error.detail}`, { variant: 'error' });
+        })
+        .finally(() => {
+            setSendingEmail(false);
+        });
+      }
+
     return (
         <div className="thanks-card-container">
             <div className={cardStyle}>
@@ -158,7 +203,7 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
                 </div>
                 <div className={resolveTextClasses()}>
                     <div className="card-element">
-                        {resolveIntro()}:
+                        {textMessage}:
                     </div>
                     <div className="card-element text">
                         <b>{text}</b> {isTruncated && "..." && 
@@ -180,11 +225,25 @@ const ThanksCard: React.FC<ThanksCardProps> = (props: ThanksCardProps) => {
                     <img src={deleteIcon} className="delete-icon" onClick={handleClickedDelete}/>
                 </div>
                 }
+                {
+                    canSendEmail && !sendingEmail && props.userCanSendEmail &&
+                    (
+                        <div>
+                            <img className="send-email" src={sendIcon} onClick={handleSendEmailClick} />
+                            <Tooltip id="send-lock" anchorSelect=".send-email" place="top" className="tooltip">
+                                {translationService.getFor(AI_PRO_SEND_EMAIL_TOOLTIP)}
+                            </Tooltip>
+                        </div>
+                    )
+                }
                 <div className="lock">
                     <img src={lockIcon} className="lock-img" data-tooltip-id="tooltip-lock" />
-                    <Tooltip id="tooltip-lock" anchorSelect="lock-image" place="top" className="tooltip">
+                    <Tooltip id="tooltip-lock" anchorSelect=".lock-img" place="top" className="tooltip">
                             {translationService.getFor(LOCK_ICON_TOOLTIP)}
                     </Tooltip>
+                </div>
+                <div>
+                    {sendingEmail && <Loader size="small"/>}
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 export const toDateString = (date: Date): string => {
-    return new Date(date.toString()).toDateString();
+    return new Date(date.toString()).toLocaleDateString();
 }
 
 export const toTimeString = (date: Date): string => {

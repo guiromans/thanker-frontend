@@ -10,16 +10,20 @@ import groupIcon from '../src/assets/images/group_icon.png';
 import portalIcon from '../src/assets/images/portal_icon.png';
 import settingsIcon from '../src/assets/images/settings_icon.png';
 import wallIcon from '../src/assets/images/wall_icon.png';
+import premiumIcon from '../src/assets/images/premiumIcon.png';
 import HeaderIcon from "./cards/HeaderIcon";
 import { isMobile } from "react-device-detect";
 import { LanguageFlags } from "./cards/LanguageFlags";
 import styled from "styled-components";
 import SponsoredCard from "./cards/SponsoredCard";
+import { UserService } from "./services/UserService";
+import { IsSubscriberResponse } from "./model/UserModel";
 
 export interface HeaderProps {
     userId: string | null | undefined;
     onLanguageChange: (language: Language) => void;
     onUserIdSelect: (userId: string) => void;
+    onThankerAiProClick: () => void;
     onFollowingClick: () => void;
     onGratitudeWallClick: () => void;
     onQuoteClick: () => void;
@@ -82,13 +86,29 @@ const DropdownMenu = styled.div<{ open: boolean }>`
 
 export const Header = (props: HeaderProps) => {
 
+    const THANKER_API_PRO_LABEL: string = "Thanker AI Pro™"
+
     const storageService: StorageService = new StorageService();
     const translationService: TranslationService = new TranslationService();
+    const userService: UserService = new UserService();
     const [language, setLanguage] = useState<Language>(storageService.getLanguage());
     const [openMenu, setOpenMenu] = useState<boolean>(false);
+    const [hideAds, setHideAds] = useState<boolean>(true);
+    const [boldMap, setBoldMap] = useState<Record<string, boolean>>({
+        [THANKER_API_PRO_LABEL]: false,
+        [HEADER_FOLLOWING]: false,
+        [HEADER_GRATITUDE_WALL]: false,
+        [HEADER_QUOTE]: false,
+        [HEADER_SETTINGS]: false,
+        [HEADER_ABOUT]: false
+    })
 
     const menuRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
+
+    useEffect(() => {
+        resolveHideAds();
+    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
@@ -126,6 +146,7 @@ export const Header = (props: HeaderProps) => {
 
     const handleSettingsClick = () => {
         hideMenu();
+        setHeaderBold(HEADER_SETTINGS);
         props.onSettingsClick();
     }
 
@@ -139,8 +160,15 @@ export const Header = (props: HeaderProps) => {
         window.location.href = '/';
     }
 
+    const handleThankerAiProClick = () => {
+        hideMenu();
+        setHeaderBold(THANKER_API_PRO_LABEL);
+        props.onThankerAiProClick();
+    }
+
     const handleAboutClick = () => {
         hideMenu();
+        setHeaderBold(HEADER_ABOUT);
         props.onAboutClick();
     }
 
@@ -152,16 +180,19 @@ export const Header = (props: HeaderProps) => {
 
     const handleFollowingClick = () => {
         hideMenu();
+        setHeaderBold(HEADER_FOLLOWING);
         props.onFollowingClick();
     }
 
     const handleGratitudeWallClick = () => {
         hideMenu();
+        setHeaderBold(HEADER_GRATITUDE_WALL);
         props.onGratitudeWallClick();
     }
 
     const handleQuoteClick = () => {
         hideMenu();
+        setHeaderBold(HEADER_QUOTE);
         props.onQuoteClick();
     }
 
@@ -177,6 +208,24 @@ export const Header = (props: HeaderProps) => {
         setOpenMenu(false);
     }
 
+    const setHeaderBold = (headerKey: string) => {
+        const updatedMap = Object.fromEntries(
+            Object.keys(boldMap).map(key =>
+                [key, key === headerKey]
+            )
+        );
+
+        setBoldMap(updatedMap);
+    }
+
+    const resolveHideAds = async() => {
+        await userService.isSubscriber()
+            .then((resp) => {
+                const subscriberResponse: IsSubscriberResponse = resp.data as IsSubscriberResponse;
+                setHideAds(subscriberResponse.isSubscriber && storageService.getHideAds());
+            })
+    }
+
     if (isMobile) {
         return (
             <div className={resolveHeaderClasses()}>
@@ -190,13 +239,14 @@ export const Header = (props: HeaderProps) => {
                         </HamburgerButton>
                         <DropdownMenu open={openMenu} ref={menuRef}>
                           <label className="header-label" onClick={handleLogoClick}>{translationService.getFor(PROFILE_PAGE)}</label>
+                          <label className="header-label" onClick={handleThankerAiProClick}>{THANKER_API_PRO_LABEL}</label>
                           <label className="header-label" onClick={handleFollowingClick}>{translationService.getFor(HEADER_FOLLOWING)}</label>
                           <label className="header-label" onClick={handleGratitudeWallClick}>{translationService.getFor(HEADER_GRATITUDE_WALL)}</label>
                           <label className="header-label" onClick={handleQuoteClick}>{translationService.getFor(HEADER_QUOTE)}</label>
                           <label className="header-label" onClick={handleSettingsClick}>{translationService.getFor(HEADER_SETTINGS)}</label>
                           <label className="header-label" onClick={handleAboutClick}>{translationService.getFor(HEADER_ABOUT)}</label>
                           <label className="header-label" onClick={handleLogoutClick}>{translationService.getFor(HEADER_LOGOUT)}</label>
-                          <SponsoredCard language={language} />
+                          {!hideAds && <SponsoredCard language={language} /> }
                         </DropdownMenu>
                     </div>
                     )}
@@ -210,11 +260,12 @@ export const Header = (props: HeaderProps) => {
             <div className={resolveHeaderClasses()}>
                 <div className='header-left'>
                     <div className="header-left"><h1 className='logo' onClick={handleLogoClick}>Thanker</h1></div>
-                    {userIdExists() && <HeaderIcon textKey={HEADER_FOLLOWING} language={language} imageSrc={groupIcon} onClick={handleFollowingClick} />}
-                    {userIdExists() && <HeaderIcon textKey={HEADER_GRATITUDE_WALL} language={language} imageSrc={wallIcon} onClick={handleGratitudeWallClick} />}
-                    {userIdExists() && <HeaderIcon textKey={HEADER_SETTINGS} language={language} imageSrc={settingsIcon} onClick={handleSettingsClick}/>}
-                    {userIdExists() && <HeaderIcon textKey={HEADER_ABOUT} language={language} imageSrc={portalIcon} onClick={handleAboutClick} />}
-                    {userIdExists() && <HeaderIcon textKey={HEADER_LOGOUT} language={language} imageSrc={logoutIcon} onClick={handleLogoutClick}/>}
+                    {userIdExists() && <HeaderIcon textKey={THANKER_API_PRO_LABEL} language={language} imageSrc={premiumIcon} onClick={handleThankerAiProClick} isBold={boldMap[THANKER_API_PRO_LABEL]}/>}
+                    {userIdExists() && <HeaderIcon textKey={HEADER_FOLLOWING} language={language} imageSrc={groupIcon} onClick={handleFollowingClick} isBold={boldMap[HEADER_FOLLOWING]} />}
+                    {userIdExists() && <HeaderIcon textKey={HEADER_GRATITUDE_WALL} language={language} imageSrc={wallIcon} onClick={handleGratitudeWallClick} isBold={boldMap[HEADER_GRATITUDE_WALL]} />}
+                    {userIdExists() && <HeaderIcon textKey={HEADER_SETTINGS} language={language} imageSrc={settingsIcon} onClick={handleSettingsClick} isBold={boldMap[HEADER_SETTINGS]} />}
+                    {userIdExists() && <HeaderIcon textKey={HEADER_ABOUT} language={language} imageSrc={portalIcon} onClick={handleAboutClick} isBold={boldMap[HEADER_ABOUT]} />}
+                    {userIdExists() && <HeaderIcon textKey={HEADER_LOGOUT} language={language} imageSrc={logoutIcon} onClick={handleLogoutClick} isBold={false} />}
                 </div>
                 <div className='header-right'>
                     {userIdExists() && 

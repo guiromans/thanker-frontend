@@ -34,4 +34,8 @@ export class ThanksService {
         return await http.patch(`${this.THANKS_PATH}/${thanksId}`, null, {params: reqParams});
     }
 
+    async sendPremiumEmail(thanksId: string): Promise<AxiosResponse> {
+        return await http.post(`${this.THANKS_PATH}/${thanksId}/send-premium-email`);
+    }
+
 }

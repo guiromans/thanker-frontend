@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { ImageUploadResponse, UserResponse } from "../model/UserModel";
-import { CLICK_YOUR_NAME_UPDATE, Language, THANKS, UPDATE, TranslationService, USERNAME_UPDATED, PUBLIC, PRIVATE, FILES_MUST_BE, CLICK_YOUR_PICTURE_UPDATE } from "../services/TranslationService";
+import { CLICK_YOUR_NAME_UPDATE, Language, THANKS, UPDATE, TranslationService, USERNAME_UPDATED, FILES_MUST_BE, CLICK_YOUR_PICTURE_UPDATE, PUBLIC_PROFILE, PRIVATE_PROFILE } from "../services/TranslationService";
 import '../style/UserStyle.css';
 import { resolveUserImage } from "../utils/UserUtils";
 import { enqueueSnackbar } from "notistack";
@@ -167,7 +167,7 @@ const UserCard = (props: UserProps) => {
             <div className="user-data">
                 {props.user && props.user !== null && displayUserThanks()}
             </div>
-            <div className="text-profile">{translationService.getFor(props.user?.isOpenProfile ? PUBLIC : PRIVATE)}</div>
+            <div className="text-profile">{translationService.getFor(props.user?.isOpenProfile ? PUBLIC_PROFILE : PRIVATE_PROFILE)}</div>
         </div>
         
     );

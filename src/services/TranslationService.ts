@@ -30,6 +30,8 @@ export const SEARCH_USERS_HINT: string = "search-users-hint";
 export const SEARCH_FOLLOWING_HINT: string = "search-following-hint";
 export const PRIVATE: string = "PRIVATE";
 export const PUBLIC: string = "PUBLIC";
+export const PUBLIC_PROFILE: string = "PUBLIC-PROFILE";
+export const PRIVATE_PROFILE: string = "PRIVATE-PROFILE";
 export const PASSWORD: string = "password";
 export const THANKS: string = "thanks";
 export const LOGIN: string = "login";
@@ -60,6 +62,7 @@ export const UPDATE: string = "update";
 export const ARE_YOU_SURE_TO_DELETE: string = "are-you-sure-to-delete";
 export const YES: string = "yes";
 export const NO: string = "no";
+export const OR: string = "or";
 export const SEE_MORE: string = "see-more";
 export const SHOW_GRATITUDE_TEXT: string = "show-gratitude-text";
 export const CRYPTOGRAPHY_INFO: string = "cryptography-info";
@@ -72,6 +75,8 @@ export const PROFILE_IS_OPEN_SETTING: string = "profile-is-open-setting";
 export const PROFILE_NOT_OPEN_SETTING: string = "profile-not-open-setting";
 export const DEFAULT_THANKS_PRIVACY_PRIVATE: string = "default-thanks-privacy-private";
 export const DEFAULT_THANKS_PRIVACY_PUBLIC: string = "default-thanks-privacy-public";
+export const DEFAULT_HIDE_ADS_TRUE: string = "default-hide-ads-true";
+export const DEFAULT_HIDE_ADS_FALSE: string = "default-hide-ads-false";
 export const BE_THE_FIRST_THANKER: string = "be-the-first-thanker";
 export const THIS_IS_PRIVATE_PROFILE: string = "this-is-private-profile";
 export const FOLLOW_TO_SEE_THANKS: string = "follow-to-see-thanks";
@@ -81,6 +86,8 @@ export const MADE_PROFILE_PUBLIC_TO_THANKS: string = "made-profile-public-to-tha
 export const COULD_NOT_UPDATE_PROFILE_PRIVACY: string = "could-not-update-profile-privacy";
 export const YOUR_DEFAULT_THANKS_PRIVACY_PRIVATE: string = "your-default-thanks-privacy-private";
 export const YOUR_DEFAULT_THANKS_PRIVACY_PUBLIC: string = "your-default-thanks-privacy-public";
+export const YOUR_DEFAULT_HIDE_ADS_TRUE: string = "your-default-hide-ads-true";
+export const YOUR_DEFAULT_HIDE_ADS_FALSE: string = "your-default-hide-ads-false";
 export const HARVARD_ARTICLE: string = "harvard-article";
 export const BERKELEY_ARTICLE: string = "berkeley-article";
 export const UCLA_ARTICLE: string = "ucla-article";
@@ -91,6 +98,10 @@ export const LOCK_ICON_TOOLTIP: string = "lock-icon-tooltip";
 export const GRATITUDE_WALL: string = "gratitude-wall";
 export const SEARCH: string = "search-label";
 export const GIVING_THANKS_PLEASE_HOLD: string = "giving-thanks-please-hold";
+export const MONTH_KEY: string = "month-key";
+export const SUBSCRIPTION_BEING_CONFIRMED: string = "subscription-being-confirmed";
+export const SUBSCRIPTION_HAS_BEEN_CONFIRMED: string = "subscription-has-been-confirmed";
+export const SUBSCRIPTION_ERROR: string = "subscription-error";
 
 export const INTRO_THANKFUL_FOR: string = "intro-thankful-for";
 export const INTRO_GRATEFUL_FOR: string = "intro-grateful-for";
@@ -149,6 +160,60 @@ export const ERROR_ACCEPT_TERMS_AND_CONDITIONS: string = "error-accept-terms-and
 export const ERROR_SERVER_COMMS: string = "error-server-comms";
 export const ERROR_GOOGLE_LOGIN: string = "error-google-login";
 
+export const AI_PRO_DAILY_GRATITUDE_AI: string = "ai-pro-daily-gratitude-ai";
+export const AI_PRO_INSIGHTS: string = "ai-pro-insights";
+export const AI_PRO_TAILORED_MESSAGES: string = "ai-pro-tailored-messages";
+export const AI_PRO_PSEUDO_CELEBRITY_QUOTE: string = "ai-pro-pseudo-celebrity-quote";
+export const AI_PRO_HIDE_ADS: string = "ai-pro-hide-ads";
+export const AI_PRO_SEND_DAILY_EMAIL: string = "ai-pro-send-daily-email";
+export const AI_PRO_HINT: string = "ai-pro-hint";
+export const AI_PRO_SUBSCRIBE: string = "ai-pro-subscribe";
+export const AI_PRO_MESSAGE_OF_THE_DAY: string = "ai-pro-message-of-the-day";
+export const AI_PRO_GRATITUDE_VISUALIZER: string = "ai-pro-gratitude-visualizer";
+export const AI_PRO_INSIGHTS_VALUE: string = "ai-pro-insights-value";
+export const AI_PRO_HIGHLIGHTS: string = "ai-pro-highlights";
+export const AI_PRO_PSEUDO_CELEBRITY_VALUE: string = "ai-pro-pseudo-celebrity-value";
+export const AI_PRO_PSEUDO_CELEBRITY_SAYS: string = "ai-pro-pseudo-celebrity-says";
+export const AI_PRO_SUBSCRIBER: string = "ai-pro-subscriber";
+export const AI_PRO_EMAIL_SENT: string = "ai-pro-email-sent";
+export const AI_PRO_EMAIL_ERROR: string = "ai-pro-email-error";
+export const AI_PRO_SEND_EMAIL_TOOLTIP: string = "ai-pro-send-email-tooltip";
+export const AI_PRO_REVERIFY_SUBSCRIPTION: string = "ai-pro-reverify-subscription";
+export const AI_PRO_ERROR_GETTING_DOCUMENT: string = "ai-pro-error-getting-document";
+
+export const SUBSCRIPTION_SURE_TO_CANCEL: string = "subscription-sure-to-cancel";
+export const SUBSCRIPTION_SURE_TO_REACTIVATE: string = "subscription-sure-to-reactivate";
+export const SUBSCRIPTION_CANCELLED_MESSAGE: string = "subscription-cancelled-message";
+export const SUBSCRIPTION_ALREADY_CANCELLED_MESSAGE: string = "subscription-already-cancelled-message";
+export const SUBSCRIPTION_REACTIVATED_MESSAGE: string = "subscription-reactivated-message";
+export const SUBSCRIPTION_ALREADY_REACTIVATED_MESSAGE: string = "subscription-already-reactivated-message";
+export const SUBSCRIPTION_CHANGE_PAYMENT_SETTINGS: string = "subscription-change-payment-settings";
+export const SUBSCRIPTION_CANCEL: string = "subscription-cancel";
+export const SUBSCRIPTION_REACTIVATE: string = "subscription-reactivate";
+export const SUBSCRIPTION_COME_BACK_TOMORROW: string = "subscription-come-back-tomorrow";
+export const SUBSCRIPTION_ERROR_LOADING_SESSION: string = "subscription-error-loading-session";
+export const SUBSCRIPTION_ERROR_VERIFYING_SUBSCRIPTION: string = "subscription-error-verifying-subscription";
+
+export const CATEGORY_ART: string = "ART";
+export const CATEGORY_BEAUTY: string = "BEAUTY";
+export const CATEGORY_CAREER: string = "CAREER";
+export const CATEGORY_EDUCATION: string = "EDUCATION";
+export const CATEGORY_ENTERTAINMENT: string = "ENTERTAINMENT";
+export const CATEGORY_FAMILY: string = "FAMILY";
+export const CATEGORY_FASHION: string = "FASHION";
+export const CATEGORY_FINANCE: string = "FINANCE";
+export const CATEGORY_FOOD: string = "FOOD";
+export const CATEGORY_HEALTH: string = "HEALTH";
+export const CATEGORY_LOVE: string = "LOVE";
+export const CATEGORY_NATURE: string = "NATURE";
+export const CATEGORY_PETS: string = "PETS";
+export const CATEGORY_RELIGION: string = "RELIGION";
+export const CATEGORY_SCIENCES: string = "SCIENCES";
+export const CATEGORY_SOCIAL: string = "SOCIAL";
+export const CATEGORY_SPORTS: string = "SPORTS";
+export const CATEGORY_TECHNOLOGY: string = "TECHNOLOGY";
+export const CATEGORY_TRAVEL: string = "TRAVEL";
+
 export class TranslationService {
     storageService: StorageService = new StorageService();
     language: Language = this.storageService.getLanguage();
@@ -193,6 +258,8 @@ export class TranslationService {
             [SEARCH_FOLLOWING_HINT, "Pesquisa quem segues"],
             [PRIVATE, "Privado"],
             [PUBLIC, "Público"],
+            [PUBLIC_PROFILE, "Perfil Público"],
+            [PRIVATE_PROFILE, "Perfil Privado"],
             [PASSWORD, "Palavra-Passe"],
             [THANKS, "Agradecimentos"],
             [HINT_OTHER_GRATEFUL_1, "O que te fez sentir gratidão por"],
@@ -223,6 +290,10 @@ export class TranslationService {
             [PROFILE_NOT_OPEN_SETTING, "O teu perfil está fechado a receber Agradecimentos de outras pessoas (privado)"],
             [DEFAULT_THANKS_PRIVACY_PRIVATE, "A opção padrão dos teus agradecimentos será \"Privado\""],
             [DEFAULT_THANKS_PRIVACY_PUBLIC, "A opção padrão dos teus agradecimentos será \"Público\""],
+            [DEFAULT_HIDE_ADS_TRUE, "Anúncios estarão escondidos"],
+            [DEFAULT_HIDE_ADS_FALSE, "Anúncios estarão visíveis"],
+            [YOUR_DEFAULT_HIDE_ADS_TRUE, "Os anúncios irão ser removidos"],
+            [YOUR_DEFAULT_HIDE_ADS_FALSE, "Os anúncios irão estar visíveis"],
             [BE_THE_FIRST_THANKER, "Sê o primeiro Thanker deste perfil"],
             [THIS_IS_PRIVATE_PROFILE, "Este perfil não está aberto a outros Agradecimentos, atualmente"],
             [FOLLOW_TO_SEE_THANKS, "Segue outros utilizadores para veres o mural da Gratidão, ou espera que eles façam Thanks!"],
@@ -232,6 +303,10 @@ export class TranslationService {
             [COULD_NOT_UPDATE_PROFILE_PRIVACY, "Não foi possível atualizar a Privacidade da tua página"],
             [YOUR_DEFAULT_THANKS_PRIVACY_PRIVATE, "Alteraste a privacidade padrão dos teus Thanks para: Privado - para Thanks que vais dar"],
             [YOUR_DEFAULT_THANKS_PRIVACY_PUBLIC, "Alteraste a privacidade padrão dos teus Thanks para: Público - para Thanks que vais dar"],
+            [DEFAULT_HIDE_ADS_TRUE, "Os anúncios estão escondidos"],
+            [DEFAULT_HIDE_ADS_FALSE, "Os anúncios estão visíveis"],
+            [YOUR_DEFAULT_HIDE_ADS_TRUE, "Os anúncios serão removidos"],
+            [YOUR_DEFAULT_HIDE_ADS_FALSE, "Os anúncios estarão visíveis"],
             [HARVARD_ARTICLE, "Artigo da Universidade de Harvard"],
             [BERKELEY_ARTICLE, "Artigo da Universidade de Berkeley"],
             [UCLA_ARTICLE, "Artigo da UCLA"],
@@ -248,6 +323,19 @@ export class TranslationService {
             [ARE_YOU_SURE_TO_DELETE, "De certeza que queres apagar este Agradecimento?"],
             [YES, "Sim"],
             [NO, "Não"],
+            [OR, "Ou"],
+            [SUBSCRIPTION_CANCEL, "Cancelar Subscrição"],
+            [SUBSCRIPTION_REACTIVATE, "Reativar Subscrição"],
+            [SUBSCRIPTION_ALREADY_CANCELLED_MESSAGE, "Subscrição já estava cancelada"],
+            [SUBSCRIPTION_ALREADY_REACTIVATED_MESSAGE, "Subscrição já estava reativada"],
+            [SUBSCRIPTION_CHANGE_PAYMENT_SETTINGS, "Alterar método de pagamento"],
+            [SUBSCRIPTION_CANCELLED_MESSAGE, "A tua subscrição foi cancelada, e estará válida até ao final do período já pago."],
+            [SUBSCRIPTION_REACTIVATED_MESSAGE, "A tua subscrição foi foi reativada com sucesso."],
+            [SUBSCRIPTION_SURE_TO_CANCEL, "De certeza que queres cancelar a tua subscrição?"],
+            [SUBSCRIPTION_SURE_TO_REACTIVATE, "De certeza que queres reativar a tua subscrição?"],
+            [SUBSCRIPTION_COME_BACK_TOMORROW, "Volta amanhã para mais descobertas com IA!"],
+            [SUBSCRIPTION_ERROR_LOADING_SESSION, "Erro a iniciar sessão de pagamento"],
+            [SUBSCRIPTION_ERROR_VERIFYING_SUBSCRIPTION, "Erro a verificar subscrição"],
             [PROFESSION_ACTOR, "Ator"],
             [PROFESSION_ACTRESS, "Atriz"],
             [PROFESSION_COMEDIAN, "Comediante"],
@@ -304,6 +392,10 @@ export class TranslationService {
             [NEW_PASSWORD, "Nova password"],
             [CONFIRM_NEW_PASSWORD, "Confirma nova password"],
             [SUBMIT, "Submeter"],
+            [MONTH_KEY, "Mês"],
+            [SUBSCRIPTION_BEING_CONFIRMED, "Subscrição a ser confirmada. Por favor aguarda!"],
+            [SUBSCRIPTION_HAS_BEEN_CONFIRMED, "A tua subscrição está confirmada. Parabéns!"],
+            [SUBSCRIPTION_ERROR, "Houve um erro a confirmar a tua subscrição. Por favor tenta novamente"],
             [ERROR_NAME_NOT_EMPTY, "Nome não pode estar vazio"],
             [ERROR_HANDLE_VALIDITY, "Handle não pode estar vazio, e tem de ter alfanumérico (caracteres maiúsculos e minúsculos, sem sinais, e também números)"],
             [ERROR_EMAIL_NOT_EMPTY, "E-mail não pode estar vazio"],
@@ -314,6 +406,45 @@ export class TranslationService {
             [ERROR_SERVER_COMMS, "Erro na comunicação com o servidor"],
             [ERROR_GOOGLE_LOGIN, "Erro no login com Google"],
             [THANKER_IS_THANKFUL_TO, "O Thanker agradece a:"],
+            [AI_PRO_DAILY_GRATITUDE_AI, "A tua dose diária de IA de Gratidão - o teu Diário de Gratidão interage contigo!"],
+            [AI_PRO_INSIGHTS, "Detalhes e análise da tua viagem de Gratidão"],
+            [AI_PRO_TAILORED_MESSAGES, "Mensagens personalizadas para ti"],
+            [AI_PRO_PSEUDO_CELEBRITY_QUOTE, "Citação diária de uma Pseudo-Celebridade"],
+            [AI_PRO_SEND_DAILY_EMAIL, "Envio de e-mail de Gratidão a alguém (um por dia)"],
+            [AI_PRO_HINT, "Dicas baseadas na tua experiência no Thanker"],
+            [AI_PRO_HIDE_ADS, "Possibilidade de esconder anúncios"],
+            [AI_PRO_SUBSCRIBE, "Subscrever!"],
+            [AI_PRO_MESSAGE_OF_THE_DAY, "Mensagem do dia"],
+            [AI_PRO_GRATITUDE_VISUALIZER, "Visualizador da Gratidão"],
+            [AI_PRO_INSIGHTS_VALUE, "Análise"],
+            [AI_PRO_HIGHLIGHTS, "Destaques"],
+            [AI_PRO_PSEUDO_CELEBRITY_VALUE, "Pseudo-Celebridade"],
+            [AI_PRO_PSEUDO_CELEBRITY_SAYS, "diz"],
+            [AI_PRO_SUBSCRIBER, "Subscritor/a AI Pro™"],
+            [AI_PRO_EMAIL_SENT, "E-mail enviado"],
+            [AI_PRO_EMAIL_ERROR, "Erro a enviar e-mail"],
+            [AI_PRO_SEND_EMAIL_TOOLTIP, "Envia e-mail!"],
+            [AI_PRO_REVERIFY_SUBSCRIPTION, "Já fizeste subscrição? Clica aqui para verificarmos novamente!"],
+            [AI_PRO_ERROR_GETTING_DOCUMENT, "Erro ao tentar obter documento AI Pro"],
+            [CATEGORY_ART, "Arte"],
+            [CATEGORY_BEAUTY, "Beleza"],
+            [CATEGORY_CAREER, "Carreira"],
+            [CATEGORY_EDUCATION, "Educação"],
+            [CATEGORY_ENTERTAINMENT, "Entretenimento"],
+            [CATEGORY_FAMILY, "Família"],
+            [CATEGORY_FASHION, "Moda"],
+            [CATEGORY_FINANCE, "Finanças"],
+            [CATEGORY_FOOD, "Comida"],
+            [CATEGORY_HEALTH, "Saúde"],
+            [CATEGORY_LOVE, "Amor"],
+            [CATEGORY_NATURE, "Natureza"],
+            [CATEGORY_PETS, "Animais de Estimação"],
+            [CATEGORY_RELIGION, "Religião"],
+            [CATEGORY_SCIENCES, "Ciências"],
+            [CATEGORY_SOCIAL, "Social"],
+            [CATEGORY_SPORTS, "Desporto"],
+            [CATEGORY_TECHNOLOGY, "Tecnologia"],
+            [CATEGORY_TRAVEL, "Viagens"],
             [QUOTE_1, "A Gratidão dá sentido ao nosso passado, traz paz ao presente, e cria uma visão para o amanhã"],
             [QUOTE_2, "A raíz da Felicidade é a Gratidão"],
             [QUOTE_3, "Quando comecei a contar as minhas bençãos, a minha vida deu toda uma volta"],
@@ -400,6 +531,8 @@ export class TranslationService {
             [SEARCH_FOLLOWING_HINT, "Search by who you follow"],
             [PRIVATE, "Private"],
             [PUBLIC, "Public"],
+            [PUBLIC_PROFILE, "Public Profile"],
+            [PRIVATE_PROFILE, "Private Profile"],
             [PASSWORD, "Password"],
             [THANKS, "Thanks"],
             [USER_CREATED_TEXT, "Thank you creating your Thanker account! Please go to your e-mail for confirmation"],
@@ -431,6 +564,7 @@ export class TranslationService {
             [PROFILE_NOT_OPEN_SETTING, "Your profile is closed to receive other people's Thanks (private)"],
             [DEFAULT_THANKS_PRIVACY_PRIVATE, "The default option for your Thanks will be \"Private\""],
             [DEFAULT_THANKS_PRIVACY_PUBLIC, "The default option for your Thanks will be \"Public\""],
+            
             [BE_THE_FIRST_THANKER, "Be the first Thanker of this profile"],
             [THIS_IS_PRIVATE_PROFILE, "This profile is not currently opened for other people's Thanks"],
             [FOLLOW_TO_SEE_THANKS, "Follow other users to see the Gratitude Wall, or wait for them to start Thanking!"],
@@ -440,6 +574,10 @@ export class TranslationService {
             [COULD_NOT_UPDATE_PROFILE_PRIVACY, "Could not update Thanks privacy of your page"],
             [YOUR_DEFAULT_THANKS_PRIVACY_PRIVATE, "You've updated the default privacy of your Thanks to: Private - for Thanks you're going to give"],
             [YOUR_DEFAULT_THANKS_PRIVACY_PUBLIC, "You've updated the default privacy of your Thanks to: Public - for Thanks you're going to give"],
+            [DEFAULT_HIDE_ADS_TRUE, "Ads are hidden"],
+            [DEFAULT_HIDE_ADS_FALSE, "Ads are visible"],
+            [YOUR_DEFAULT_HIDE_ADS_TRUE, "Ads will be removed"],
+            [YOUR_DEFAULT_HIDE_ADS_FALSE, "Ads will be visible"],
             [HARVARD_ARTICLE, "Harvard University Article"],
             [BERKELEY_ARTICLE, "Berkeley University Article"],
             [UCLA_ARTICLE, "UCLA Article"],
@@ -456,6 +594,19 @@ export class TranslationService {
             [ARE_YOU_SURE_TO_DELETE, "Are you sure you want to delete this Thanks?"],
             [YES, "Yes"],
             [NO, "No"],
+            [OR, "Or"],
+            [SUBSCRIPTION_CANCEL, "Cancel subscription"],
+            [SUBSCRIPTION_REACTIVATE, "Reactivate subscription"],
+            [SUBSCRIPTION_ALREADY_CANCELLED_MESSAGE, "Subscription was already cancelled"],
+            [SUBSCRIPTION_ALREADY_REACTIVATED_MESSAGE, "Subscription had already been reactivated"],
+            [SUBSCRIPTION_CHANGE_PAYMENT_SETTINGS, "Change payment settings"],
+            [SUBSCRIPTION_CANCELLED_MESSAGE, "Your subscription has been cancelled, and remains valid until the end of the paid period."],
+            [SUBSCRIPTION_REACTIVATED_MESSAGE, "Your subscription has been successfully reactivated."],
+            [SUBSCRIPTION_SURE_TO_CANCEL, "Are you sure you want to cancel your subscription?"],
+            [SUBSCRIPTION_SURE_TO_REACTIVATE, "Are you sure you want to reactivate your subscription?"],
+            [SUBSCRIPTION_COME_BACK_TOMORROW, "Come back tomorrow for more AI discovery!"],
+            [SUBSCRIPTION_ERROR_LOADING_SESSION, "Error starting payment session"],
+            [SUBSCRIPTION_ERROR_VERIFYING_SUBSCRIPTION, "Error verifying subscription"],
             [PROFESSION_ACTOR, "Actor"],
             [PROFESSION_ACTRESS, "Actress"],
             [PROFESSION_COMEDIAN, "Comediant"],
@@ -521,7 +672,50 @@ export class TranslationService {
             [NEW_PASSWORD, "New password"],
             [CONFIRM_NEW_PASSWORD, "Confirm new password"],
             [SUBMIT, "Submit"],
+            [MONTH_KEY, "Month"],
+            [SUBSCRIPTION_BEING_CONFIRMED, "Subscription being confirmed. Please wait! :)"],
+            [SUBSCRIPTION_HAS_BEEN_CONFIRMED, "Your subscription has been confirmed. Congrats!"],
+            [SUBSCRIPTION_ERROR, "There was an error confirming your subscription. Please try again!"],
             [THANKER_IS_THANKFUL_TO, "Thanker is thankful to:"],
+            [AI_PRO_DAILY_GRATITUDE_AI, "Your daily dose of Gratitude AI - the Gratitude journal interacting with you!"],
+            [AI_PRO_INSIGHTS, "Insights on your Gratitude journey"],
+            [AI_PRO_TAILORED_MESSAGES, "Tailored messages just for you"],
+            [AI_PRO_PSEUDO_CELEBRITY_QUOTE, "Daily quote of a Pseudo-Celebrity"],
+            [AI_PRO_SEND_DAILY_EMAIL, "Send a daily e-mail from your Gratitude post (one per day)"],
+            [AI_PRO_HINT, "Hints based on your Thanker experience"],
+            [AI_PRO_HIDE_ADS, "Ability to hide ads"],
+            [AI_PRO_SUBSCRIBE, "Subscribe!"],
+            [AI_PRO_MESSAGE_OF_THE_DAY, "Message of the day"],
+            [AI_PRO_GRATITUDE_VISUALIZER, "Gratitude Visualizer"],
+            [AI_PRO_INSIGHTS_VALUE, "Insights"],
+            [AI_PRO_HIGHLIGHTS, "Highlights"],
+            [AI_PRO_PSEUDO_CELEBRITY_VALUE, "Pseudo Celebrity"],
+            [AI_PRO_PSEUDO_CELEBRITY_SAYS, "says"],
+            [AI_PRO_SUBSCRIBER, "AI Pro™ Subscriber"],
+            [AI_PRO_EMAIL_SENT, "E-mail sent"],
+            [AI_PRO_EMAIL_ERROR, "Error sending e-mail"],
+            [AI_PRO_SEND_EMAIL_TOOLTIP, "Send e-mail!"],
+            [AI_PRO_REVERIFY_SUBSCRIPTION, "Already subscribed? Click here for us to check again!"],
+            [AI_PRO_ERROR_GETTING_DOCUMENT, "Error getting AI Pro document"],
+            [CATEGORY_ART, "Art"],
+            [CATEGORY_BEAUTY, "Beauty"],
+            [CATEGORY_CAREER, "Career"],
+            [CATEGORY_EDUCATION, "Education"],
+            [CATEGORY_ENTERTAINMENT, "Entertainment"],
+            [CATEGORY_FAMILY, "Family"],
+            [CATEGORY_FASHION, "Fashion"],
+            [CATEGORY_FINANCE, "Finance"],
+            [CATEGORY_FOOD, "Food"],
+            [CATEGORY_HEALTH, "Health"],
+            [CATEGORY_LOVE, "Love"],
+            [CATEGORY_NATURE, "Nature"],
+            [CATEGORY_PETS, "Pets"],
+            [CATEGORY_RELIGION, "Religion"],
+            [CATEGORY_SCIENCES, "Science"],
+            [CATEGORY_SOCIAL, "Social"],
+            [CATEGORY_SPORTS, "Sports"],
+            [CATEGORY_TECHNOLOGY, "Technology"],
+            [CATEGORY_TRAVEL, "Travel"],
             [QUOTE_1, "Gratitude makes sense of our past, brings peace for today, and creates a vision for tomorrow"], //Melody Beattie
             [QUOTE_2, "The root of joy is gratefulness"], //David Steindl-Rast
             [QUOTE_3, "When I started counting my blessings, my whole life turned around"], // Willie Nelson,
@@ -608,6 +802,8 @@ export class TranslationService {
             [SEARCH_FOLLOWING_HINT, "Buscar por quienes sigues"],
             [PRIVATE, "Privado"],
             [PUBLIC, "Público"],
+            [PUBLIC_PROFILE, "Perfil Público"],
+            [PRIVATE_PROFILE, "Perfil Privado"],
             [PASSWORD, "Contraseña"],
             [THANKS, "Gracias"],
             [USER_CREATED_TEXT, "¡Gracias por crear tu cuenta de Thanker! Por favor, ve a tu correo para la confirmación"],
@@ -648,6 +844,10 @@ export class TranslationService {
             [COULD_NOT_UPDATE_PROFILE_PRIVACY, "No se pudo actualizar la privacidad de los agradecimientos de tu página"],
             [YOUR_DEFAULT_THANKS_PRIVACY_PRIVATE, "Has actualizado la privacidad predeterminada de tus agradecimientos a: Privado - para los agradecimientos que vas a dar"],
             [YOUR_DEFAULT_THANKS_PRIVACY_PUBLIC, "Has actualizado la privacidad predeterminada de tus agradecimientos a: Público - para los agradecimientos que vas a dar"],
+            [DEFAULT_HIDE_ADS_TRUE, "Anuncios están ocultos"],
+            [DEFAULT_HIDE_ADS_FALSE, "Anuncios son visibles"],
+            [YOUR_DEFAULT_HIDE_ADS_TRUE, "Anuncios serán eliminados"],
+            [YOUR_DEFAULT_HIDE_ADS_FALSE, "Anuncios serán visibles"],
             [HARVARD_ARTICLE, "Artículo de la Universidad de Harvard"],
             [BERKELEY_ARTICLE, "Artículo de la Universidad de Berkeley"],
             [UCLA_ARTICLE, "Artículo de UCLA"],
@@ -664,6 +864,19 @@ export class TranslationService {
             [ARE_YOU_SURE_TO_DELETE, "¿Estás seguro de que quieres eliminar este agradecimiento?"],
             [YES, "Sí"],
             [NO, "No"],
+            [OR, "O"],
+            [SUBSCRIPTION_CANCEL, "Cancelar suscripción"],
+            [SUBSCRIPTION_REACTIVATE, "Reactivar suscripción"],
+            [SUBSCRIPTION_ALREADY_CANCELLED_MESSAGE, "La suscripción ya fue cancelada"],
+            [SUBSCRIPTION_ALREADY_REACTIVATED_MESSAGE, "La suscripción ya fue reactivada"],
+            [SUBSCRIPTION_CHANGE_PAYMENT_SETTINGS, "Cambiar la configuración de pago"],
+            [SUBSCRIPTION_CANCELLED_MESSAGE, "Tu suscripción ha sido cancelada y seguirá siendo válida hasta el final del período pagado."],
+            [SUBSCRIPTION_REACTIVATED_MESSAGE, "Tu suscripción ha sido reactivada exitosamente."],
+            [SUBSCRIPTION_SURE_TO_CANCEL, "¿Estás seguro de que deseas cancelar tu suscripción?"],
+            [SUBSCRIPTION_SURE_TO_REACTIVATE, "¿Estás seguro de que deseas reactivar tu suscripción?"],
+            [SUBSCRIPTION_COME_BACK_TOMORROW, "¡Vuelve mañana para más descubrimientos de IA!"],
+            [SUBSCRIPTION_ERROR_LOADING_SESSION, "Error al iniciar la sesión de pago"],
+            [SUBSCRIPTION_ERROR_VERIFYING_SUBSCRIPTION, "Error al verificar la suscripción"],
             [PROFESSION_ACTOR, "Actor"],
             [PROFESSION_ACTRESS, "Actriz"],
             [PROFESSION_COMEDIAN, "Comediante"],
@@ -729,7 +942,47 @@ export class TranslationService {
             [NEW_PASSWORD, "Nueva contraseña"],
             [CONFIRM_NEW_PASSWORD, "Confirmar nueva contraseña"],
             [SUBMIT, "Enviar"],
+            [MONTH_KEY, "Mes"],
             [THANKER_IS_THANKFUL_TO, "El agradecedor está agradecido a:"],
+            [AI_PRO_DAILY_GRATITUDE_AI, "Tu dosis diaria de Gratitude AI - el diario de gratitud interactuando contigo"],
+            [AI_PRO_INSIGHTS, "Perspectivas sobre tu viaje de gratitud"],
+            [AI_PRO_TAILORED_MESSAGES, "Mensajes personalizados solo para ti"],
+            [AI_PRO_PSEUDO_CELEBRITY_QUOTE, "Cita diaria de una Pseudo-Celebridad"],
+            [AI_PRO_SEND_DAILY_EMAIL, "Enviar un correo diario desde tu publicación de gratitud (uno por día)"],
+            [AI_PRO_HINT, "Pistas basadas en tu experiencia en Thanker"],
+            [AI_PRO_HIDE_ADS, "Capacidad para ocultar anuncios"],
+            [AI_PRO_MESSAGE_OF_THE_DAY, "Mensaje del día"],
+            [AI_PRO_GRATITUDE_VISUALIZER, "Visualizador de Gratitud"],
+            [AI_PRO_INSIGHTS_VALUE, "Perspectivas"],
+            [AI_PRO_HIGHLIGHTS, "Destacados"],
+            [AI_PRO_PSEUDO_CELEBRITY_VALUE, "Pseudo Celebridad"],
+            [AI_PRO_PSEUDO_CELEBRITY_SAYS, "dice"],
+            [AI_PRO_SUBSCRIBER, "Suscriptor de AI Pro™"],
+            [AI_PRO_EMAIL_SENT, "Correo electrónico enviado"],
+            [AI_PRO_EMAIL_ERROR, "Error al enviar el correo electrónico"],
+            [AI_PRO_SEND_EMAIL_TOOLTIP, "Send e-mail!"],
+            [AI_PRO_SEND_EMAIL_TOOLTIP, "¡Enviar correo electrónico!"],
+            [AI_PRO_REVERIFY_SUBSCRIPTION, "¿Ya estás suscrito? ¡Haz clic aquí para que verifiquemos de nuevo!"],
+            [AI_PRO_ERROR_GETTING_DOCUMENT, "Error al obtener el documento de AI Pro"],
+            [CATEGORY_ART, "Arte"],
+            [CATEGORY_BEAUTY, "Belleza"],
+            [CATEGORY_CAREER, "Carrera"],
+            [CATEGORY_EDUCATION, "Educación"],
+            [CATEGORY_ENTERTAINMENT, "Entretenimiento"],
+            [CATEGORY_FAMILY, "Familia"],
+            [CATEGORY_FASHION, "Moda"],
+            [CATEGORY_FINANCE, "Finanzas"],
+            [CATEGORY_FOOD, "Comida"],
+            [CATEGORY_HEALTH, "Salud"],
+            [CATEGORY_LOVE, "Amor"],
+            [CATEGORY_NATURE, "Naturaleza"],
+            [CATEGORY_PETS, "Mascotas"],
+            [CATEGORY_RELIGION, "Religión"],
+            [CATEGORY_SCIENCES, "Ciencia"],
+            [CATEGORY_SOCIAL, "Social"],
+            [CATEGORY_SPORTS, "Deportes"],
+            [CATEGORY_TECHNOLOGY, "Tecnología"],
+            [CATEGORY_TRAVEL, "Viaje"],
             [QUOTE_1, "La gratitud da sentido a nuestro pasado, trae paz para hoy y crea una visión para mañana"], //Melody Beattie
             [QUOTE_2, "La raíz de la alegría es la gratitud"], //David Steindl-Rast
             [QUOTE_3, "Cuando comencé a contar mis bendiciones, toda mi vida cambió"], // Willie Nelson
@@ -817,6 +1070,8 @@ export class TranslationService {
                 [SEARCH_FOLLOWING_HINT, "フォローしている人で検索"],
                 [PRIVATE, "プライベート"],
                 [PUBLIC, "パブリック"],
+                [PUBLIC_PROFILE, "公開プロフィール"],
+                [PRIVATE_PROFILE, "非公開プロフィール"],
                 [PASSWORD, "パスワード"],
                 [THANKS, "ありがとう"],
                 [USER_CREATED_TEXT, "Thankerアカウントの作成ありがとうございます！確認のためにメールをご確認ください"],
@@ -857,6 +1112,10 @@ export class TranslationService {
                 [COULD_NOT_UPDATE_PROFILE_PRIVACY, "プロフィールの感謝プライバシーを更新できませんでした"],
                 [YOUR_DEFAULT_THANKS_PRIVACY_PRIVATE, "あなたの感謝のデフォルトプライバシー設定を「プライベート」に更新しました"],
                 [YOUR_DEFAULT_THANKS_PRIVACY_PUBLIC, "あなたの感謝のデフォルトプライバシー設定を「パブリック」に更新しました"],
+                [DEFAULT_HIDE_ADS_TRUE, "広告は非表示です"],
+                [DEFAULT_HIDE_ADS_FALSE, "広告は表示されています"],
+                [YOUR_DEFAULT_HIDE_ADS_TRUE, "広告が削除されます"],
+                [YOUR_DEFAULT_HIDE_ADS_FALSE, "広告が表示されます"],
                 [HARVARD_ARTICLE, "ハーバード大学の記事"],
                 [BERKELEY_ARTICLE, "バークレー大学の記事"],
                 [UCLA_ARTICLE, "UCLAの記事"],
@@ -873,6 +1132,19 @@ export class TranslationService {
                 [ARE_YOU_SURE_TO_DELETE, "この感謝を削除してもよろしいですか？"],
                 [YES, "はい"],
                 [NO, "いいえ"],
+                [OR, "または"],
+                [SUBSCRIPTION_CANCEL, "サブスクリプションを解約する"],
+                [SUBSCRIPTION_REACTIVATE, "サブスクリプションを再開する"],
+                [SUBSCRIPTION_ALREADY_CANCELLED_MESSAGE, "サブスクリプションは既に解約されています"],
+                [SUBSCRIPTION_ALREADY_REACTIVATED_MESSAGE, "サブスクリプションは既に再開されています"],
+                [SUBSCRIPTION_CHANGE_PAYMENT_SETTINGS, "支払い設定を変更する"],
+                [SUBSCRIPTION_CANCELLED_MESSAGE, "サブスクリプションは解約されましたが、支払い済みの期間が終了するまで有効です。"],
+                [SUBSCRIPTION_REACTIVATED_MESSAGE, "サブスクリプションが正常に再開されました。"],
+                [SUBSCRIPTION_SURE_TO_CANCEL, "サブスクリプションを解約してもよろしいですか？"],
+                [SUBSCRIPTION_SURE_TO_REACTIVATE, "サブスクリプションを再開してもよろしいですか？"],
+                [SUBSCRIPTION_COME_BACK_TOMORROW, "もっとAIを発見するために、明日また戻ってきてください！"],
+                [SUBSCRIPTION_ERROR_LOADING_SESSION, "支払いセッションの開始エラー"],
+                [SUBSCRIPTION_ERROR_VERIFYING_SUBSCRIPTION, "サブスクリプションの確認エラー"],
                 [PROFESSION_ACTOR, "俳優"],
                 [PROFESSION_ACTRESS, "女優"],
                 [PROFESSION_COMEDIAN, "コメディアン"],
@@ -938,7 +1210,47 @@ export class TranslationService {
                 [NEW_PASSWORD, "新しいパスワード"],
                 [CONFIRM_NEW_PASSWORD, "新しいパスワードの確認"],
                 [SUBMIT, "送信"],
+                [MONTH_KEY, "月ごと"],
                 [THANKER_IS_THANKFUL_TO, "感謝している相手:"],
+                [AI_PRO_DAILY_GRATITUDE_AI, "毎日のGratitude AIのひととき - あなたと対話する感謝の日記"],
+                [AI_PRO_INSIGHTS, "感謝の旅の洞察"],
+                [AI_PRO_TAILORED_MESSAGES, "あなたに合わせたメッセージ"],
+                [AI_PRO_PSEUDO_CELEBRITY_QUOTE, "擬似セレブリティの毎日の名言"],
+                [AI_PRO_SEND_DAILY_EMAIL, "感謝の投稿から毎日メールを送信（1日1通）"],
+                [AI_PRO_HINT, "Thankerでの体験に基づいたヒント"],
+                [AI_PRO_HIDE_ADS, "広告を非表示にする機能"],
+                [AI_PRO_MESSAGE_OF_THE_DAY, "今日のメッセージ"],
+                [AI_PRO_GRATITUDE_VISUALIZER, "感謝のビジュアライザー"],
+                [AI_PRO_INSIGHTS_VALUE, "インサイト"],
+                [AI_PRO_HIGHLIGHTS, "ハイライト"],
+                [AI_PRO_PSEUDO_CELEBRITY_VALUE, "疑似セレブリティ"],
+                [AI_PRO_PSEUDO_CELEBRITY_SAYS, "が言う"],
+                [AI_PRO_SUBSCRIBER, "AI Pro™サブスクライバー"],
+                [AI_PRO_EMAIL_SENT, "メール送信済み"],
+                [AI_PRO_EMAIL_ERROR, "メール送信エラー"],
+                [AI_PRO_SEND_EMAIL_TOOLTIP, "メールを送信！"],
+                [AI_PRO_REVERIFY_SUBSCRIPTION, "すでに購読していますか？もう一度確認するためにここをクリックしてください！"],
+                [AI_PRO_SUBSCRIBE, "登録する！"],
+                [AI_PRO_ERROR_GETTING_DOCUMENT, "AI Pro ドキュメントの取得エラー"],
+                [CATEGORY_ART, "アート"],
+                [CATEGORY_BEAUTY, "美容"],
+                [CATEGORY_CAREER, "キャリア"],
+                [CATEGORY_EDUCATION, "教育"],
+                [CATEGORY_ENTERTAINMENT, "エンターテインメント"],
+                [CATEGORY_FAMILY, "家族"],
+                [CATEGORY_FASHION, "ファッション"],
+                [CATEGORY_FINANCE, "金融"],
+                [CATEGORY_FOOD, "食べ物"],
+                [CATEGORY_HEALTH, "健康"],
+                [CATEGORY_LOVE, "愛"],
+                [CATEGORY_NATURE, "自然"],
+                [CATEGORY_PETS, "ペット"],
+                [CATEGORY_RELIGION, "宗教"],
+                [CATEGORY_SCIENCES, "科学"],
+                [CATEGORY_SOCIAL, "社会"],
+                [CATEGORY_SPORTS, "スポーツ"],
+                [CATEGORY_TECHNOLOGY, "テクノロジー"],
+                [CATEGORY_TRAVEL, "旅行"],
                 [QUOTE_1, "感謝は過去を意味づけ、今日の平和をもたらし、明日のビジョンを創造します"],
                 [QUOTE_2, "喜びの根源は感謝です"],
                 [QUOTE_3, "祝福を数え始めたとき、私の人生は一変しました"],
@@ -1014,8 +1326,10 @@ export class TranslationService {
         INSPIRATION_1, INSPIRATION_2, INSPIRATION_3, INSPIRATION_4, INSPIRATION_5, INSPIRATION_6
     ]
 
-    getFor = (label: string): string | undefined => {
-        return this.TRANLATIONS_MAP.get(this.language)?.get(label);
+    getFor = (label: string): string => {
+        const translation: string | undefined = this.TRANLATIONS_MAP.get(this.language)?.get(label);
+
+        return translation ? translation : label;
     }
 
     getForLanguage = (label: string, language: Language): string | undefined => {

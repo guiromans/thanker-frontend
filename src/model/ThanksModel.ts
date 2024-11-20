@@ -13,7 +13,8 @@ export interface ThanksResponse {
     receiver: UserResponse,
     text: string,
     privacyType: PrivacyType,
-    date: Date
+    date: Date,
+    sentEmail: boolean
 }
 
 export enum PrivacyType {

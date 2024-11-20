@@ -159,3 +159,18 @@
     width: 16px;
     height: 16px;
 }
+
+.send-email {
+    width: 40px;
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    padding: 8px;
+    margin-right: 48px;
+}
+
+.send-email:hover {
+    cursor: pointer;
+    transform: scale(1.15);
+    transition: transform 0.1s ease-in-out;
+}

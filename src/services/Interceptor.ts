@@ -36,6 +36,8 @@ http.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
+        if (authService.getRefreshToken() !== null) {
+        
         const response = await authService.applyRefreshToken();
         const authResponse: AuthResponse = response.data as AuthResponse;
 
@@ -44,6 +46,7 @@ http.interceptors.response.use(
         // Retry the original request with the new token
         originalRequest.headers.Authorization = `Bearer ${authResponse.token}`;
         return axios(originalRequest);
+        }
       } catch (error) {
         const axiosError: AxiosError = error as AxiosError;
 

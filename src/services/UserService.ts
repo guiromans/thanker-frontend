@@ -89,6 +89,14 @@ export class UserService {
         return await http.patch(`${this.USERS_URL}/update-open-profile?isOpenProfile=${isOpenProfile}`)
     }
 
+    async isSubscriber(): Promise<AxiosResponse> {
+        return await http.get(`${this.USERS_URL}/is-subscriber`);
+    }
+
+    async hasSoftCancel(): Promise<AxiosResponse> {
+        return await http.get(`${this.USERS_URL}/has-soft-cancel`);
+    }
+
     getUserId(): string | undefined {
         return this.authService.readUserIdFromToken();
     }

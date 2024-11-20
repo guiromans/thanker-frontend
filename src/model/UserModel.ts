@@ -7,7 +7,13 @@ export interface UserResponse {
     handle: string,
     profilePictureUrl: string | null,
     numberOfThanks: number,
-    isOpenProfile: boolean
+    isOpenProfile: boolean,
+    premiumStatus: PremiumStatus
+    canSendEmail: boolean
+};
+
+export enum PremiumStatus {
+    ACTIVE, INACTIVE, PAID
 };
 
 export interface CreateUserRequest {
@@ -48,4 +54,14 @@ export interface ImageUploadRequest {
 export interface ImageUploadResponse {
     uploadUrl: string,
     getUrl: string
+}
+
+export interface IsSubscriberResponse {
+    userId: string
+    isSubscriber: boolean
+}
+
+export interface SoftCancelResponse {
+    userId: string
+    softCancel: boolean
 }

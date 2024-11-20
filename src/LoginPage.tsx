@@ -4,7 +4,7 @@ import { ErrorResponse, useNavigate } from "react-router-dom";
 import './style/Fonts.css';
 import './style/Styles.css';
 import './style/Login.css';
-import { CREATE_USER, ERROR_GOOGLE_LOGIN, ERROR_LOGIN_MSG, ERROR_SERVER_COMMS, LOGIN, MAKE_YOUR_DAY, NEW_CONFIRMATION, PASSWORD, RESET_PASSWORD, TranslationService } from "./services/TranslationService";
+import { CREATE_USER, ERROR_GOOGLE_LOGIN, ERROR_LOGIN_MSG, ERROR_SERVER_COMMS, LOGIN, MAKE_YOUR_DAY, NEW_CONFIRMATION, OR, PASSWORD, RESET_PASSWORD, TranslationService } from "./services/TranslationService";
 import { AuthResponse } from "./model/AuthResponse";
 import { ThankerIntro } from "./cards/ThankerIntro";
 import { Loader } from "./cards/Loader";
@@ -110,6 +110,12 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
           <h2 className='subtitle'>{translationService.getFor(MAKE_YOUR_DAY)}</h2>
         </div>
         <br/>
+        <div className="login-google">
+          <GoogleLogin logo_alignment="left" size="large" theme="filled_blue" shape="pill" onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFail} />
+        </div>
+        <div className="or-class">
+          <label className="or-label-class">{translationService.getFor(OR)}</label>
+        </div>
         <form onSubmit={performLogin} method='POST'>
           <input 
             type='email' 
@@ -124,9 +130,6 @@ export const LoginPage: React.FC<LoginProps> = ({onLogged}) => {
           {!authenticating && <button type='submit' className="thanker-button">{translationService.getFor(LOGIN)}</button>}
           {authenticating && <div className='centerish'><Loader size="small" /></div>}
         </form>
-        <div className="login-google">
-          <GoogleLogin shape="pill" onSuccess={onGoogleLoginSuccess} onError={onGoogleLoginFail} />
-        </div>
         <div className={resolveOptionsClass()}>
           {!authenticating && <a className='label-link' onClick={openRegisterPage}>{translationService.getFor(CREATE_USER)}</a>}
           {!authenticating && <a className='label-link' onClick={openResetPasswordPage}>{translationService.getFor(RESET_PASSWORD)}</a>}

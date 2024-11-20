@@ -4,9 +4,9 @@ import { CreateThanksRequest, DeleteThanksResponse, PrivacyChangeResponse, Priva
 import { ErrorResponse } from "./model/ErrorResponse";
 import { getUniqueById, privacyTypeOf } from "./utils/ThanksUtils";
 import { AuthService } from "./services/AuthService";
-import { ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, GIVING_THANKS_PLEASE_HOLD, Language, PRIVACY_ICON_TOOLTIP, TEXT_NOT_EMPTY, THANK, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
+import { AI_PRO_EMAIL_ERROR, AI_PRO_EMAIL_SENT, ARE_YOU_SURE_TO_DELETE, CHANGED_PRIVACY_TYPE, ERROR_CHANGE_PRIVACY_TYPE, ERROR_TRYING_TO_FOLLOW, FOLLOW, FOLLOWING, GIVING_THANKS_PLEASE_HOLD, Language, PRIVACY_ICON_TOOLTIP, TEXT_NOT_EMPTY, THANK, THANKS, TranslationService, YOU_ARE_NOW_FOLLOWING } from "./services/TranslationService";
 import { FollowerResponse } from "./model/FollowerModel";
-import { UserResponse } from "./model/UserModel";
+import { IsSubscriberResponse, UserResponse } from "./model/UserModel";
 import { UserService } from "./services/UserService";
 import { Loader } from "./cards/Loader";
 import ThanksCard from "./cards/ThanksCard";
@@ -29,6 +29,7 @@ import rightArrow from './assets/images/green_arrow.png';
 import rightArrowTransparent from './assets/images/green_arrow_transparent.png';
 import { PageType } from "./model/PageType";
 import SponsoredCard from "./cards/SponsoredCard";
+import { AxiosError } from "axios";
 
 interface UserProps {
   userId: string | null | undefined;
@@ -74,6 +75,9 @@ export const UserPage = (props: UserProps) => {
   const [classThanksButton, setClassThanksButton] = useState<string>("thanks-button");
   const [disableThanks, setDisableThanks] = useState<boolean>(false);
   const [loadingUsers, setLoadingUsers] = useState<boolean>(false);
+  const [hideAds, setHideAds] = useState<boolean>(true);
+  const [showLoader, setShowLoader] = useState<boolean>(false);
+  const [canSendEmail, setCanSendEmail] = useState<boolean>();
   const { enqueueSnackbar } = useSnackbar();
 
   const userService: UserService = new UserService();
@@ -84,6 +88,7 @@ export const UserPage = (props: UserProps) => {
 
   useEffect(() => {
     setPrivacyType(loadDefaultThanksPrivacy());
+    resolveHideAds();
   }, []);
 
   useEffect(() => {
@@ -132,7 +137,6 @@ export const UserPage = (props: UserProps) => {
 
   const checkScroll = () => {
     const div = thanksScrollableDivRef.current;
-    console.log("Check scroll method")
     if (div !== null && !gettingMoreThanks) {
       const isAtBottom = div.scrollTop + div.clientHeight >= div.scrollHeight - 20;
       if (isAtBottom) {
@@ -174,6 +178,7 @@ export const UserPage = (props: UserProps) => {
         setUser(user);
         setThanksPlaceHolder(resolveTextAreaPlaceholder(user));
         setUserImageUrl(user.profilePictureUrl);
+        setCanSendEmail(user !== undefined && user.id === userService.getUserId()! && user.canSendEmail);
         setTimeout(() => {
           setLoadingPage(false);
         }, 500);
@@ -230,7 +235,9 @@ export const UserPage = (props: UserProps) => {
                 handle: user.handle,
                 numberOfThanks: user.numberOfThanks + 1,
                 profilePictureUrl: user.profilePictureUrl,
-                isOpenProfile: user.isOpenProfile
+                isOpenProfile: user.isOpenProfile,
+                premiumStatus: user.premiumStatus,
+                canSendEmail: user.canSendEmail
               }
               setUser(newUser);
             }
@@ -249,6 +256,10 @@ export const UserPage = (props: UserProps) => {
         enqueueSnackbar(`${translationService.getFor(TEXT_NOT_EMPTY)}`, { variant: 'error' })
       }
     }
+  }
+
+  const updateCanChangeEmail = () => {
+    setCanSendEmail(user !== undefined && user.id === userService.getUserId()! && user.canSendEmail);
   }
 
   const resolveTextAreaPlaceholder = (user: UserResponse): string => {
@@ -365,6 +376,17 @@ export const UserPage = (props: UserProps) => {
     setSelectedArrow(rightArrow);
   }
 
+  const resolveHideAds = async() => {
+    await userService.isSubscriber()
+      .then((resp) => {
+        const subscriberResponse: IsSubscriberResponse = resp.data as IsSubscriberResponse;
+        setHideAds(subscriberResponse.isSubscriber && storageService.getHideAds());
+      })
+  }
+
+  const handleEmailSent = () => {
+    setCanSendEmail(false);
+  }
 
   if (loadingPage) {
     return (
@@ -413,7 +435,7 @@ export const UserPage = (props: UserProps) => {
             </form>
           }
           { !isUserPage() && <div className="ad">
-              <SponsoredCard language={language} />
+              {!hideAds && <SponsoredCard language={language} />}
             </div>
           }
           {
@@ -441,6 +463,8 @@ export const UserPage = (props: UserProps) => {
               userImageUrl={userImageUrl}
               pageUserId={userId}
               timestamp={timestamp}
+              userCanSendEmail={canSendEmail !== undefined && canSendEmail}
+              sentEmail={handleEmailSent}
             />
           ))}
           {thanks.length === 0 && page === 0 && !loadingThanks && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} pageType={PageType.USER} />}
@@ -450,6 +474,13 @@ export const UserPage = (props: UserProps) => {
         <div className="arrow left-arrow">
           <img src={selectedArrow} className="arrow-specs" onClick={handleLeftArrowClick}/>
         </div>
+        <Modal
+          message={modalMessage}
+          isVisible={showConfirmationModal}
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+          language={props?.language}
+        />
       </div>
     )}
     </div>);
@@ -506,11 +537,13 @@ export const UserPage = (props: UserProps) => {
               userImageUrl={userImageUrl}
               pageUserId={userId}
               timestamp={timestamp}
+              userCanSendEmail={canSendEmail !== undefined && canSendEmail}
+              sentEmail={handleEmailSent}
             />
           ))}
           {thanks.length === 0 && page === 0 && !loadingThanks && <NoThanksCard language={language} isOpenProfile={user?.isOpenProfile!} pageType={PageType.USER} />}
           <br />
-          {gettingMoreThanks && <div className='centerish'><Loader size="small" /></div>}
+          {(gettingMoreThanks || showLoader) && <div className='centerish'><Loader size="small" /></div>}
         </div>
         <HurrayCard isVisible={showHurray} />
       </div>

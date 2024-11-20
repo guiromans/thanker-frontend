@@ -1,0 +1,13 @@
+.setting-label-container {
+    text-align: start;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    padding-left: 40px;
+    margin-top: 24px;
+    margin-bottom: 24px;
+}
+
+.setting-label-image {
+    width: 28px;
+}

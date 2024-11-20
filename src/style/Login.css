@@ -16,8 +16,17 @@
     place-items: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 24px;
+    margin-top: 8px;
+    margin-bottom: 32px;
+}
+
+.or-class {
     margin-bottom: 24px;
+}
+
+.or-label-class {
+    color: #50C878;
+    font-weight: bold;
 }
 
 .main-login {

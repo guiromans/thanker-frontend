@@ -10,6 +10,7 @@ export class StorageService {
     REFRESH_TOKEN: string = "refreshToken";
     LANGUAGE: string = "language";
     DEFAULT_THANKS_PRIVACY: string = "default_thanks_privacy";
+    HIDE_ADS: string = "hide_ads";
 
     getToken(): string | null {
         return localStorage.getItem(this.TOKEN);
@@ -51,8 +52,22 @@ export class StorageService {
         return savedPrivacyType != null ? privacyTypeOf(savedPrivacyType) : PrivacyType.PRIVATE;
     }
 
+    getHideAds(): boolean {
+        const hideAdsStr: string | null = localStorage.getItem(this.HIDE_ADS);
+
+        if (hideAdsStr == null) {
+            return false;
+        }
+
+        return hideAdsStr.toLocaleLowerCase().trim() === "true" ? true : false;
+    }
+
     setDefaultThanksPrivacy(privacyType: PrivacyType) {
         localStorage.setItem(this.DEFAULT_THANKS_PRIVACY, privacyType);
+    }
+
+    setHideAds(hide: boolean) {
+        localStorage.setItem(this.HIDE_ADS, hide.toString());
     }
 
 }

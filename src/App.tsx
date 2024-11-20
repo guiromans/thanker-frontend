@@ -29,6 +29,8 @@ import QuoteCard from './cards/QuoteCard';
 import { GratitudeWallPage } from './GratitudeWallPage';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import React from 'react';
+import ThankerAiProPage from './ThankerAiProPage';
+import { ConfirmPaymentPage } from './ConfirmPaymentPage';
 
 const App = () => {
   const authService = new AuthService();
@@ -137,12 +139,17 @@ const App = () => {
     window.location.hash = '/gdpr';
   }
 
+  const handleThankerAiProClick = () => {
+    window.location.hash = '/thanker-ai-pro'
+  }
+
   if (loading) {
     return (
       <div className='main'>
         {loggingOut && (<Header 
           onLanguageChange={handleLanguageChange} 
           onUserIdSelect={handleSearchedUserSelect}
+          onThankerAiProClick={handleThankerAiProClick}
           onFollowingClick={handleFollowingSelect}
           onGratitudeWallClick={handleGratitudeWallSelect}
           onHomePageClick={handleHomePageClick}
@@ -169,6 +176,7 @@ const App = () => {
         <Header 
           onLanguageChange={handleLanguageChange} 
           onUserIdSelect={handleSearchedUserSelect}
+          onThankerAiProClick={handleThankerAiProClick}
           onHomePageClick={handleHomePageClick}
           onFollowingClick={handleFollowingSelect}
           onGratitudeWallClick={handleGratitudeWallSelect}
@@ -189,12 +197,14 @@ const App = () => {
             <Route path="/users/:userId/activate/:confirmationId" element={<AccountConfirmationPage onConfirmationDone={openMainPage} />} />
             <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
+            <Route path="/thanker-ai-pro" element={<ThankerAiProPage language={language} />} />
             <Route path="/users/reset-password" element={<RequestResetPasswordPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/:userId/reset-password/:resetPasswordId" element={<ResetPasswordPage onError={openMainPage} />} />
             <Route path="/following" element={<FollowingPage userId={userId} onClick={handleFollowingClick} language={language} />} />
             <Route path="/gratitude-wall" element={<GratitudeWallPage onUserClick={handleFollowingSelect} language={language} />} />
             <Route path="/settings" element={<SettingsPage language={language} />} />
+            <Route path="/payments/confirm" element={<ConfirmPaymentPage language={language} onConfirmationTaskDone={handleThankerAiProClick} />} />
             <Route path="/gdpr" element={<GDPRCard language={language} />} />
             <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} onGdprClick={handleGdprClick} />} />
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
@@ -212,6 +222,7 @@ const App = () => {
         <Header 
           onLanguageChange={handleLanguageChange} 
           onUserIdSelect={handleSearchedUserSelect}
+          onThankerAiProClick={handleThankerAiProClick}
           onHomePageClick={handleHomePageClick}
           onFollowingClick={handleFollowingSelect}
           onGratitudeWallClick={handleGratitudeWallSelect}
@@ -230,12 +241,14 @@ const App = () => {
             <Route path="/users/:userId/activate/:confirmationId" element={<AccountConfirmationPage onConfirmationDone={openMainPage} />} />
             <Route path="/users/:userId" element={hasValidToken() ? <UserPage userId={undefined} language={language}  loadingUsers={loadingUsers} onUserNotFound={handleUserNotFound} onSelectUserId={handleSearchedUserSelect}/> : <LoginPage onLogged={handleLogged} />} />
             <Route path="/users/create" element={<CreateUserPage language={language} onUserCreated={openMainPage}/>} />
+            <Route path="/thanker-ai-pro" element={<ThankerAiProPage language={language} />} />
             <Route path="/users/reset-password" element={<RequestResetPasswordPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/new-confirmation" element={<RequestNewConfirmationPage language={language} onResetRequested={openMainPage} />} />
             <Route path="/users/:userId/reset-password/:resetPasswordId" element={<ResetPasswordPage onError={openMainPage} />} />
             <Route path="/following" element={<FollowingPage userId={userId} onClick={handleFollowingClick} language={language} />} />
             <Route path="/gratitude-wall" element={<GratitudeWallPage onUserClick={handleFollowingSelect} language={language} />} />
             <Route path="/settings" element={<SettingsPage language={language} />} />
+            <Route path="/payments/confirm" element={<ConfirmPaymentPage language={language} onConfirmationTaskDone={handleThankerAiProClick} />} />
             <Route path="/gdpr" element={<GDPRCard language={language} />} />
             <Route path="/about" element={!hasValidToken() ? <LoginPage onLogged={handleLogged}/> : <About language={language} onGdprClick={handleGdprClick} />} />
             <Route path="/logout" element={<LogoutPage onLogout={handleLogout} />} />
