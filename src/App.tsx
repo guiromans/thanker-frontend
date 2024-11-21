@@ -90,6 +90,7 @@ const App = () => {
       authService.logout();
       setLoading(false);
       setLoggingOut(false);
+      goToHome();
     }, 500);
   }
 
