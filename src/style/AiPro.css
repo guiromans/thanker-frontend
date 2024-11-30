@@ -237,7 +237,15 @@
 }
 
 .ai-pro-arrow-left:hover {
-    transform: rotate(-0.5turn) scale(1.1);
+    transform: rotate(-0.5turn) scale(1.15);
+}
+
+.ai-pro-arrow:active {
+    transform: scale(1.25);
+}
+
+.ai-pro-arrow-left:active {
+    transform: rotate(-0.5turn) scale(1.25);
 }
 
 .ai-pro-chart {
